@@ -1,1 +1,55 @@
 @import "tailwindcss" important;
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-900.woff2") format("woff2");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-500.woff2") format("woff2");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-600.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-700.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-800.woff2") format("woff2");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Montserrat";
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-regular.woff2") format("woff2");
+  font-weight: 400; /* Regular weight is typically 400 */
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  --font-mont:
+    "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}

@@ -2,10 +2,12 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import FAQ from "@components/FAQ.astro";
+import { Image } from "astro:assets";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { getImage } from "astro:assets";
+import { Icon } from "astro-icon/components";
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
 
@@ -14,8 +16,60 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!--                    Hero                      -->
   <!-- ============================================ -->
 
-  <section id="hero">
-    <div class="cs-container">
+  <section class="relative pt-17 md:pt-18 lg:pt-21.25 xl:pt-23.75">
+    <div class="absolute inset-0 -z-1 w-full h-full">
+      <Image
+        src={landingImage}
+        alt="Epoxy Flooring Edmonton"
+        class="w-full h-full object-cover absolute inset-0 z-0"
+        loading="eager"
+      />
+      <!-- Black Overlay -->
+      <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
+    </div>
+
+    <div
+      class="h-135 relative z-1 flex flex-col items-center lg:items-start lg:max-w-300 lg:mx-auto lg:py-20 xl:h-177 justify-center"
+    >
+      <div class="p-4 md:p-6 flex flex-col gap-5 lg:max-w-160">
+        <!-- font-size: ; -->
+        <h1
+          class="text-neutral-100 font-mont font-extrabold leading-[1.4em] text-[1.8125rem] sm:text-[3.125rem]"
+        >
+          Premium Epoxy Flooring in Edmonton
+        </h1>
+        <p
+          class="text-neutral-100 text-pretty font-mont leading-[1.8em] md:mb-8 font-bold text-[clamp(1.2rem,1.5vw,1.2rem)]"
+        >
+          Transform your concrete surfaces with professional-grade coatings
+          built for beauty, protection, and performance.
+        </p>
+        <div class="flex items-center flex-wrap gap-5">
+          <a
+            href="/contact"
+            class="cs-button-solid bg-amber-300 text-[0.9375rem] font-mont text-neutral-950 font-bold inline-flex items-center w-fit gap-2 transition-colors duration-300 hover:bg-neutral-500 before:hidden"
+          >
+            Request a Qoute <Icon
+              name={"tabler:chevron-right"}
+              class={"size-5"}
+            />
+          </a>
+
+          <a
+            href="/contact"
+            class="cs-button-solid text-neutral-100 text-[0.9375rem] font-mont bg-neutral-950 font-bold inline-flex items-center w-fit gap-2 transition-colors duration-300 hover:bg-neutral-500 before:hidden"
+          >
+            <Icon name={"tabler:phone-filled"} class={"size-5"} />
+            (123) 456-7890
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- h-135.25  -->
+  <section id="hero" class="hidden">
+    <div class="cs-container md:max-h-85 lg:max-h-114.75 xl:max-h-175">
       <div class="cs-flex-group">
         <span class="cs-topper">Intermediate Kit</span>
         <h1 class="cs-title">
@@ -64,7 +118,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!--                  Services                    -->
   <!-- ============================================ -->
 
-  <section id="services" class="services">
+  <section id="services" class="services hidden">
     <div class="card">
       <picture>
         <img
