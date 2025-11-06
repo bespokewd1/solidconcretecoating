@@ -181,8 +181,8 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
                 class={"object-cover"}
               />
 
-              <div class="flex flex-col gap-5 p-4">
-                <h2 class="font-mont text-[clamp(1.4rem,5vw,1.625rem)] font-extrabold tracking-wide uppercase">
+              <div class="flex flex-col gap-5 p-4 lg:px-8 lg:pb-8">
+                <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase">
                   {service.title}
                 </h2>
 
@@ -245,69 +245,26 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--            Extra Content To Rank             -->
   <!-- ============================================ -->
-
-  <section id="sbs-r">
-    <div class="cs-container">
-      <!-- Left Image Section -->
-      <div class="cs-left">
-        <picture class="cs-picture cs-picture1">
-          <source
-            media="(max-width: 600px)"
-            srcset="/assets/images/construction-m.jpg"
-          />
-          <source
-            media="(min-width: 601px)"
-            srcset="/assets/images/construction.jpg"
-          />
-          <img
-            aria-hidden="true"
-            decoding="async"
-            src="/assets/images/construction.jpg"
-            alt="house"
-            loading="lazy"
-            width="400"
-            height="560"
-          />
-        </picture>
-        <picture class="cs-picture cs-picture2">
-          <source
-            media="(max-width: 600px)"
-            srcset="/assets/images/cabinets2-m.jpg"
-          />
-          <source
-            media="(min-width: 601px)"
-            srcset="/assets/images/cabinets2.jpg"
-          />
-          <img
-            aria-hidden="true"
-            decoding="async"
-            src="/assets/images/cabinets2.jpg"
-            alt="cabinets"
-            loading="lazy"
-            width="400"
-            height="560"
-          />
-        </picture>
+  <section class="px-4 py-6 lg:px-8">
+    <div
+      class="mx-auto grid max-w-300 grid-cols-1 gap-5 sm:p-4 md:grid-cols-2 md:gap-6 md:p-6"
+    >
+      <div class="bg-amber-400">
+        <div
+          class="-translate-1.5 bg-amber-300 p-12 text-center font-mont text-neutral-950"
+        >
+          <p class="mb-2 text-5xl font-bold">15</p>
+          <p class="text-2xl font-semibold">years of experience</p>
+        </div>
       </div>
-      <!-- Right Content Section-->
-      <div class="cs-right">
-        <span class="cs-topper">SEO Ranking</span>
-        <h2 class="cs-title">Talk about a main service keyword</h2>
-        <p class="cs-text">
-          In consequat tincidunt turpis sit amet imperdiet. Praesent Class
-          officelan nonatoureanor mauris laoreet, iaculis libero quis. Curabitur
-          et tempus eri consequat tincidunt turpis sit amet imperdiet. Praesent
-          nonatourean olei aptent taciti sociosqu ad litora torquent per.
-        </p>
-        <p class="cs-text">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Non tenetur,
-          iure nihil ipsam qui atque commodi id voluptatem nesciunt, quis animi
-          fuga cum doloribus! Eaque laboriosam, unde consectetur iure asperiores
-          ullam. Consequuntur debitis a voluptatibus vitae optio autem explicabo
-          quia neque est quas, in placeat. Lorem ipsum dolor sit amet
-          consectetur adipisicing elit. Doloribus modi laudantium voluptatibus
-          rem libero error minus quia eligendi sapiente eos.
-        </p>
+
+      <div class="bg-amber-400">
+        <div
+          class="-translate-1.5 bg-amber-300 p-12 text-center font-mont text-neutral-950"
+        >
+          <p class="mb-2 text-5xl font-bold">15</p>
+          <p class="text-2xl font-semibold">years of experience</p>
+        </div>
       </div>
     </div>
   </section>
