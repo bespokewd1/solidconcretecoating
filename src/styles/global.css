@@ -52,4 +52,13 @@
   --font-mont:
     "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    --spacing-section-padding: clamp(3.75rem, 7.82vw, 6.25rem);
+    --text-heading: clamp(1.4rem,5vw,1.625rem);
+}
+
+
+html::selection {
+  background: var(--color-amber-300);
+  color: var(--color-neutral-950);
 }

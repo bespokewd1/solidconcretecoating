@@ -9,7 +9,7 @@
   // Website colors
   :root {
     --primary: hsl(45.9 96.7% 64.5%);
-    --primary: hsl(45.9 96.7% 64.5%);
+    --primaryLight: var(--color-amber-300);
     // --primaryLight: hsl(80, 60%, 40%);
     --secondary: #001f3f;
     --secondaryLight: #001f3f;
@@ -148,7 +148,7 @@
     font-size: 100%;
     margin: 0;
     padding: 0;
-    color: var(--bodyTextColor);
+    color: var(--color-nuetral-950);
   }
 
   *,
@@ -177,6 +177,7 @@
   h6 {
     margin: 0;
     color: var(--headerColor);
+    font: var(--font-mont);
   }
 
   p,
@@ -185,11 +186,13 @@
     font-size: (16/16rem);
     line-height: 1.5em;
     margin: 0;
+    font: var(--font-mont);
   }
 
   p,
   li {
     color: #353535;
+    font: var(--font-mont);
   }
 
   a,

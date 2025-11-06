@@ -3,11 +3,48 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import FAQ from "@components/FAQ.astro";
 import { Image } from "astro:assets";
+import clientData from "@data/client.json";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import brand1 from "@assets/images/brands/brand-1.webp";
+import about from "@assets/images/about.jpg";
+import service1 from "@assets/images/services/service-1.jpg";
 import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import ContactCta from "@components/ContactCta.astro";
+
+type ServiceInfo = {
+  Image: ImageMetadata;
+  title: string;
+  description: string;
+  href: string;
+};
+
+const services: ServiceInfo[] = [
+  {
+    Image: service1,
+    title: "Service 1",
+    description:
+      "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.",
+    href: "/",
+  },
+  {
+    Image: service1,
+    title: "Service 2",
+    description:
+      "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.",
+    href: "/",
+  },
+  {
+    Image: service1,
+    title: "Service 3",
+    description:
+      "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.",
+    href: "/",
+  },
+];
+
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
 
@@ -17,164 +54,193 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
 
   <section class="relative pt-17 md:pt-18 lg:pt-21.25 xl:pt-23.75">
-    <div class="absolute inset-0 -z-1 w-full h-full">
+    <div class="absolute inset-0 -z-1 h-full w-full">
       <Image
         src={landingImage}
         alt="Epoxy Flooring Edmonton"
-        class="w-full h-full object-cover absolute inset-0 z-0"
+        class="absolute inset-0 z-0 h-full w-full object-cover"
         loading="eager"
       />
       <!-- Black Overlay -->
-      <div class="absolute inset-0 bg-black opacity-50 z-10"></div>
+      <div class="absolute inset-0 z-10 bg-black opacity-50"></div>
     </div>
 
     <div
-      class="h-135 relative z-1 flex flex-col items-center lg:items-start lg:max-w-300 lg:mx-auto lg:py-20 xl:h-177 justify-center"
+      class="relative z-1 flex h-135 flex-col items-center justify-center lg:mx-auto lg:max-w-300 lg:items-start lg:py-20 xl:h-177"
     >
-      <div class="p-4 md:p-6 flex flex-col gap-5 lg:max-w-160">
+      <div class="flex flex-col gap-5 p-4 md:p-6 lg:max-w-160">
         <!-- font-size: ; -->
         <h1
-          class="text-neutral-100 font-mont font-extrabold leading-[1.4em] text-[1.8125rem] sm:text-[3.125rem]"
+          class="font-mont text-[1.8125rem] leading-[1.4em] font-extrabold text-neutral-100 sm:text-[3.125rem]"
         >
           Premium Epoxy Flooring in Edmonton
         </h1>
         <p
-          class="text-neutral-100 text-pretty font-mont leading-[1.8em] md:mb-8 font-bold text-[clamp(1.2rem,1.5vw,1.2rem)]"
+          class="font-mont text-[clamp(1.2rem,1.5vw,1.2rem)] leading-[1.8em] font-bold text-pretty text-neutral-100 md:mb-8"
         >
           Transform your concrete surfaces with professional-grade coatings
           built for beauty, protection, and performance.
         </p>
-        <div class="flex items-center flex-wrap gap-5">
-          <a
-            href="/contact"
-            class="cs-button-solid bg-amber-300 text-[0.9375rem] font-mont text-neutral-950 font-bold inline-flex items-center w-fit gap-2 transition-colors duration-300 hover:bg-neutral-500 before:hidden"
-          >
-            Request a Qoute <Icon
-              name={"tabler:chevron-right"}
-              class={"size-5"}
-            />
-          </a>
+        <div class="flex flex-wrap items-center gap-5">
+          <ContactCta label="Request a Qoute" />
 
           <a
-            href="/contact"
-            class="cs-button-solid text-neutral-100 text-[0.9375rem] font-mont bg-neutral-950 font-bold inline-flex items-center w-fit gap-2 transition-colors duration-300 hover:bg-neutral-500 before:hidden"
+            href={`tel:${clientData.phoneForTel}`}
+            class="cs-button-solid group w-fit gap-2 bg-neutral-800 px-0 font-mont text-[0.9375rem] font-bold text-neutral-100 transition-colors duration-300 before:hidden"
           >
-            <Icon name={"tabler:phone-filled"} class={"size-5"} />
-            (123) 456-7890
+            <span
+              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-neutral-950 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+            >
+              <Icon name={"tabler:phone-filled"} class={"size-5"} />
+              (123) 456-7890
+            </span>
           </a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- h-135.25  -->
-  <section id="hero" class="hidden">
-    <div class="cs-container md:max-h-85 lg:max-h-114.75 xl:max-h-175">
-      <div class="cs-flex-group">
-        <span class="cs-topper">Intermediate Kit</span>
-        <h1 class="cs-title">
-          Intermediate Astro v5 <br /> Decap CMS
-        </h1>
-        <p class="cs-text">
-          This intermediate kit includes a pre-configured Astro environment,
-          which allows for repeated components, centralized data and greater
-          room to scale as your clients grow. Decap CMS has been integrated to
-          run a blog.
-        </p>
-        <a href="/about" class="cs-button-solid">Explore More</a>
-        <a href="/contact" class="cs-button-transparent">
-          <img
-            class="cs-img"
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.digitaloceanspaces.com/Hero/play.svg"
-            alt="play icon"
-            width="17"
-            height="17"
-          />
-          Get in Touch
-        </a>
+  <section class="px-4 py-6">
+    <div class="mx-auto flex max-w-300 flex-col gap-5 p-4 md:gap-6 md:p-6">
+      <h2 class="text-[clamp(1.4rem,5vw,1.625rem)] font-extrabold uppercase">
+        Premium Epoxy Flooring
+      </h2>
+
+      <div class="flex w-full flex-wrap items-center justify-between gap-5">
+        <div class="grid gap-3">
+          <a
+            href={`tel:${clientData.phoneForTel}`}
+            class="inline-flex items-center gap-3 font-bold"
+          >
+            <Icon name={"tabler:phone-filled"} class={"size-5"} />
+            {clientData.phoneFormatted}
+          </a>
+
+          <a
+            href={`mailto:${clientData.email}`}
+            class="inline-flex items-center gap-3 font-bold"
+          >
+            <Icon name={"tabler:mail-filled"} class={"size-5"} />
+            {clientData.email}
+          </a>
+
+          <a
+            href={`tel:${clientData.address.mapLink}`}
+            class="inline-flex items-center gap-3 font-bold"
+          >
+            <Icon name={"tabler:map-pin-filled"} class={"size-5"} />
+            {clientData.address.lineOne}
+          </a>
+        </div>
+        <div>
+          <ContactCta label="Free Estimate" />
+        </div>
+      </div>
+
+      <div
+        class="mt-2 grid grid-cols-2 place-items-center gap-2 sm:grid-cols-4"
+      >
+        <Image
+          src={brand1}
+          alt={"brand image"}
+          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
+        />
+        <Image
+          src={brand1}
+          alt={"brand image"}
+          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
+        />
+        <Image
+          src={brand1}
+          alt={"brand image"}
+          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
+        />
+        <Image
+          src={brand1}
+          alt={"brand image"}
+          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
+        />
       </div>
     </div>
-
-    <!-- Background Image -->
-    <!-- We can't use Astro <Picture /> as it does not support multiple sources -->
-    <picture class="cs-picture">
-      <source media="(max-width: 600px)" srcset="/assets/images/hero-m.webp" />
-      <source media="(min-width: 601px)" srcset="/assets/images/hero.jpg" />
-      <img
-        aria-hidden="true"
-        decoding="async"
-        src={optimizedImage.src}
-        alt="new home"
-        width="2500"
-        height="1667"
-        loading="eager"
-      />
-    </picture>
   </section>
 
   <!-- ============================================ -->
   <!--                  Services                    -->
   <!-- ============================================ -->
+  <section class="px-4 pt-0 pb-section-padding">
+    <div
+      class="mx-auto grid max-w-300 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 p-4 md:gap-6 md:p-6"
+    >
+      {
+        services.map((service) => (
+          <article class="bg-neutral-200">
+            <div class="flex -translate-1.5 flex-col items-center bg-neutral-50">
+              <Image
+                src={service.Image}
+                alt={service.title}
+                class={"object-cover"}
+              />
 
-  <section id="services" class="services hidden">
-    <div class="card">
-      <picture>
-        <img
-          aria-hidden="true"
-          decoding="async"
-          src="/assets/svgs/service1.svg"
-          alt="appliance"
-          width="48"
-          height="48"
-        />
-      </picture>
-      <h2>Service 1</h2>
-      <p>
-        Talk about the service with keywords people will be searching for it by.
-        Keep it 1-2 sentences.
-      </p>
-    </div>
-    <div class="card">
-      <picture>
-        <img
-          aria-hidden="true"
-          decoding="async"
-          src="/assets/svgs/service2.svg"
-          alt="appliance"
-          width="48"
-          height="48"
-        />
-      </picture>
-      <h2>Service 2</h2>
-      <p>
-        Talk about the service with keywords people will be searching for it by.
-        Keep it 1-2 sentences.
-      </p>
-    </div>
-    <div class="card">
-      <picture>
-        <img
-          aria-hidden="true"
-          decoding="async"
-          src="/assets/svgs/service3.svg"
-          alt="appliance"
-          width="48"
-          height="48"
-        />
-      </picture>
-      <h2>Service 3</h2>
-      <p>
-        Talk about the service with keywords people will be searching for it by.
-        Keep it 1-2 sentences.
-      </p>
+              <div class="flex flex-col gap-5 p-4">
+                <h2 class="font-mont text-[clamp(1.4rem,5vw,1.625rem)] font-extrabold tracking-wide uppercase">
+                  {service.title}
+                </h2>
+
+                <p class="flex-1 font-mont leading-[1.8rem] tracking-normal">
+                  {service.description}
+                </p>
+
+                <a
+                  href={service.href}
+                  class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+                >
+                  <span class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100">
+                    {service.title}
+                    <Icon name={"tabler:chevron-right"} class={"size-5"} />
+                  </span>
+                </a>
+              </div>
+            </div>
+          </article>
+        ))
+      }
     </div>
   </section>
 
   <!-- ============================================ -->
   <!--                 Side By Side                 -->
   <!-- ============================================ -->
+
+  <section class="px-4 pt-6 pb-section-padding">
+    <div class="mx-auto grid max-w-300 gap-5 p-4 md:block md:gap-0 md:p-6">
+      <div
+        class="order-2 bg-neutral-300 md:float-right md:mb-4 md:ml-4 md:w-90 lg:ml-10 lg:w-full lg:max-w-125 xl:mt-15 xl:max-w-140"
+      >
+        <Image
+          src={about}
+          alt="about us image"
+          class={"object-cover -translate-1.5"}
+        />
+      </div>
+      <div class="order-1 font-mont">
+        <span class="font-medium italic">Leader in Epoxy Flooring</span>
+        <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
+          POLYASPARTIC EPOXY FLOORING & GARAGE FLOOR COATING IN EDMONTON
+        </h2>
+        <p class="leading-[1.8] lg:text-lg">
+          With over 10 years of industry experience, we specialize in delivering
+          exceptional results that exceed expectations. Our Epoxy Flooring
+          Edmonton solutions provide exceptional durability, aesthetic appeal,
+          and protection for residential, commercial, and industrial spaces.
+          Whether you want to upgrade your garage with a sleek, long-lasting
+          finish or improve the resilience of your industrial facility, our
+          expert team delivers top-quality Epoxy Flooring Edmonton services.
+          Trust us for durable, stylish, and high-performance Epoxy Flooring
+          Edmonton that enhances any space!
+        </p>
+      </div>
+    </div>
+  </section>
 
   <section id="sbs">
     <div class="cs-container">
@@ -621,7 +687,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
   <CTA />
 </BaseLayout>
-
 <style lang="less">
   /* STYLES FOR ABOVE THE FOLD */
 
