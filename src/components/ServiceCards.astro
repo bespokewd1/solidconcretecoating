@@ -51,7 +51,11 @@ const services: ServiceInfo[] = [
 const { class: className, ...props } = Astro.props;
 ---
 
-<section class:list={["px-4 pt-0 pb-section-padding", className]} {...props}>
+<section
+  class="px-4 pt-0 pb-section-padding"
+  class:list={[className]}
+  {...props}
+>
   <div
     class="mx-auto grid max-w-300 grid-cols-1 gap-5 p-4 sm:max-lg:max-w-150 md:gap-6 md:p-6 lg:grid-cols-3"
   >

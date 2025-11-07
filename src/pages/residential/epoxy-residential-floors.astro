@@ -1,5 +1,5 @@
 ---
-import landingImage from "@assets/images/home-landing.png"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import landingImage from "@assets/images/landing/service-landing-2.png";
 import ContactHeader from "@components/ContactHeader.astro";
 import HeroForm from "@components/HeroForm.astro";
 import SideBySide from "@components/SideBySide.astro";
@@ -18,7 +18,11 @@ import FAQ from "@components/FAQ.astro";
 ---
 
 <BaseLayout ogImage={landingImage}>
-  <HeroForm img={landingImage} />
+  <HeroForm
+    title="Edmonton Residential Epoxy Floors"
+    subtitle="Durable, easy‑to‑clean garage and basement floors by Solid Concrete Coating Ltd. Free estimates in Edmonton."
+    img={landingImage}
+  />
 
   <section class="px-4 pt-6">
     <ContactHeader />
@@ -28,12 +32,14 @@ import FAQ from "@components/FAQ.astro";
     class="py-section-padding"
     topper="Epoxy Garage Floor Installation"
     title="Enhance Your Garage with Professional Epoxy Flooring in Edmonton"
-    body={`Discover the best solution for your garage with Solid Concrete Coating Ltd.’s epoxy
-    and polyaspartic garage floor installations. Our Edmonton epoxy flooring delivers a sleek,
-    durable surface that resists stains, hot‑tire pickup, abrasions, and everyday wear—while
-    elevating your home’s look. Designed for residential and light‑commercial garages,
-    our systems are easy to clean, non‑porous, and built for Alberta’s seasons.
-    Upgrade your garage with a long‑lasting, high‑performance finish that blends style and strength.`}
+    body={`Discover the ideal solution for your garage with Solid Concrete Coating Ltd.’s epoxy and
+    polyaspartic floor installations. Our Edmonton epoxy garage flooring delivers a sleek,
+    durable surface that resists stains, hot‑tire pickup, abrasions,
+    and daily wear—while elevating the look of your space.
+Built for residential and light‑commercial garages, our systems are non‑porous, easy to clean,
+    and engineered to handle Alberta’s seasonal temperature swings.
+    Upgrade your garage with a long‑lasting, high‑performance finish that blends style, traction, and durability.
+    `}
     image={res1}
     alt="garage floor"
   />

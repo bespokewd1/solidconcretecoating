@@ -1,0 +1,121 @@
+---
+import landingImage from "@assets/images/landing/service-landing-2.png";
+import ContactHeader from "@components/ContactHeader.astro";
+import HeroForm from "@components/HeroForm.astro";
+import SideBySide from "@components/SideBySide.astro";
+import TrustBadge from "@components/TrustBadge.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import res1 from "@assets/images/services/res-floor-1.png";
+import BadgeContent from "@components/BadgeContent.astro";
+import WhyChooseUs from "@components/WhyChooseUs.astro";
+import Reviews from "@components/Reviews.astro";
+import FAQ from "@components/FAQ.astro";
+import CTA from "@components/CTA.astro";
+import ContactCta from "@components/ContactCta.astro";
+
+export type ProcessStep = {
+  title: string;
+  body: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export type InstallProcessData = {
+  topper: string;
+  title: string;
+  description: string;
+  steps: ProcessStep[];
+};
+
+export const installProcessData: InstallProcessData = {
+  topper: "Epoxy Garage Floor Installation Process",
+  title: "How We Install Epoxy & Polyaspartic Garage Floors in Edmonton",
+  description:
+    "Every project with Solid Concrete Coating Ltd. follows a careful, proven process to ensure a flawless, long‑lasting finish. From prep to topcoat, we handle each step with precision for maximum durability and a clean, seamless look.",
+  steps: [
+    {
+      title: "Floor Assessment & Preparation",
+      body: "We inspect your garage slab, then mechanically prepare the surface (crack repair, patching, grinding, and cleaning) to achieve optimal adhesion and a smooth, even base for coating.",
+      ctaLabel: "Get a Free Quote",
+      ctaHref: "/contact",
+    },
+    {
+      title: "Priming & Base Coat Application",
+      body: "A high‑bond primer is applied to lock onto the concrete, followed by a durable base coat engineered for Edmonton’s temperature swings, hot‑tire pickup, and everyday wear.",
+    },
+    {
+      title: "Decorative Flakes & Topcoat Finish",
+      body: "Choose decorative flakes for a custom look that also hides dust and scuffs. We seal everything with a tough, UV‑stable topcoat (epoxy or polyaspartic) for a glossy, long‑wearing, low‑maintenance finish.",
+    },
+  ],
+};
+---
+
+<BaseLayout preloadedImage={[landingImage]}>
+  <HeroForm
+    title="Edmonton Epoxy Garage Floors"
+    subtitle="Premium Epoxy & Polyaspartic Garage Floors in Edmonton"
+    img={landingImage}
+  />
+
+  <section class="px-4 pt-6">
+    <ContactHeader />
+    <TrustBadge />
+  </section>
+
+  <SideBySide
+    class="py-section-padding"
+    topper="Epoxy Garage Floor Installation"
+    title="Edmonton’s Professional Epoxy Garage Floor Installation"
+    body={`Discover the best solution for your garage with Solid Concrete Coating Ltd.’s epoxy
+    and polyaspartic garage floor installations. Our Edmonton epoxy flooring delivers a sleek,
+    durable surface that resists stains, hot‑tire pickup, abrasions, and everyday wear—while
+    elevating your home’s look. Designed for residential and light‑commercial garages,
+    our systems are easy to clean, non‑porous, and built for Alberta’s seasons.
+    Upgrade your garage with a long‑lasting, high‑performance finish that blends style and strength.`}
+    image={res1}
+    alt="garage floor"
+  />
+
+  <BadgeContent />
+
+  <WhyChooseUs class="bg-neutral-100" />
+
+  <Reviews />
+
+  <FAQ class="bg-neutral-100" />
+
+  <section class="px-4 py-section-padding font-mont">
+    <div
+      class="mx-auto grid max-w-300 items-start gap-6 p-4 md:gap-10 md:p-6 lg:grid-cols-2"
+    >
+      <div
+        class="flex flex-col gap-4 border border-neutral-950 bg-neutral-50 p-4 md:mb-6"
+      >
+        <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
+          {installProcessData.title}
+        </h2>
+        <p class="mb-4 leading-[1.8] lg:text-lg">
+          {installProcessData.description}
+        </p>
+
+        <ContactCta label="Get a Qoute" />
+      </div>
+      <div>
+        {
+          installProcessData.steps.map((step) => (
+            <div class="mb-6 lg:mb-10">
+              <h3 class="mb-2 text-heading font-extrabold tracking-wide uppercase">
+                {step.title}
+              </h3>
+              <p class="leading-[1.8] lg:text-lg">{step.body}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <CTA />
+</BaseLayout>
