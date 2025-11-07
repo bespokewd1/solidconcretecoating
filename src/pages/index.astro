@@ -6,45 +6,17 @@ import { Image } from "astro:assets";
 import clientData from "@data/client.json";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
-import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import landingImage from "@assets/images/home-landing.png"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import brand1 from "@assets/images/brands/brand-1.webp";
-import about from "@assets/images/about.jpg";
-import service1 from "@assets/images/services/service-1.jpg";
+import brand2 from "@assets/images/brands/brand-2.webp";
+import brand3 from "@assets/images/brands/brand-3.webp";
+import brand4 from "@assets/images/brands/brand-4.webp";
+import about from "@assets/images/about.png";
 import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import ContactCta from "@components/ContactCta.astro";
 import Portfolio from "@components/Portfolio.astro";
-
-type ServiceInfo = {
-  Image: ImageMetadata;
-  title: string;
-  description: string;
-  href: string;
-};
-
-const services: ServiceInfo[] = [
-  {
-    Image: service1,
-    title: "Service 1",
-    description:
-      "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.",
-    href: "/",
-  },
-  {
-    Image: service1,
-    title: "Service 2",
-    description:
-      "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.",
-    href: "/",
-  },
-  {
-    Image: service1,
-    title: "Service 3",
-    description:
-      "Talk about the service with keywords people will be searching for it by. Keep it 1-2 sentences.",
-    href: "/",
-  },
-];
+import ServiceCards from "@components/ServiceCards.astro";
 
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
@@ -147,17 +119,17 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
         />
         <Image
-          src={brand1}
+          src={brand2}
           alt={"brand image"}
           class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
         />
         <Image
-          src={brand1}
+          src={brand3}
           alt={"brand image"}
           class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
         />
         <Image
-          src={brand1}
+          src={brand4}
           alt={"brand image"}
           class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
         />
@@ -165,48 +137,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     </div>
   </section>
 
-  <!-- ============================================ -->
-  <!--                  Services                    -->
-  <!-- ============================================ -->
-  <section class="px-4 pt-0 pb-section-padding">
-    <div
-      class="mx-auto grid max-w-300 grid-cols-1 gap-5 p-4 md:grid-cols-3 md:gap-6 md:p-6"
-    >
-      {
-        services.map((service) => (
-          <article class="bg-neutral-200">
-            <div class="flex -translate-1.5 flex-col items-center bg-neutral-50">
-              <Image
-                src={service.Image}
-                alt={service.title}
-                class={"object-cover"}
-              />
-
-              <div class="flex flex-col gap-5 p-4 lg:px-8 lg:pb-8">
-                <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase">
-                  {service.title}
-                </h2>
-
-                <p class="flex-1 font-mont leading-[1.8rem] tracking-normal">
-                  {service.description}
-                </p>
-
-                <a
-                  href={service.href}
-                  class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
-                >
-                  <span class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100">
-                    {service.title}
-                    <Icon name={"tabler:chevron-right"} class={"size-5"} />
-                  </span>
-                </a>
-              </div>
-            </div>
-          </article>
-        ))
-      }
-    </div>
-  </section>
+  <ServiceCards />
 
   <!-- ============================================ -->
   <!--                 Side By Side                 -->
@@ -275,201 +206,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
 
   <Portfolio />
-
-  <section id="gallery">
-    <div class="cs-container">
-      <span class="cs-topper">Our Portfolio</span>
-      <h2 class="cs-title">
-        Et orci volutpat, back up generator installations
-      </h2>
-      <div class="cs-image-group">
-        <!-- Row 1-->
-        <div class="cs-row cs-row-1">
-          <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
-          <picture class="cs-picture cs-picture1">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port1-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port1.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port1.jpg"
-              alt="new hallway"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture2">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port4-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port4.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port4.jpg"
-              alt="new home construction"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture3">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port7-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port7.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port7.jpg"
-              alt="building a new wall"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-        </div>
-        <!-- Row 2 -->
-        <div class="cs-row cs-row-2">
-          <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
-          <picture class="cs-picture cs-picture1">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port2-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port2.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port2.jpg"
-              alt="new kitchen"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture2">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port5-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port5.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port5.jpg"
-              alt="apartment addition"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture3">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port8-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port8.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port8.jpg"
-              alt="kew kitchen cabinets"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-        </div>
-        <!-- Row 3 -->
-        <div class="cs-row cs-row-3">
-          <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
-          <picture class="cs-picture cs-picture1">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port3-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port3.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port3.jpg"
-              alt="new kitchen"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture2">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port6-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port6.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port6.jpg"
-              alt="apartment addition"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture3">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port9-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port9.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port9.jpg"
-              alt="kew kitchen cabinets"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-        </div>
-      </div>
-      <a href="/projects" class="cs-button-solid">View all projects</a>
-    </div>
-  </section>
 
   <!-- ============================================ -->
   <!--                    FAQ                       -->

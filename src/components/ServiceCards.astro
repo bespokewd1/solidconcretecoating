@@ -1,0 +1,83 @@
+---
+import service1 from "@assets/images/services/service-1.png";
+import service2 from "@assets/images/services/service-2.png";
+import service3 from "@assets/images/services/service-3.png";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+type ServiceInfo = {
+  Image: ImageMetadata;
+  title: string;
+  description: string;
+  href: string;
+  linkLabel: string;
+};
+
+const services: ServiceInfo[] = [
+  {
+    Image: service1,
+    title: "Residential Epoxy Flooring",
+    description:
+      "Upgrade your home with Premium Epoxy Flooring. Ideal for any room, our floors deliver long‑lasting durability and low maintenance, perfect for busy households and high‑traffic areas like epoxy garage floors, basements, decks, and more. Get a seamless, stylish finish that stands up to everyday life.",
+    href: "/",
+    linkLabel: "Residential  Epoxy",
+  },
+  {
+    Image: service2,
+    title: "Commercial Epoxy Flooring",
+    description:
+      "Premium Epoxy Flooring installs commercial‑grade systems engineered for heavy foot traffic and daily wear. Create safer, cleaner, and more professional spaces with high‑performance coatings that resist stains, spills, and scratches—perfect for offices, retail, restaurants, and warehouses.",
+    href: "/",
+    linkLabel: "Commercial  Epoxy",
+  },
+  {
+    Image: service3,
+    title: "Industrial Epoxy Flooring",
+    description:
+      "Choose Premium Epoxy Flooring for industrial environments that demand maximum strength and safety. Our advanced coatings handle impact, chemicals, and intensive use while improving visibility and compliance—ideal for plants, shops, and distribution facilities.",
+    href: "/",
+    linkLabel: "Industrial  Epoxy",
+  },
+];
+---
+
+<!-- ============================================ --><!--                  Services                    --><!-- ============================================ -->
+<section class="px-4 pt-0 pb-section-padding">
+  <div
+    class="mx-auto grid max-w-300 grid-cols-1 gap-5 p-4 sm:max-lg:max-w-150 md:gap-6 md:p-6 lg:grid-cols-3"
+  >
+    {
+      services.map((service) => (
+        <article class="bg-neutral-200">
+          <div class="flex h-full -translate-1.5 flex-col items-center bg-neutral-50">
+            <Image
+              src={service.Image}
+              alt={service.title}
+              class={"object-cover"}
+            />
+
+            <div class="flex flex-1 flex-col gap-5 p-4 lg:px-8 lg:pb-8">
+              <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase">
+                {service.title}
+              </h2>
+
+              <p class="flex-1 font-mont leading-[1.8rem] tracking-normal">
+                {service.description}
+              </p>
+
+              <a
+                href={service.href}
+                class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+              >
+                <span class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100">
+                  {service.linkLabel}
+                  <Icon name={"tabler:chevron-right"} class={"size-5"} />
+                </span>
+              </a>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>

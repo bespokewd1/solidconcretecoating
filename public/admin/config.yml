@@ -48,22 +48,44 @@ collections:
 
   - name: "gallery"
     label: "Gallery"
-    label_singular: "Gallery Image"
+    label_singular: "Gallery Post"
     folder: "src/content/gallery"
+    media_folder: "src/assets/images/gallery"
+    public_folder: "src/assets/images/gallery"
     create: true
     slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
     fields:
+      - label: "Images"
+        name: "images"
+        widget: "list"
+        summary: "{{fields.imageAlt}}"
+        fields:
+          - { label: "Image", name: "image", widget: "image" }
+          - {
+              label: "Alt Text (optional)",
+              name: "imageAlt",
+              widget: "string",
+              required: false,
+              hint: "Leave empty to use default with numbering",
+            }
+          - {
+              label: "Title/Caption (optional)",
+              name: "title",
+              widget: "string",
+              required: false,
+              hint: "Leave empty to use default with numbering",
+            }
       - {
-          label: "Image",
-          name: "image",
-          widget: "image",
-          allow_multiple: false,
+          label: "Default Alt Text",
+          name: "defaultAlt",
+          widget: "string",
+          hint: "Used when individual image alt is not provided",
         }
-      - { label: "Alt Text", name: "imageAlt", widget: "string" }
       - {
-          label: "Title/Caption",
-          name: "title",
+          label: "Default Title",
+          name: "defaultTitle",
           widget: "string",
           required: false,
+          hint: "Used when individual image title is not provided",
         }
       - { label: "Upload Date", name: "date", widget: "datetime" }

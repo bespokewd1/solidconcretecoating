@@ -23,9 +23,15 @@ const galleryCollection = defineCollection({
 	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/gallery" }),
 	schema: ({ image }) =>
 		z.object({
-			image: image(),
-			imageAlt: z.string(),
-			title: z.string().optional(),
+			images: z.array(
+				z.object({
+					image: image(),
+					imageAlt: z.string().optional(),
+					title: z.string().optional(),
+				})
+			),
+			defaultAlt: z.string(),
+			defaultTitle: z.string().optional(),
 			date: z.date(),
 		}),
 });
