@@ -16,4 +16,7 @@ export default defineConfig({
  vite: {
     plugins: [tailwindcss()],
   },
+ redirects: {
+    '/residential': '/residential/epoxy-residential-floors/',
+  },
 });

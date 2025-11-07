@@ -4,24 +4,17 @@ import CTA from "@components/CTA.astro";
 import Landing from "@components/Landing.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
-import landingImage from "@assets/images/landing.jpg" // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { getImage } from "astro:assets";
-const optimizedImage = await getImage({src: landingImage, format: 'avif'});
+const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
 
-<BaseLayout
-  title="Reviews"
-  description="Meta description for the page"
-  preloadedImage = {optimizedImage}
->
+<BaseLayout ogImage={optimizedImage}>
   <!-- ============================================ -->
   <!--                    LANDING                   -->
   <!-- ============================================ -->
 
-  <Landing 
-    title="Reviews"
-    image={optimizedImage}
-  />
+  <Landing title="Reviews" image={optimizedImage} />
 
   <!-- ============================================ -->
   <!--                  Reviews                     -->

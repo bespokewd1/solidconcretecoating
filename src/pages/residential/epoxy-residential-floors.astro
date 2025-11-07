@@ -1,0 +1,115 @@
+---
+import landingImage from "@assets/images/home-landing.png"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import ContactHeader from "@components/ContactHeader.astro";
+import HeroForm from "@components/HeroForm.astro";
+import SideBySide from "@components/SideBySide.astro";
+import TrustBadge from "@components/TrustBadge.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import res1 from "@assets/images/services/res-floor-1.png";
+import res2 from "@assets/images/services/res-floor-2.png";
+import res3 from "@assets/images/services/res-floor-3.png";
+import res4 from "@assets/images/services/res-floor-4.png";
+import res5 from "@assets/images/services/res-floor-5.png";
+import BadgeContent from "@components/BadgeContent.astro";
+import WhyChooseUs from "@components/WhyChooseUs.astro";
+import Reviews from "@components/Reviews.astro";
+import FAQ from "@components/FAQ.astro";
+---
+
+<BaseLayout ogImage={landingImage}>
+  <HeroForm img={landingImage} />
+
+  <section class="px-4 pt-6">
+    <ContactHeader />
+    <TrustBadge />
+  </section>
+  <SideBySide
+    class="py-section-padding"
+    topper="Epoxy Garage Floor Installation"
+    title="Enhance Your Garage with Professional Epoxy Flooring in Edmonton"
+    body={`Discover the best solution for your garage with Solid Concrete Coating Ltd.’s epoxy
+    and polyaspartic garage floor installations. Our Edmonton epoxy flooring delivers a sleek,
+    durable surface that resists stains, hot‑tire pickup, abrasions, and everyday wear—while
+    elevating your home’s look. Designed for residential and light‑commercial garages,
+    our systems are easy to clean, non‑porous, and built for Alberta’s seasons.
+    Upgrade your garage with a long‑lasting, high‑performance finish that blends style and strength.`}
+    image={res1}
+    alt="garage floor"
+  />
+
+  <BadgeContent />
+
+  <SideBySide
+    asSection
+    class="bg-neutral-100"
+    topper="Residential Epoxy Floors"
+    title="Epoxy Deck Floor Installation in Edmonton"
+    body={`Elevate your outdoor living space with Solid Concrete Coating Ltd.’s
+    epoxy and polyaspartic deck coatings. Built for Edmonton’s climate,
+    our systems deliver a waterproof, UV‑stable, and easy‑to‑clean surface
+    that stands up to foot traffic, spills, and seasonal temperature swings—without sacrificing style.
+Ideal for decks and patios, our installations enhance both beauty and function, creating a seamless finish
+    that’s comfortable underfoot and simple to maintain. Choose from modern solid colours, decorative flakes, or quartz blends to complement any outdoor setting.
+    `}
+    image={res2}
+    alt="deck floor"
+    alignment="left"
+  />
+
+  <SideBySide
+    asSection
+    topper="Concrete Epoxy Floors"
+    title="Epoxy Concrete Floor Installation in Edmonton"
+    body={`Upgrade your concrete surfaces with Solid Concrete Coating Ltd.’s advanced epoxy
+    and polyaspartic flooring systems. Engineered for Edmonton conditions, our
+    coatings deliver exceptional durability, chemical and stain resistance, and a clean, polished finish that elevates any space.
+
+Ideal for garages, basements, workshops, and commercial areas, our high‑bond systems stand up to heavy use
+    while remaining easy to maintain. Choose from solid colours, decorative flakes, or quartz
+    to match your style and performance needs—for a tough, attractive floor that lasts for years.
+    `}
+    image={res3}
+    alt="deck floor"
+    alignment="right"
+  />
+
+  <SideBySide
+    asSection
+    class="bg-neutral-100"
+    topper="Basement Epoxy Floors"
+    title="Basement Epoxy Floor Installation in Edmonton"
+    body={`Transform your basement with Solid Concrete Coating Ltd.’s epoxy and polyaspartic
+    flooring systems—engineered for the unique demands of below‑grade spaces in Edmonton.
+    Our seamless coatings create a waterproof, easy‑to‑clean surface that resists stains,
+    abrasions, and household chemicals while elevating the look of your home.
+Perfect for finished living areas, rec rooms, home gyms, utility rooms, and storage spaces,
+    our basement epoxy floors help deter mold and mildew by eliminating grout lines and porous surfaces.
+    Choose from modern solid colours, decorative flakes, or quartz blends to match your style and deliver long‑lasting performance.
+    `}
+    image={res4}
+    alt="deck floor"
+    alignment="left"
+  />
+
+  <SideBySide
+    asSection
+    topper="Metallic Epoxy Floors"
+    title="Metallic Epoxy Floor Installation in Edmonton"
+    body={`Elevate your space with the high‑end look of metallic
+    epoxy from Solid Concrete Coating Ltd. Our specialty metallic systems create a deep, three‑dimensional
+    finish that can resemble flowing water, molten metal, or clouded skies—perfect for statement‑making residential and commercial interiors in Edmonton.
+
+Beyond the luxurious appearance, metallic epoxy delivers the same durability and protection you expect from premium epoxy and polyaspartic coatings: stain
+    and abrasion resistance, seamless application, and low maintenance. The glossy, non‑porous surface cleans easily and stands up to everyday wear, making it ideal for showrooms, foyers, rec rooms, studios, and more.
+    `}
+    image={res5}
+    alt="deck floor"
+    alignment="right"
+  />
+
+  <Reviews class="bg-neutral-100" />
+  <WhyChooseUs />
+
+  <FAQ class="bg-neutral-100" />
+</BaseLayout>

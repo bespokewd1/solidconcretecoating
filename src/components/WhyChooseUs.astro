@@ -1,0 +1,76 @@
+---
+export type BenefitItem = {
+  title: string;
+  body: string;
+};
+export const whyChooseData: BenefitItem[] = [
+  {
+    title: "Industry‑Leading Durability",
+    body: "Our systems use premium resins and aggregates engineered to resist wear, impact, hot‑tire pickup, and chemicals—keeping your floors looking great through daily use.",
+  },
+  {
+    title: "Fast & Easy Scheduling",
+    body: "We respect your time with streamlined estimates and efficient timelines. Many residential projects are completed in as little as a day, with minimal disruption.",
+  },
+  {
+    title: "Customized Solutions",
+    body: "From solid colours to decorative flake and quartz, we tailor finishes to your needs—matching the right system to your garage, basement, shop, or commercial space.",
+  },
+  {
+    title: "Proven Track Record",
+    body: "Trusted by Edmonton homeowners and local businesses for clean installs, reliable timelines, and durable results that perform season after season.",
+  },
+  {
+    title: "Affordable Pricing",
+    body: "Competitive, transparent quotes with no surprises—so you get premium epoxy and polyaspartic performance without the premium price tag.",
+  },
+  {
+    title: "Responsive Customer Service",
+    body: "Friendly support before, during, and after your project. We keep you informed and answer questions quickly so the whole experience feels easy.",
+  },
+  {
+    title: "Warranty Coverage",
+    body: "Every install is backed by solid warranty options for peace of mind, reflecting the quality of our materials and workmanship.",
+  },
+  {
+    title: "Local Commitment",
+    body: "Proudly serving Edmonton. We care about our community and stand behind our work with dependable service you can trust.",
+  },
+];
+---
+
+<section class="px-4 py-6 font-mont">
+  <div class="mx-auto grid max-w-300 gap-6 p-4 md:p-6 lg:gap-10">
+    <div class="mx-auto flex max-w-prose flex-col justify-center text-center">
+      <span
+        class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
+        >Why Choose Us?</span
+      >
+      <h2
+        class="mb-2 text-heading font-extrabold tracking-wide text-pretty uppercase"
+      >
+        Experience the Solid Concrete Coating Difference
+      </h2>
+      <p class="mx-auto leading-[1.8]">
+        At Solid Concrete Coating Ltd., we don’t just apply epoxy—we craft
+        long‑lasting flooring solutions that elevate your space. Discover what
+        makes homeowners and businesses choose us for epoxy and polyaspartic
+        flooring in Edmonton.
+      </p>
+    </div>
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+      {
+        whyChooseData.map((item) => (
+          <div class="bg-neutral-200">
+            <div class="grid h-full -translate-1.5 bg-neutral-100 p-2 px-3 sm:grid-rows-[4.0625rem_1fr]">
+              <h3 class="mb-4 text-xl font-extrabold tracking-wide text-pretty uppercase">
+                {item.title}
+              </h3>
+              <p class="leading-[1.8] text-balance">{item.body}</p>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

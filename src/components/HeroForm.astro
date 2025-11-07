@@ -1,0 +1,72 @@
+---
+import ContactCta from "@components/ContactCta.astro";
+import { Icon } from "astro-icon/components";
+import clientData from "@data/client.json";
+
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+import ContactForm from "./ContactForm.astro";
+
+type Props = HTMLAttributes<"section"> & {
+  img: ImageMetadata;
+};
+
+const { img, class: className, ...props } = Astro.props;
+---
+
+<section
+  class:list={["relative pt-17 md:pt-18 lg:pt-21.25 xl:pt-23.75", className]}
+  {...props}
+>
+  <div class="absolute inset-0 -z-1 h-full w-full">
+    <Image
+      src={img}
+      alt="Epoxy Flooring Edmonton"
+      class="absolute inset-0 z-0 h-full w-full object-cover"
+      loading="eager"
+    />
+    <!-- Black Overlay -->
+    <div class="absolute inset-0 z-10 bg-black opacity-30"></div>
+  </div>
+
+  <div
+    class="relative z-1 flex flex-col items-center justify-center gap-5 lg:mx-auto lg:max-w-7xl lg:flex-row lg:justify-between lg:py-20 xl:h-177"
+  >
+    <div class="flex flex-col gap-5 p-4 md:p-6 lg:max-w-160">
+      <h1
+        class="font-mont text-[1.8125rem] leading-[1.4em] font-extrabold text-neutral-100 sm:text-[3.125rem]"
+      >
+        Premium Epoxy Flooring in Edmonton
+      </h1>
+      <p
+        class="font-mont text-[clamp(1.2rem,1.5vw,1.2rem)] leading-[1.8em] font-bold text-pretty text-neutral-100 md:mb-8"
+      >
+        Transform your concrete surfaces with professional-grade coatings built
+        for beauty, protection, and performance.
+      </p>
+      <div class="flex flex-wrap items-center gap-5">
+        <ContactCta label="Request a Qoute" />
+
+        <a
+          href={`tel:${clientData.phoneForTel}`}
+          class="cs-button-solid group w-fit gap-2 bg-neutral-800 px-0 font-mont text-[0.9375rem] font-bold text-neutral-100 transition-colors duration-300 before:hidden"
+        >
+          <span
+            class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-neutral-950 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+          >
+            <Icon name={"tabler:phone-filled"} class={"size-5"} />
+            (123) 456-7890
+          </span>
+        </a>
+      </div>
+    </div>
+
+    <div class="mx-auto flex w-full items-center justify-center p-0 xs:p-4">
+      <div
+        class="m mx-4 w-full max-w-150 rounded-none bg-neutral-950 p-5 sm:p-6 md:mx-0 md:p-7 lg:p-8 xl:p-9"
+      >
+        <ContactForm />
+      </div>
+    </div>
+  </div>
+</section>

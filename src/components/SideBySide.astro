@@ -1,0 +1,68 @@
+---
+import { Image } from "astro:assets";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section"> & {
+  image: ImageMetadata; // import from astro:assets in the page and pass it in
+  alt?: string;
+  alignment?: "left" | "right";
+  topper?: string;
+  title?: string;
+  body?: string;
+  asSection?: boolean;
+};
+
+const {
+  image,
+  alt = "about image",
+  alignment = "right",
+  topper = "Leader in Epoxy Flooring",
+  title = "POLYASPARTIC EPOXY FLOORING & GARAGE FLOOR COATING IN EDMONTON",
+  body = "",
+  asSection = false,
+  class: className = "",
+  ...props
+} = Astro.props;
+
+// Shared classes from your current markup
+const wrapperClasses =
+  "mx-auto grid max-w-300 gap-5 p-4 md:block md:gap-0 md:p-6";
+const imageBase =
+  "bg-neutral-300 md:mb-4 md:w-90 lg:w-full lg:max-w-125 xl:max-w-140";
+const imageFloatRight = "md:float-right md:ml-4 lg:ml-10";
+const imageFloatLeft = "md:float-left md:mr-4 lg:mr-10";
+const imageClasses =
+  (alignment === "right" ? imageFloatRight : imageFloatLeft) + " " + imageBase;
+
+// Order classes for mobile stacking (image second by default when right)
+const imageOrder = alignment === "right" ? "order-2" : "order-1";
+const textOrder = alignment === "right" ? "order-1" : "order-2";
+---
+
+<section
+  class:list={[
+    "px-4 pt-6",
+    className,
+    asSection ? "py-section-padding" : "pb-section-padding",
+  ]}
+  {...props}
+>
+  <div class={wrapperClasses}>
+    <div class={`${imageOrder} ${imageClasses}`}>
+      <Image src={image} alt={alt} class={"object-cover -translate-1.5"} />
+    </div>
+
+    <div class={`${textOrder} font-mont`}>
+      <span
+        class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
+        >{topper}</span
+      >
+      <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
+        {title}
+      </h2>
+      <p class="leading-[1.8] lg:text-lg">
+        {body}
+      </p>
+    </div>
+  </div>
+</section>

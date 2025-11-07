@@ -1,0 +1,31 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section">;
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section class:list={["px-4 py-6 lg:px-8", className]} {...props}>
+  <div
+    class="mx-auto grid w-full max-w-300 grid-cols-1 gap-5 sm:p-4 md:grid-cols-2 md:gap-6 md:p-6"
+  >
+    <div class="bg-amber-400">
+      <div
+        class="-translate-1.5 bg-amber-300 p-12 text-center font-mont text-neutral-950"
+      >
+        <p class="mb-2 text-5xl font-bold">15</p>
+        <p class="text-2xl font-semibold">years of experience</p>
+      </div>
+    </div>
+
+    <div class="bg-amber-400">
+      <div
+        class="-translate-1.5 bg-amber-300 p-12 text-center font-mont text-neutral-950"
+      >
+        <p class="mb-2 text-5xl font-bold">200+</p>
+        <p class="text-2xl font-semibold">Satisfied Customer</p>
+      </div>
+    </div>
+  </div>
+</section>

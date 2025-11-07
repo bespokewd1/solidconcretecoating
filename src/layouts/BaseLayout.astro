@@ -24,13 +24,15 @@ type PreloadedImage = GetImageResult | ContentImage;
 interface Props {
   title?: string;
   description?: string;
-  preloadedImage?: PreloadedImage; // optional - passing a preloadedImage to BaseLayout will 1. preload the image and 2. use the image for og socials tags in the <head>
+  preloadedImage?: PreloadedImage[]; // optional - passing a preloadedImage to BaseLayout will 1. preload the image and 2. use the image for og socials tags in the <head>
+  ogImage?: PreloadedImage;
 }
 
 const {
   title = "Epoxy Flooring Edmonton | Solid Concrete Coating Ltd. – Trusted Concrete Coating Experts",
   description = "Transform your floors with Edmonton’s trusted epoxy and concrete coating specialists. We provide residential, commercial, and industrial epoxy flooring built for durability, style, and long-term performance. Get a free quote today!",
   preloadedImage,
+  ogImage = defaultOg,
 } = Astro.props as Props;
 ---
 
@@ -53,12 +55,14 @@ const {
 
     <!-- If present, preloads the image passed as a prop -->
     {
-      preloadedImage && (
-        <link rel="preload" href={preloadedImage.src} as="image" />
-      )
+      Array.isArray(preloadedImage) &&
+        preloadedImage !== null &&
+        preloadedImage.map((image) => (
+          <link rel="preload" href={image.src} as="image" />
+        ))
     }
 
-    <link rel="preload" href={defaultOg.src} as="image" />
+    <link rel="preload" href={ogImage.src} as="image" />
     <!-- Social Media Display - generated automatically with the props passd to BaseLayout -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -67,8 +71,8 @@ const {
       property="og:url"
       content={`https://${client.domain}${Astro.url.pathname}`}
     />
-    <meta property="og:image" content={defaultOg.src} />
-    <meta property="og:image:secure_url" content={defaultOg.src} />
+    <meta property="og:image" content={ogImage.src} />
+    <meta property="og:image:secure_url" content={ogImage.src} />
 
     <!-- Favicons -->
     <link

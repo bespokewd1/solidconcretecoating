@@ -1,0 +1,42 @@
+---
+import clientData from "@data/client.json";
+import { Icon } from "astro-icon/components";
+import ContactCta from "@components/ContactCta.astro";
+---
+
+<div class="mx-auto flex max-w-300 flex-col gap-5 p-4 md:gap-6 md:p-6">
+  <h2 class="text-heading font-extrabold uppercase">
+    Solid Concrete Coating Ltd. - Premium Epoxy Flooring
+  </h2>
+
+  <div class="flex w-full flex-wrap items-center justify-between gap-5">
+    <div class="grid gap-3">
+      <a
+        href={`tel:${clientData.phoneForTel}`}
+        class="inline-flex items-center gap-3 font-bold"
+      >
+        <Icon name={"tabler:phone-filled"} class={"size-5"} />
+        {clientData.phoneFormatted}
+      </a>
+
+      <a
+        href={`mailto:${clientData.email}`}
+        class="inline-flex items-center gap-3 font-bold"
+      >
+        <Icon name={"tabler:mail-filled"} class={"size-5"} />
+        {clientData.email}
+      </a>
+
+      <a
+        href={`tel:${clientData.address.mapLink}`}
+        class="inline-flex items-center gap-3 font-bold"
+      >
+        <Icon name={"tabler:map-pin-filled"} class={"size-5"} />
+        {clientData.address.lineOne}
+      </a>
+    </div>
+    <div>
+      <ContactCta label="Free Estimate" />
+    </div>
+  </div>
+</div>

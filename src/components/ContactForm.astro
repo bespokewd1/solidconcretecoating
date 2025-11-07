@@ -1,0 +1,138 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<form
+  name="contact"
+  method="POST"
+  data-netlify="true"
+  action="/"
+  class="flex flex-col gap-5 font-mont sm:gap-6"
+>
+  <input type="hidden" name="form-name" value="contact" />
+
+  <!-- Name -->
+  <div class="relative z-1">
+    <input
+      id="name"
+      name="name"
+      required
+      placeholder="Name"
+      class:list={[
+        "peer z-10 w-full rounded-none bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
+        "focus:translate-y-px focus:ring-2 focus:ring-amber-300 sm:py-4.5 md:py-4 md:pb-2",
+      ]}
+      autocomplete="name"
+    />
+    <label
+      for="name"
+      class="pointer-events-none absolute top-1/2 left-4 z-10 -translate-y-1/2 bg-transparent text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+    >
+      Name
+    </label>
+    <div
+      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+    >
+    </div>
+  </div>
+
+  <!-- Email -->
+  <div class="relative z-1">
+    <input
+      id="email"
+      type="email"
+      name="email"
+      required
+      placeholder="Email"
+      class:list={[
+        "peer z-10 w-full rounded-none bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
+        "focus:translate-y-px focus:ring-2 focus:ring-amber-300 sm:py-4.5 md:py-4 md:pb-2",
+      ]}
+      autocomplete="email"
+    />
+    <label
+      for="email"
+      class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+    >
+      Email
+    </label>
+
+    <div
+      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+    >
+    </div>
+  </div>
+
+  <div class="relative z-1">
+    <input
+      id="phone"
+      type="tel"
+      name="phone"
+      placeholder="Phone"
+      inputmode="tel"
+      autocomplete="tel"
+      class:list={[
+        "peer z-10 w-full rounded-none bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
+        "focus:translate-y-px focus:ring-2 focus:ring-amber-300 sm:py-4.5 md:py-4 md:pb-2",
+      ]}
+    />
+    <label
+      for="phone"
+      class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+    >
+      Phone
+    </label>
+
+    <div
+      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+    >
+    </div>
+  </div>
+
+  <!-- Message -->
+  <div class="relative z-1">
+    <textarea
+      id="message"
+      name="message"
+      required
+      placeholder="Message"
+      rows="5"
+      class:list={[
+        "peer z-10 w-full resize-y rounded-none bg-neutral-50 px-4 py-5 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "transition-[padding,box-shadow] duration-200 ease-out outline-none focus:translate-y-0.5 focus:ring-2 focus:ring-amber-300 sm:py-6",
+      ]}></textarea>
+    <label
+      for="message"
+      class="pointer-events-none absolute top-4 left-4 z-10 text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+    >
+      Message
+    </label>
+
+    <div
+      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+    >
+    </div>
+  </div>
+
+  <div data-netlify-recaptcha="true" class="mt-1"></div>
+
+  <button
+    type="submit"
+    class="cs-button-solid group mx-auto w-full max-w-75 gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+  >
+    <span
+      class="inline-flex w-full -translate-x-px -translate-y-0.5 items-center justify-center gap-3 bg-amber-300 px-7.5 text-center duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+    >
+      Send
+      <Icon name={"tabler:send-2"} class={"size-5"} />
+    </span>
+  </button>
+  <!-- <button
+          class="rounded-none bg-amber-300 px-5 py-3 font-bold tracking-wide text-neutral-50 transition-colors duration-200 focus:ring-2 focus:ring-amber-300 focus:outline-none md:px-6 md:py-3.5"
+        >
+          Send
+        </button> -->
+</form>

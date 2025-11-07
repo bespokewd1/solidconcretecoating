@@ -7,10 +7,6 @@ import clientData from "@data/client.json";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import landingImage from "@assets/images/home-landing.png"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
-import brand1 from "@assets/images/brands/brand-1.webp";
-import brand2 from "@assets/images/brands/brand-2.webp";
-import brand3 from "@assets/images/brands/brand-3.webp";
-import brand4 from "@assets/images/brands/brand-4.webp";
 import about from "@assets/images/about.png";
 import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
@@ -18,50 +14,16 @@ import ContactCta from "@components/ContactCta.astro";
 import Portfolio from "@components/Portfolio.astro";
 import ServiceCards from "@components/ServiceCards.astro";
 import Reviews from "@components/Reviews.astro";
-
-export type BenefitItem = {
-  title: string;
-  body: string;
-};
-export const whyChooseData: BenefitItem[] = [
-  {
-    title: "Industry‑Leading Durability",
-    body: "Our systems use premium resins and aggregates engineered to resist wear, impact, hot‑tire pickup, and chemicals—keeping your floors looking great through daily use.",
-  },
-  {
-    title: "Fast & Easy Scheduling",
-    body: "We respect your time with streamlined estimates and efficient timelines. Many residential projects are completed in as little as a day, with minimal disruption.",
-  },
-  {
-    title: "Customized Solutions",
-    body: "From solid colours to decorative flake and quartz, we tailor finishes to your needs—matching the right system to your garage, basement, shop, or commercial space.",
-  },
-  {
-    title: "Proven Track Record",
-    body: "Trusted by Edmonton homeowners and local businesses for clean installs, reliable timelines, and durable results that perform season after season.",
-  },
-  {
-    title: "Affordable Pricing",
-    body: "Competitive, transparent quotes with no surprises—so you get premium epoxy and polyaspartic performance without the premium price tag.",
-  },
-  {
-    title: "Responsive Customer Service",
-    body: "Friendly support before, during, and after your project. We keep you informed and answer questions quickly so the whole experience feels easy.",
-  },
-  {
-    title: "Warranty Coverage",
-    body: "Every install is backed by solid warranty options for peace of mind, reflecting the quality of our materials and workmanship.",
-  },
-  {
-    title: "Local Commitment",
-    body: "Proudly serving Edmonton. We care about our community and stand behind our work with dependable service you can trust.",
-  },
-];
+import SideBySide from "@components/SideBySide.astro";
+import TrustBadge from "@components/TrustBadge.astro";
+import ContactHeader from "@components/ContactHeader.astro";
+import BadgeContent from "@components/BadgeContent.astro";
+import WhyChooseUs from "@components/WhyChooseUs.astro";
 
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
 
-<BaseLayout preloadedImage={optimizedImage}>
+<BaseLayout ogImage={optimizedImage}>
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
@@ -114,67 +76,8 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   </section>
 
   <section class="px-4 pt-6">
-    <div class="mx-auto flex max-w-300 flex-col gap-5 p-4 md:gap-6 md:p-6">
-      <h2 class="text-[clamp(1.4rem,5vw,1.625rem)] font-extrabold uppercase">
-        Solid Concrete Coating Ltd. - Premium Epoxy Flooring
-      </h2>
-
-      <div class="flex w-full flex-wrap items-center justify-between gap-5">
-        <div class="grid gap-3">
-          <a
-            href={`tel:${clientData.phoneForTel}`}
-            class="inline-flex items-center gap-3 font-bold"
-          >
-            <Icon name={"tabler:phone-filled"} class={"size-5"} />
-            {clientData.phoneFormatted}
-          </a>
-
-          <a
-            href={`mailto:${clientData.email}`}
-            class="inline-flex items-center gap-3 font-bold"
-          >
-            <Icon name={"tabler:mail-filled"} class={"size-5"} />
-            {clientData.email}
-          </a>
-
-          <a
-            href={`tel:${clientData.address.mapLink}`}
-            class="inline-flex items-center gap-3 font-bold"
-          >
-            <Icon name={"tabler:map-pin-filled"} class={"size-5"} />
-            {clientData.address.lineOne}
-          </a>
-        </div>
-        <div>
-          <ContactCta label="Free Estimate" />
-        </div>
-      </div>
-
-      <div
-        class="mt-2 grid grid-cols-2 place-items-center gap-2 sm:grid-cols-4"
-      >
-        <Image
-          src={brand1}
-          alt={"brand image"}
-          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
-        />
-        <Image
-          src={brand2}
-          alt={"brand image"}
-          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
-        />
-        <Image
-          src={brand3}
-          alt={"brand image"}
-          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
-        />
-        <Image
-          src={brand4}
-          alt={"brand image"}
-          class={"p-2 sm:max-w-43.75 lg:max-w-full lg:p-4"}
-        />
-      </div>
-    </div>
+    <ContactHeader />
+    <TrustBadge />
   </section>
 
   <ServiceCards class={"pt-section-padding bg-neutral-100"} />
@@ -182,67 +85,19 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--                 Side By Side                 -->
   <!-- ============================================ -->
-
-  <section class="px-4 pt-6 pb-section-padding">
-    <div class="mx-auto grid max-w-300 gap-5 p-4 md:block md:gap-0 md:p-6">
-      <div
-        class="order-2 bg-neutral-300 md:float-right md:mb-4 md:ml-4 md:w-90 lg:ml-10 lg:w-full lg:max-w-125 xl:mt-15 xl:max-w-140"
-      >
-        <Image
-          src={about}
-          alt="about us image"
-          class={"object-cover -translate-1.5"}
-        />
-      </div>
-      <div class="order-1 font-mont">
-        <span
-          class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
-          >Leader in Epoxy Flooring</span
-        >
-        <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
-          POLYASPARTIC EPOXY FLOORING & GARAGE FLOOR COATING IN EDMONTON
-        </h2>
-        <p class="leading-[1.8] lg:text-lg">
-          With over 10 years of industry experience, we specialize in delivering
-          exceptional results that exceed expectations. Our Epoxy Flooring
-          Edmonton solutions provide exceptional durability, aesthetic appeal,
-          and protection for residential, commercial, and industrial spaces.
-          Whether you want to upgrade your garage with a sleek, long-lasting
-          finish or improve the resilience of your industrial facility, our
-          expert team delivers top-quality Epoxy Flooring Edmonton services.
-          Trust us for durable, stylish, and high-performance Epoxy Flooring
-          Edmonton that enhances any space!
-        </p>
-      </div>
-    </div>
-  </section>
+  <SideBySide
+    image={about}
+    alt="about us image"
+    alignment="right"
+    topper="Leader in Epoxy Flooring"
+    title="POLYASPARTIC EPOXY FLOORING & GARAGE FLOOR COATING IN EDMONTON"
+    body={`With over 10 years of industry experience, we specialize in delivering exceptional results that exceed expectations. Our Epoxy Flooring Edmonton solutions provide exceptional durability, aesthetic appeal, and protection for residential, commercial, and industrial spaces. Whether you want to upgrade your garage with a sleek, long-lasting finish or improve the resilience of your industrial facility, our expert team delivers top-quality Epoxy Flooring Edmonton services. Trust us for durable, stylish, and high-performance Epoxy Flooring Edmonton that enhances any space!`}
+  />
 
   <!-- ============================================ -->
   <!--            Extra Content To Rank             -->
   <!-- ============================================ -->
-  <section class="px-4 py-6 lg:px-8">
-    <div
-      class="mx-auto grid w-full max-w-300 grid-cols-1 gap-5 sm:p-4 md:grid-cols-2 md:gap-6 md:p-6"
-    >
-      <div class="bg-amber-400">
-        <div
-          class="-translate-1.5 bg-amber-300 p-12 text-center font-mont text-neutral-950"
-        >
-          <p class="mb-2 text-5xl font-bold">15</p>
-          <p class="text-2xl font-semibold">years of experience</p>
-        </div>
-      </div>
-
-      <div class="bg-amber-400">
-        <div
-          class="-translate-1.5 bg-amber-300 p-12 text-center font-mont text-neutral-950"
-        >
-          <p class="mb-2 text-5xl font-bold">15</p>
-          <p class="text-2xl font-semibold">years of experience</p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <BadgeContent />
 
   <!-- ============================================ -->
   <!--                   Gallery                    -->
@@ -254,43 +109,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!--                   Why Choose Us                    -->
   <!-- ============================================ -->
 
-  <section class="px-4 py-6 font-mont">
-    <div class="mx-auto grid max-w-300 gap-6 p-4 md:p-6 lg:gap-10">
-      <div class="mx-auto flex max-w-prose flex-col justify-center text-center">
-        <span
-          class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
-          >Why Choose Us?</span
-        >
-        <h2
-          class="mb-2 text-heading font-extrabold tracking-wide text-pretty uppercase"
-        >
-          Experience the Solid Concrete Coating Difference
-        </h2>
-        <p class="mx-auto leading-[1.8]">
-          At Solid Concrete Coating Ltd., we don’t just apply epoxy—we craft
-          long‑lasting flooring solutions that elevate your space. Discover what
-          makes homeowners and businesses choose us for epoxy and polyaspartic
-          flooring in Edmonton.
-        </p>
-      </div>
-      <div
-        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
-      >
-        {
-          whyChooseData.map((item) => (
-            <div class="bg-neutral-200">
-              <div class="grid h-full -translate-1.5 bg-neutral-100 p-2 px-3 sm:grid-rows-[4.0625rem_1fr]">
-                <h3 class="mb-4 text-xl font-extrabold tracking-wide text-pretty uppercase">
-                  {item.title}
-                </h3>
-                <p class="leading-[1.8] text-balance">{item.body}</p>
-              </div>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+  <WhyChooseUs />
 
   <!-- ============================================ -->
   <!--                    FAQ                       -->

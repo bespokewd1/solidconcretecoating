@@ -53,6 +53,7 @@
     "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
+    --breakpoint-xs: 30rem;
     --spacing-section-padding: clamp(3.75rem, 7.82vw, 6.25rem);
     --text-heading: clamp(1.4rem,5vw,1.625rem);
     --text-heading-v2: clamp(1.625rem,5vw,2.5rem);

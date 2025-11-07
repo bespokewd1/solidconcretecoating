@@ -5,32 +5,37 @@
     "children": []
   },
   {
+    "key": "Residential",
+    "url": "/residential/",
+    "children": [
+      {
+        "key": "Epoxy Residential Floors",
+        "url": "/residential/epoxy-residential-floors/"
+      },
+      {
+        "key": "Epoxy Garage Floors",
+        "url": "/residential/epoxy-garage-floors/"
+      }
+    ]
+  },
+  {
+    "key": "Commercial",
+    "url": "/commercial-epoxy-floors/",
+    "children": []
+  },
+  {
+    "key": "Industrial",
+    "url": "/industrial-epoxy-floors/",
+    "children": []
+  },
+  {
     "key": "About Us",
     "url": "/about/",
     "children": []
   },
   {
-    "key": "Projects",
-    "url": "/projects/",
-    "children": [
-      {
-        "key": "Project 1",
-        "url": "/projects/project-1/"
-      },
-      {
-        "key": "Project 2",
-        "url": "/projects/project-2/"
-      }
-    ]
-  },
-  {
-    "key": "Reviews",
-    "url": "/reviews/",
-    "children": []
-  },
-  {
     "key": "Blog",
     "url": "/blog/",
-    "children": []     
+    "children": []
   }
 ]
