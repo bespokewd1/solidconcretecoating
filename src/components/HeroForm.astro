@@ -56,7 +56,7 @@ const { title, subtitle, img, class: className, ...props } = Astro.props;
             class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-neutral-950 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
           >
             <Icon name={"tabler:phone-filled"} class={"size-5"} />
-            (123) 456-7890
+            {clientData.phoneFormatted}
           </span>
         </a>
       </div>

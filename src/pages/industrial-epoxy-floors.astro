@@ -1,0 +1,105 @@
+---
+import landingImage from "@assets/images/landing/service-landing-3.png";
+
+import ContactHeader from "@components/ContactHeader.astro";
+import HeroForm from "@components/HeroForm.astro";
+import SideBySide from "@components/SideBySide.astro";
+import TrustBadge from "@components/TrustBadge.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import industry1 from "@assets/images/services/industry-1.png";
+import industry2 from "@assets/images/services/industry-2.png";
+import industry3 from "@assets/images/services/industry-3.png";
+import BadgeContent from "@components/BadgeContent.astro";
+import WhyChooseUs from "@components/WhyChooseUs.astro";
+import Reviews from "@components/Reviews.astro";
+import FAQ from "@components/FAQ.astro";
+import CTA from "@components/CTA.astro";
+
+export type ProcessStep = {
+  title: string;
+  body: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export type InstallProcessData = {
+  topper: string;
+  title: string;
+  description: string;
+  steps: ProcessStep[];
+};
+---
+
+<BaseLayout preloadedImage={[landingImage]}>
+  <HeroForm
+    title="Heavy‑Duty Industrial Epoxy Flooring in Edmonton"
+    subtitle="Durable, slip‑resistant systems for manufacturing, distribution, and automotive facilities—installed by the pros at Solid Concrete Coating Ltd."
+    img={landingImage}
+  />
+
+  <section class="px-4 pt-6">
+    <ContactHeader />
+  </section>
+
+  <SideBySide
+    class="bg-neutral-100 py-section-padding"
+    topper="Edmonton Industrial Epoxy Floors"
+    title="Industrial Epoxy Flooring Installation in Edmonton"
+    body={[
+      `Solid Concrete Coating Ltd. delivers high‑performance industrial epoxy and polyaspartic
+      flooring built for the toughest environments in Edmonton. Our systems are engineered to
+       withstand heavy machinery, forklift traffic, thermal cycling, and chemical exposure while maintaining a clean, professional appearance.`,
+      `From manufacturing plants and warehouses to large workshops and utility spaces, we follow a precise surface‑prep and installation process
+      that maximizes adhesion and minimizes downtime. The result is a resilient, slip‑resistant floor that boosts safety and operational efficiency.`,
+      `Partner with Solid Concrete Coating Ltd. for industrial epoxy flooring in Edmonton that’s durable, low‑maintenance, and proven to perform. Request a free estimate to spec the right system for your facility.`,
+    ]}
+    image={industry1}
+    alt="garage floor"
+  />
+
+  <section class="px-4 pt-6">
+    <TrustBadge />
+    <BadgeContent />
+  </section>
+
+  <div class="bg-neutral-100 pt-6">
+    <SideBySide
+      asSection
+      topper="Shot Blasting for Epoxy Preparation"
+      title="Optimize Industrial Floors with Professional Shot Blasting in Edmonton"
+      body={[
+        `In demanding industrial settings, proper surface preparation determines how long your epoxy floor will last. Solid Concrete Coating Ltd. uses precision shot blasting to remove coatings, oils,
+         and contaminants while profiling the concrete for superior adhesion and a smooth, consistent finish. This mechanical prep reduces failures, improves chemical and abrasion resistance, and extends the service life of your industrial epoxy or polyaspartic system.`,
+        `Get a tougher floor that stands up to heavy equipment, temperature swings, and spills—start with expert shot blasting from our Edmonton team. Free estimates available.`,
+      ]}
+      image={industry2}
+      alt="garage floor"
+    />
+  </div>
+
+  <div class="pt-6">
+    <SideBySide
+      asSection
+      topper="Concrete Polishing"
+      title="Industrial‑Grade Concrete Polishing for Superior Durability in Edmonton"
+      body={[
+        ` Strengthen and modernize your facility with Solid Concrete Coating Ltd.’s industrial concrete polishing. Our multi‑stage grinding,
+         densifying, and polishing process transforms concrete into a glossy, high‑performance surface that stands up
+          to forklifts, heavy machinery, and continuous traffic. The finished floor resists dusting, staining, and wear while making daily cleaning faster and more cost‑effective.`,
+        `Ideal for warehouses, manufacturing plants, and large workshops, polished concrete delivers long service
+         life without coatings or waxes—reducing maintenance costs and downtime. Upgrade your Edmonton operation with a durable, professional finish. Free estimates available.`,
+      ]}
+      image={industry3}
+      alt="garage floor"
+      alignment="left"
+    />
+  </div>
+
+  <Reviews class="bg-neutral-100" />
+  <WhyChooseUs />
+
+  <FAQ class="bg-neutral-100" />
+
+  <CTA />
+</BaseLayout>
