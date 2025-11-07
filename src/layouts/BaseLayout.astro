@@ -8,6 +8,8 @@ import "@styles/root.less";
 import "@styles/dark.less";
 import "../styles/global.css";
 
+import defaultOg from "@assets/images/og/default-og.png";
+
 // Define a type for images from the content collection
 type ContentImage = {
   src: string;
@@ -56,6 +58,7 @@ const {
       )
     }
 
+    <link rel="preload" href={defaultOg.src} as="image" />
     <!-- Social Media Display - generated automatically with the props passd to BaseLayout -->
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -64,14 +67,8 @@ const {
       property="og:url"
       content={`https://${client.domain}${Astro.url.pathname}`}
     />
-    {
-      preloadedImage && (
-        <>
-          <meta property="og:image" content={preloadedImage.src} />
-          <meta property="og:image:secure_url" content={preloadedImage.src} />
-        </>
-      )
-    }
+    <meta property="og:image" content={defaultOg.src} />
+    <meta property="og:image:secure_url" content={defaultOg.src} />
 
     <!-- Favicons -->
     <link
@@ -120,7 +117,7 @@ const {
     <!-- Sitewide Scripts -->
     <script src="@js/nav.js"></script>
   </head>
-  <body>
+  <body class="font-mont">
     <!-- Screen reader skip main nav -->
     <a class="skip" aria-label="skip to main content" href="#main"
       >Click To Skip To Main Content</a
@@ -166,7 +163,8 @@ const {
     theme === "dark" ? enableDarkMode() : disableDarkMode();
   }
 
-  setTheme();
+  // setTheme();
 
-  document.addEventListener("astro:after-swap", setTheme); // For View Transitions purposes - astro:after-swap ensures that the theme is kept after navigating to a new page.
+  // document.addEventListener("astro:after-swap", setTheme);
+  // For View Transitions purposes - astro:after-swap ensures that the theme is kept after navigating to a new page.
 </script>

@@ -1,84 +1,87 @@
-<section id="faq-1741">
+---
+import { faqs } from "@data/faqs";
+import { renderMd } from "@utils/markdown";
+import type { RenderedFaq } from "@types/faq-types";
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"section">;
+
+// Pre-render Markdown to HTML at build/SSR time
+const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
+  ...f,
+  html: renderMd(f.answer),
+}));
+
+const { ...props } = Astro.props;
+---
+
+<section id="faq-1741" {...props}>
   <div class="cs-container">
     <div class="cs-content">
-      <span class="cs-topper">Frequently Asked Questions</span>
-      <h2 class="cs-title">
-        In consequat tincidunt turpis sit amet imperdiet.
+      <span
+        class="text-sm font-medium tracking-wide text-amber-500 uppercase italic"
+      >
+        Frequently Asked Questions
+      </span>
+      <span class="cs-topper"></span>
+      <!-- mb-4 text-heading font-extrabold tracking-wide uppercase -->
+      <h2
+        class="cs-title max-w-full font-mont text-heading font-bold tracking-wide uppercase"
+      >
+        Edmonton Epoxy Flooring: Answers to Common Questions
       </h2>
     </div>
     <div class="cs-flex-group">
       <ul class="cs-faq-group">
-        <!-- Active class added as default -->
-        <li class="cs-faq-item active">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              How do I start a kitchen design project with you?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            To begin your kitchen design project, simply reach out to us through
-            our contact form or give us a call. We'll set up an initial
-            consultation to understand your needs, preferences, and budget. From
-            there, we'll guide you through the process, from design concepts to
-            installation.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              What payment methods do you accept?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            We accept a variety of payment methods including major credit cards,
-            bank transfers, and financing options. Our team will work with you
-            to find the best payment plan that suits your project.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              How can I track the progress of my kitchen design?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            Once your project begins, you'll receive regular updates from your
-            dedicated project manager. You can also track progress through our
-            online portal, where you can view timelines, design approvals, and
-            other key milestones.
-          </p>
-        </li>
-        <li class="cs-faq-item">
-          <button class="cs-button">
-            <span class="cs-button-text">
-              What is your return policy for custom cabinetry?
-            </span>
-          </button>
-          <p class="cs-item-text">
-            Due to the custom nature of our cabinetry, returns are handled on a
-            case-by-case basis. We strive for complete customer satisfaction and
-            will work with you to resolve any issues that may arise. Please
-            refer to our full return policy for more details.
-          </p>
-        </li>
+        {
+          renderedFaqs.map((faq, idx) => (
+            <li
+              class="cs-faq-item relative overflow-visible bg-neutral-50 font-mont"
+              class:list={[
+                idx === 0 ? "active" : "",
+                "before:absolute before:inset-0 before:-z-1 before:size-full before:translate-1.5 before:bg-neutral-200",
+              ]}
+            >
+              <button
+                class="cs-button"
+                aria-expanded={idx === 0 ? "true" : "false"}
+                aria-controls={`faq-panel-${idx}`}
+                id={`faq-button-${idx}`}
+              >
+                <span class="cs-button-text">{faq.question}</span>
+              </button>
+              <div
+                id={`faq-panel-${idx}`}
+                class:list={`[&_li+li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5`}
+                class="cs-item-text bg-neutral-50"
+                role="region"
+                aria-labelledby={`faq-button-${idx}`}
+                set:html={faq.html}
+              />
+            </li>
+          ))
+        }
       </ul>
     </div>
   </div>
 </section>
 
-<!-- Instead of loading a <script>  tag in BaseLayout, we use a scoped style in this component -->
-<!-- Astro will process this script automatically. -->
-<!-- The processed script will be injected into your page’s <head> with type="module" -->
-<!-- As a consequence, there is no need to use the defer attribute when loading a module script because modules are deferred automatically. -->
-
 <script>
-// Astro:page-load wrapper for View Transitions purposes
-document.addEventListener('astro:page-load', () => { // Makes the script available after navigating to a new page.
+  // Astro:page-load wrapper for View Transitions purposes
+  document.addEventListener("astro:page-load", () => {
     const faqItems = Array.from(document.querySelectorAll(".cs-faq-item"));
+
     for (const item of faqItems) {
+      const btn = item.querySelector(".cs-button");
+      const panel = item.querySelector(".cs-item-text");
+
       const onClick = () => {
+        const nowActive = !item.classList.contains("active");
         item.classList.toggle("active");
+
+        // Update aria-expanded for accessibility
+        if (btn) btn.setAttribute("aria-expanded", String(nowActive));
       };
+
       item.addEventListener("click", onClick);
     }
   });
@@ -93,23 +96,19 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
 
       .cs-container {
         width: 100%;
-        /* changes to 1280px at desktop */
         max-width: (584/16rem);
         margin: 2em auto;
         display: flex;
         flex-direction: column;
         align-items: center;
-        /* 48px - 64px */
         gap: clamp(3rem, 6vw, 4rem);
       }
 
       .cs-content {
-        /* set text align to left if content needs to be left aligned */
         text-align: center;
         width: 100%;
         display: flex;
         flex-direction: column;
-        /* centers content horizontally, set to flex-start to left align */
         align-items: center;
       }
 
@@ -132,29 +131,27 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
       .cs-faq-item {
         list-style: none;
         width: 100%;
-        /* clips all corners of the button that overlap the rounded border */
         overflow: hidden;
         transition: border-bottom 0.3s;
 
         &.active {
           .cs-button {
-            background-color: var(--secondary);
-            color: var(--bodyTextColorWhite);
+            background-color: var(--color-amber-300);
+            color: var(--color-neutral-950);
 
             &:before {
-              background-color: var(--bodyTextColorWhite);
+              background-color: var(--color-neutral-950);
               transform: rotate(315deg);
             }
 
             &:after {
-              background-color: var(--bodyTextColorWhite);
+              background-color: var(--color-neutral-950);
               transform: rotate(-315deg);
             }
           }
 
           .cs-item-text {
             height: auto;
-            /* 16px - 24px */
             padding: (16/16rem) clamp(1rem, 2vw, 1.5rem);
             opacity: 1;
             border: 1px solid #e8e8e8;
@@ -163,7 +160,6 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
       }
 
       .cs-button {
-        /* 16px - 20px */
         font-size: clamp(1rem, 2.5vw, 1.25rem);
         font-weight: bold;
         line-height: 1.2em;
@@ -185,7 +181,6 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
         }
 
         &:before {
-          /* left line */
           content: "";
           width: (8/16rem);
           height: (2/16rem);
@@ -197,12 +192,10 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
           left: (18/16rem);
           transform: rotate(45deg);
           transition: transform 0.5s;
-          /* animate the transform from the left side of the x axis, and the center of the y */
           transform-origin: left center;
         }
 
         &:after {
-          /* right line */
           content: "";
           width: (8/16rem);
           height: (2/16rem);
@@ -214,24 +207,38 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
           left: (21/16rem);
           transform: rotate(-45deg);
           transition: transform 0.5s;
-          /* animate the transform from the right side of the x axis, and the center of the y */
           transform-origin: right center;
         }
       }
 
+      /* IMPORTANT: allow wrapping; no whitespace-pre */
       .cs-item-text {
-        /* 14px - 16px */
         font-size: clamp(0.875rem, 1.5vw, 1rem);
         line-height: 1.5em;
         height: 0;
         margin: 0;
-        /* clips the text so it doesn't show up */
         overflow: hidden;
-        color: var(--bodyTextColor);
+        color: var(--color-neutral-950);
         opacity: 0;
         transition:
           opacity 0.3s,
           padding-bottom 0.3s;
+        white-space: normal;
+
+        /* Optional: style Markdown output */
+        p {
+          margin: 0 0 0.75rem;
+        }
+        ul,
+        ol {
+          margin: 0.5rem 0 1rem 1.25rem;
+        }
+        li + li {
+          margin-top: 0.25rem;
+        }
+        strong {
+          font-weight: 700;
+        }
       }
     }
   }
@@ -263,7 +270,6 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
         text-align: left;
         width: 40%;
         align-items: flex-start;
-        /* prevents flexbox from squishing it */
         flex: none;
       }
     }
@@ -295,7 +301,6 @@ document.addEventListener('astro:page-load', () => { // Makes the script availab
             }
 
             .cs-item-text {
-              /* 20px - 24px */
               padding-top: clamp(1.25rem, 1.3vw, 1.5rem);
               border-color: var(--accent);
             }

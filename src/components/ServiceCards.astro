@@ -4,6 +4,9 @@ import service2 from "@assets/images/services/service-2.png";
 import service3 from "@assets/images/services/service-3.png";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section">;
 
 type ServiceInfo = {
   Image: ImageMetadata;
@@ -17,32 +20,38 @@ const services: ServiceInfo[] = [
   {
     Image: service1,
     title: "Residential Epoxy Flooring",
-    description:
-      "Upgrade your home with Premium Epoxy Flooring. Ideal for any room, our floors deliver long‑lasting durability and low maintenance, perfect for busy households and high‑traffic areas like epoxy garage floors, basements, decks, and more. Get a seamless, stylish finish that stands up to everyday life.",
+    description: `Upgrade your home with Solid Concrete Coating Ltd. Ideal for any room,
+     our floors deliver long‑lasting durability and low maintenance, perfect for
+      busy households and high‑traffic areas like epoxy garage floors, basements,
+      decks, and more. Get a seamless, stylish finish that stands up to everyday life.`,
     href: "/",
     linkLabel: "Residential  Epoxy",
   },
   {
     Image: service2,
     title: "Commercial Epoxy Flooring",
-    description:
-      "Premium Epoxy Flooring installs commercial‑grade systems engineered for heavy foot traffic and daily wear. Create safer, cleaner, and more professional spaces with high‑performance coatings that resist stains, spills, and scratches—perfect for offices, retail, restaurants, and warehouses.",
+    description: `Solid Concrete Coating Ltd. installs commercial‑grade systems engineered for
+     heavy foot traffic and daily wear. Create safer, cleaner, and more professional
+      spaces with high‑performance coatings that resist stains, spills, and
+      scratches—perfect for offices, retail, restaurants, and warehouses.`,
     href: "/",
     linkLabel: "Commercial  Epoxy",
   },
   {
     Image: service3,
     title: "Industrial Epoxy Flooring",
-    description:
-      "Choose Premium Epoxy Flooring for industrial environments that demand maximum strength and safety. Our advanced coatings handle impact, chemicals, and intensive use while improving visibility and compliance—ideal for plants, shops, and distribution facilities.",
+    description: `Choose Solid Concrete Coating Ltd. for industrial environments that
+    demand maximum strength and safety. Our advanced coatings handle impact,
+     chemicals, and intensive use while improving visibility and compliance—ideal for plants, shops, and distribution facilities.`,
     href: "/",
     linkLabel: "Industrial  Epoxy",
   },
 ];
+
+const { class: className, ...props } = Astro.props;
 ---
 
-<!-- ============================================ --><!--                  Services                    --><!-- ============================================ -->
-<section class="px-4 pt-0 pb-section-padding">
+<section class:list={["px-4 pt-0 pb-section-padding", className]} {...props}>
   <div
     class="mx-auto grid max-w-300 grid-cols-1 gap-5 p-4 sm:max-lg:max-w-150 md:gap-6 md:p-6 lg:grid-cols-3"
   >

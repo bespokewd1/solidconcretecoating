@@ -3,7 +3,9 @@ import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 import type { ImageMetadata } from "astro";
 import type { CollectionEntry } from "astro:content";
+import type { HTMLAttributes } from "astro/types";
 
+type props = HTMLAttributes<"section">;
 // Types
 type GalleryEntry = CollectionEntry<"gallery">;
 
@@ -22,7 +24,6 @@ galleryPosts.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const allImages: FlattenedImage[] = [];
 
 galleryPosts.forEach((post) => {
-
   if (!post.data.images || !Array.isArray(post.data.images)) {
     console.error("No images array found in post:", post.id);
     return;
@@ -42,43 +43,54 @@ galleryPosts.forEach((post) => {
   });
 });
 
-
 // Distribute images across 3 columns for masonry layout
 const columns: FlattenedImage[][] = [[], [], []];
 allImages.forEach((img, index) => {
   columns[index % 3].push(img);
 });
 
+const { class: className, ...props } = Astro.props;
 ---
 
-<!-- ============================================ -->
-<!--                   Gallery                    -->
-<!-- ============================================ -->
-<section id="portfolio" class="overflow-hidden px-4 py-16">
+<!-- ============================================ --><!--                   Gallery                    --><!-- ============================================ -->
+<section
+  id="portfolio"
+  class:list={["overflow-hidden px-4 py-16", className]}
+  {...props}
+>
   <div class="mx-auto max-w-[82.625rem]">
-    <span class="mb-4 block text-center text-sm tracking-wide uppercase">
+    <span
+      class="block text-center text-sm font-medium tracking-wide text-amber-500 uppercase italic"
+    >
       Our Portfolio
     </span>
+
     <h2
+      class="mx-auto mb-10 max-w-[38.8125rem] text-center text-heading font-extrabold tracking-wide uppercase"
+    >
+      Epoxy Flooring Portfolio in Edmonton: Garage, Basement, Commercial &
+      Industrial Finishes
+    </h2>
+    <!-- <h2
       class="mx-auto mb-10 max-w-[38.8125rem] text-center text-3xl font-bold md:text-4xl"
     >
-      Et orci volutpat, back up generator installations
-    </h2>
+      Epoxy Flooring Portfolio in Edmonton: Garage, Basement, Commercial &
+      Industrial Finishes
+    </h2> -->
 
-    {allImages.length === 0 && (
-      <div class="text-center text-gray-500 my-8">
-        <p>No gallery images found. Add some images in the CMS!</p>
-      </div>
-    )}
+    {
+      allImages.length === 0 && (
+        <div class="my-8 text-center text-gray-500">
+          <p>No gallery images found. Add some images in the CMS!</p>
+        </div>
+      )
+    }
 
-    {allImages.length > 0 && (
-      <!-- Scrollable container with responsive max-heights -->
-      <div
-        class="gallery-scroll-container mb-16 max-h-[350px] overflow-y-auto md:max-h-[950px] lg:max-h-[1250px] xl:max-h-[1900px]"
-      >
-        <div class="flex items-start justify-center gap-4 md:gap-8">
-          {
-            columns.map((column: FlattenedImage[], colIndex: number) => (
+    {
+      allImages.length > 0 && (
+        <div class="gallery-scroll-container mb-16 max-h-[350px] overflow-y-auto md:max-h-[950px] lg:max-h-[1250px] xl:max-h-[1900px]">
+          <div class="flex items-start justify-center gap-4 md:gap-8">
+            {columns.map((column: FlattenedImage[], colIndex: number) => (
               <div class="flex flex-1 flex-col gap-4 md:gap-8">
                 {column.map((item: FlattenedImage, imgIndex: number) => (
                   <div class="group relative overflow-hidden rounded-lg">
@@ -98,11 +110,11 @@ allImages.forEach((img, index) => {
                   </div>
                 ))}
               </div>
-            ))
-          }
+            ))}
+          </div>
         </div>
-      </div>
-    )}
+      )
+    }
 
     <!-- <a href="/projects" class="cs-button-solid">View all projects</a> -->
   </div>

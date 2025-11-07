@@ -17,6 +17,46 @@ import { Icon } from "astro-icon/components";
 import ContactCta from "@components/ContactCta.astro";
 import Portfolio from "@components/Portfolio.astro";
 import ServiceCards from "@components/ServiceCards.astro";
+import Reviews from "@components/Reviews.astro";
+
+export type BenefitItem = {
+  title: string;
+  body: string;
+};
+export const whyChooseData: BenefitItem[] = [
+  {
+    title: "Industry‑Leading Durability",
+    body: "Our systems use premium resins and aggregates engineered to resist wear, impact, hot‑tire pickup, and chemicals—keeping your floors looking great through daily use.",
+  },
+  {
+    title: "Fast & Easy Scheduling",
+    body: "We respect your time with streamlined estimates and efficient timelines. Many residential projects are completed in as little as a day, with minimal disruption.",
+  },
+  {
+    title: "Customized Solutions",
+    body: "From solid colours to decorative flake and quartz, we tailor finishes to your needs—matching the right system to your garage, basement, shop, or commercial space.",
+  },
+  {
+    title: "Proven Track Record",
+    body: "Trusted by Edmonton homeowners and local businesses for clean installs, reliable timelines, and durable results that perform season after season.",
+  },
+  {
+    title: "Affordable Pricing",
+    body: "Competitive, transparent quotes with no surprises—so you get premium epoxy and polyaspartic performance without the premium price tag.",
+  },
+  {
+    title: "Responsive Customer Service",
+    body: "Friendly support before, during, and after your project. We keep you informed and answer questions quickly so the whole experience feels easy.",
+  },
+  {
+    title: "Warranty Coverage",
+    body: "Every install is backed by solid warranty options for peace of mind, reflecting the quality of our materials and workmanship.",
+  },
+  {
+    title: "Local Commitment",
+    body: "Proudly serving Edmonton. We care about our community and stand behind our work with dependable service you can trust.",
+  },
+];
 
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
@@ -35,7 +75,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         loading="eager"
       />
       <!-- Black Overlay -->
-      <div class="absolute inset-0 z-10 bg-black opacity-50"></div>
+      <div class="absolute inset-0 z-10 bg-black opacity-30"></div>
     </div>
 
     <div
@@ -73,10 +113,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     </div>
   </section>
 
-  <section class="px-4 py-6">
+  <section class="px-4 pt-6">
     <div class="mx-auto flex max-w-300 flex-col gap-5 p-4 md:gap-6 md:p-6">
       <h2 class="text-[clamp(1.4rem,5vw,1.625rem)] font-extrabold uppercase">
-        Premium Epoxy Flooring
+        Solid Concrete Coating Ltd. - Premium Epoxy Flooring
       </h2>
 
       <div class="flex w-full flex-wrap items-center justify-between gap-5">
@@ -137,7 +177,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     </div>
   </section>
 
-  <ServiceCards />
+  <ServiceCards class={"pt-section-padding bg-neutral-100"} />
 
   <!-- ============================================ -->
   <!--                 Side By Side                 -->
@@ -155,7 +195,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         />
       </div>
       <div class="order-1 font-mont">
-        <span class="font-medium italic">Leader in Epoxy Flooring</span>
+        <span
+          class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
+          >Leader in Epoxy Flooring</span
+        >
         <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
           POLYASPARTIC EPOXY FLOORING & GARAGE FLOOR COATING IN EDMONTON
         </h2>
@@ -179,7 +222,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <section class="px-4 py-6 lg:px-8">
     <div
-      class="mx-auto grid max-w-300 grid-cols-1 gap-5 sm:p-4 md:grid-cols-2 md:gap-6 md:p-6"
+      class="mx-auto grid w-full max-w-300 grid-cols-1 gap-5 sm:p-4 md:grid-cols-2 md:gap-6 md:p-6"
     >
       <div class="bg-amber-400">
         <div
@@ -205,7 +248,49 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!--                   Gallery                    -->
   <!-- ============================================ -->
 
-  <Portfolio />
+  <Portfolio class="bg-neutral-100" />
+
+  <!-- ============================================ -->
+  <!--                   Why Choose Us                    -->
+  <!-- ============================================ -->
+
+  <section class="px-4 py-6 font-mont">
+    <div class="mx-auto grid max-w-300 gap-6 p-4 md:p-6 lg:gap-10">
+      <div class="mx-auto flex max-w-prose flex-col justify-center text-center">
+        <span
+          class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
+          >Why Choose Us?</span
+        >
+        <h2
+          class="mb-2 text-heading font-extrabold tracking-wide text-pretty uppercase"
+        >
+          Experience the Solid Concrete Coating Difference
+        </h2>
+        <p class="mx-auto leading-[1.8]">
+          At Solid Concrete Coating Ltd., we don’t just apply epoxy—we craft
+          long‑lasting flooring solutions that elevate your space. Discover what
+          makes homeowners and businesses choose us for epoxy and polyaspartic
+          flooring in Edmonton.
+        </p>
+      </div>
+      <div
+        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6"
+      >
+        {
+          whyChooseData.map((item) => (
+            <div class="bg-neutral-200">
+              <div class="grid h-full -translate-1.5 bg-neutral-100 p-2 px-3 sm:grid-rows-[4.0625rem_1fr]">
+                <h3 class="mb-4 text-xl font-extrabold tracking-wide text-pretty uppercase">
+                  {item.title}
+                </h3>
+                <p class="leading-[1.8] text-balance">{item.body}</p>
+              </div>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
 
   <!-- ============================================ -->
   <!--                    FAQ                       -->
@@ -215,90 +300,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--                   Reviews                    -->
   <!-- ============================================ -->
-
-  <section id="reviews">
-    <div class="cs-container">
-      <span class="cs-topper">Our Reviews</span>
-      <h2 class="cs-title">Words From Our Customers</h2>
-      <p class="cs-text">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sit dolor
-        volutpat porttitor sagittis nunc nisl. Sagittis sit pellentesque gravida
-        viverra. Leo ut sed euismod tortor risus et. Ornare non neque, leo,
-        ornare. Lorem ipsum dolor sit amet.
-      </p>
-      <ul class="cs-card-group">
-        <!-- Review 1 -->
-        <li class="cs-item">
-          <img
-            class="cs-item-img"
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile5.png"
-            alt="profile picture"
-            width="80"
-            height="80"
-          />
-          <p class="cs-item-p">
-            Dictum dolor, nullam morbi sem in auctor proin. Consequat dolor
-            habitasse nam sed tempor. Viverra magna pharetra rhoncus, nec sed
-            ullamcorper lectus et. Auctor velit diam fermentum consequat.
-            Feugiat viverra massa urna, volutpat orci imperdiet eget eget.
-          </p>
-          <span class="cs-reviewer">
-            Jon Doe
-            <span class="cs-desc">Homeowner</span>
-          </span>
-          <img
-            class="cs-item-stars"
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-            alt="stars"
-            width="96"
-            height="16"
-          />
-        </li>
-        <!-- Review 2 -->
-        <li class="cs-item">
-          <img
-            class="cs-item-img"
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/profile-4.png"
-            alt="profile picture"
-            width="80"
-            height="80"
-          />
-          <p class="cs-item-p">
-            Dictum dolor, nullam morbi sem in auctor proin. Consequat dolor
-            habitasse nam sed tempor. Viverra magna pharetra rhoncus, nec sed
-            ullamcorper lectus et. Auctor velit diam fermentum consequat.
-            Feugiat viverra massa urna, volutpat orci imperdiet eget eget.
-          </p>
-          <span class="cs-reviewer">
-            Jane Doe
-            <span class="cs-desc">Homeowner</span>
-          </span>
-          <img
-            class="cs-item-stars"
-            aria-hidden="true"
-            loading="lazy"
-            decoding="async"
-            src="https://csimg.nyc3.digitaloceanspaces.com/Reviews/stars-yellow.svg"
-            alt="stars"
-            width="96"
-            height="16"
-          />
-        </li>
-      </ul>
-      <a aria-label="read more reviews" href="/reviews" class="cs-button-solid"
-        >Our Reviews</a
-      >
-    </div>
-  </section>
+  <Reviews class={"bg-neutral-100"} />
 
   <CTA />
 </BaseLayout>
@@ -1186,151 +1188,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
       #gallery {
         .cs-title {
           color: var(--bodyTextColorWhite);
-        }
-      }
-    }
-  }
-
-  /*-- -------------------------- -->
-<---          Reviews           -->
-<--- -------------------------- -*/
-
-  /* Mobile - 360px */
-  @media only screen and (min-width: 0em) {
-    #reviews {
-      /* Centers the button */
-      text-align: center;
-      padding: var(--sectionPadding);
-
-      .cs-container {
-        width: 100%;
-        max-width: (1104/16rem);
-        margin: auto;
-      }
-
-      .cs-topper {
-        text-align: center;
-        margin-bottom: (16/16rem);
-      }
-
-      .cs-title {
-        text-align: center;
-        max-width: (700/16rem);
-      }
-
-      .cs-text {
-        text-align: center;
-        max-width: (650/16rem);
-        /* 88px - 104px */
-        margin-bottom: clamp(5.5em, 10.2vw, 6.5em);
-      }
-
-      .cs-card-group {
-        /* 48px - 64px */
-        margin: 0 auto clamp(3rem, 5vw, 4rem);
-        padding: 0;
-      }
-
-      .cs-item {
-        text-align: left;
-        list-style: none;
-        width: 100%;
-        max-width: (542/16rem);
-        margin: 0 auto (64/16rem);
-        /* Prevents padding from affecting height & width */
-        box-sizing: border-box;
-        /* Padding L & R - 16px - 32px */
-        padding: (60/16rem) clamp(1rem, 3.2vw, 2rem) 0;
-        /* 32px - 40px */
-        padding-bottom: clamp(2rem, 5.4vw, 2.5rem);
-        background: #fff;
-        box-shadow: 0px 20px 39px 0px rgba(0, 0, 0, 0.05);
-        border-radius: (4/16rem);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        flex-wrap: wrap;
-        position: relative;
-
-        &:last-of-type {
-          margin-bottom: 0;
-        }
-      }
-
-      .cs-item-img {
-        width: (80/16rem);
-        height: (80/16rem);
-        position: absolute;
-        top: (-40/16rem);
-      }
-
-      .cs-item-p {
-        font-size: (16/16rem);
-        line-height: 1.5em;
-        margin: 0 0 (20/16rem);
-        padding-bottom: (20/16rem);
-        color: var(--bodyTextColor);
-        border-bottom: 1px solid #e8e9ec;
-      }
-
-      .cs-reviewer {
-        font-size: (16/16rem);
-        font-weight: 700;
-        line-height: 1.5em;
-        width: 40%;
-        margin: 0 auto 0 0;
-        color: var(--headerColor);
-        display: block;
-      }
-
-      .cs-desc {
-        font-size: (14/16rem);
-        font-weight: 400;
-        color: var(#353535);
-        display: block;
-      }
-
-      .cs-item-stars {
-        width: (96/16rem);
-        height: (16/16rem);
-      }
-    }
-  }
-
-  /* Tablet - 768px */
-  @media only screen and (min-width: 48em) {
-    #reviews {
-      .cs-card-group {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        gap: (16/16rem);
-      }
-
-      .cs-item {
-        /* reset margin so it won't interfere with flexbox */
-        margin: 0;
-      }
-    }
-  }
-
-  /* Dark Mode */
-  @media only screen and (min-width: 0em) {
-    body.dark-mode {
-      #reviews {
-        .cs-title,
-        .cs-text,
-        .cs-item-p,
-        .cs-reviewer {
-          color: var(--bodyTextColorWhite);
-        }
-
-        .cs-item {
-          background: var(--medium);
-        }
-
-        .cs-desc {
-          color: var(--primaryLight);
         }
       }
     }
