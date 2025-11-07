@@ -1,6 +1,7 @@
 ---
 import { Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
+import ContactCta from "./ContactCta.astro";
 
 type Props = HTMLAttributes<"section"> & {
   image: ImageMetadata; // import from astro:assets in the page and pass it in
@@ -8,7 +9,7 @@ type Props = HTMLAttributes<"section"> & {
   alignment?: "left" | "right";
   topper?: string;
   title?: string;
-  body?: string;
+  body?: string | string[];
   asSection?: boolean;
 };
 
@@ -61,8 +62,16 @@ const textOrder = alignment === "right" ? "order-1" : "order-2";
         {title}
       </h2>
       <p class="leading-[1.8] lg:text-lg">
-        {body}
+        {
+          Array.isArray(body)
+            ? body.map((paragraph) => (
+                <span class="mb-3 block">{paragraph}</span>
+              ))
+            : body
+        }
       </p>
+
+      <ContactCta class={"mt-6"} label="Request a Qoute" />
     </div>
   </div>
 </section>

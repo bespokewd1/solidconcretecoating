@@ -1,0 +1,108 @@
+---
+import landingImage from "@assets/images/landing/service-landing-1.png";
+
+import ContactHeader from "@components/ContactHeader.astro";
+import HeroForm from "@components/HeroForm.astro";
+import SideBySide from "@components/SideBySide.astro";
+import TrustBadge from "@components/TrustBadge.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import comm1 from "@assets/images/services/commerce-1.png";
+import comm2 from "@assets/images/services/commerce-2.png";
+import comm3 from "@assets/images/services/commerce-3.png";
+import BadgeContent from "@components/BadgeContent.astro";
+import WhyChooseUs from "@components/WhyChooseUs.astro";
+import Reviews from "@components/Reviews.astro";
+import FAQ from "@components/FAQ.astro";
+import CTA from "@components/CTA.astro";
+import ContactCta from "@components/ContactCta.astro";
+
+export type ProcessStep = {
+  title: string;
+  body: string;
+  ctaLabel?: string;
+  ctaHref?: string;
+};
+
+export type InstallProcessData = {
+  topper: string;
+  title: string;
+  description: string;
+  steps: ProcessStep[];
+};
+---
+
+<BaseLayout preloadedImage={[landingImage]}>
+  <HeroForm
+    title="Edmonton’s Trusted Commercial Epoxy Flooring"
+    subtitle="Tough, seamless coatings that resist traffic, spills, and stains—installed by Solid Concrete Coating Ltd. Expert surface prep, flake or quartz finishes, and fast, friendly service."
+    img={landingImage}
+  />
+
+  <section class="px-4 pt-6">
+    <ContactHeader />
+  </section>
+
+  <SideBySide
+    class="bg-neutral-100 py-section-padding"
+    topper="Commercial Epoxy Floors"
+    title="Commercial Epoxy Flooring Installation in Edmonton"
+    body={[
+      `Transform your workspace with Solid Concrete Coating Ltd.’s commercial epoxy and polyaspartic flooring.
+      Our Edmonton installations create durable, slip‑resistant surfaces that stand up to heavy foot traffic,
+      carts, and frequent spills—ideal for shops, restaurants, offices, warehouses, and showrooms.
+      Designed for both appearance and performance, our systems resist stains and abrasions while making daily cleaning fast and easy.`,
+      `We follow a streamlined, low‑disruption process to keep your business running, from
+      professional surface prep to a flawless, long‑wearing topcoat.
+      Choose Solid Concrete Coating Ltd. for commercial epoxy flooring in
+      Edmonton that looks professional, lasts for years, and supports a safer work environment. Get a free estimate today.`,
+    ]}
+    image={comm1}
+    alt="garage floor"
+  />
+
+  <section class="px-4 pt-6">
+    <TrustBadge />
+    <BadgeContent />
+  </section>
+
+  <div class="bg-neutral-100 pt-6">
+    <SideBySide
+      asSection
+      topper="Prepare Your Surface with Precision"
+      title="Shot Blasting for Epoxy Preparation in Edmonton"
+      body={[
+        `Proper surface prep is the foundation of a long‑lasting epoxy floor. Solid Concrete Coating Ltd. uses professional
+        shot blasting to clean and profile concrete, removing coatings and contaminants while leveling minor imperfections.
+        This creates the ideal surface profile for maximum adhesion, durability, and a smooth, seamless finish.`,
+        `For facilities that demand extra toughness, explore our industrial epoxy flooring in
+        Edmonton—engineered to handle heavy machinery, temperature swings, and chemical exposure with confidence. Free estimates available.`,
+      ]}
+      image={comm2}
+      alt="garage floor"
+    />
+  </div>
+
+  <div class="pt-6">
+    <SideBySide
+      asSection
+      topper="Achieve a Glossy, Durable Finish"
+      title="Concrete Polishing Services in Edmonton"
+      body={[
+        `Elevate the look and performance of your concrete with Solid Concrete Coating Ltd.’s professional concrete polishing. Our multi‑step,
+         state‑of‑the‑art process refines and densifies the slab to create a smooth, reflective surface that
+          stands up to heavy traffic and resists staining. The result is a low‑maintenance, dust‑free floor that’s easy to clean and built for longevity.`,
+        `Perfect for commercial, industrial, and modern residential spaces, polished concrete is a sustainable,
+         cost‑effective solution that delivers a contemporary aesthetic without waxes or coatings. Ask about our Edmonton concrete polishing options and get a free estimate.`,
+      ]}
+      image={comm3}
+      alt="garage floor"
+      alignment="left"
+    />
+  </div>
+
+  <Reviews class="bg-neutral-100" />
+  <WhyChooseUs />
+
+  <FAQ class="bg-neutral-100" />
+</BaseLayout>

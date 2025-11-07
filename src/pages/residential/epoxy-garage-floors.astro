@@ -64,58 +64,63 @@ export const installProcessData: InstallProcessData = {
     <TrustBadge />
   </section>
 
-  <SideBySide
-    class="py-section-padding"
-    topper="Epoxy Garage Floor Installation"
-    title="Edmonton’s Professional Epoxy Garage Floor Installation"
-    body={`Discover the best solution for your garage with Solid Concrete Coating Ltd.’s epoxy
+  <div class="bg-neutral-100 py-section-padding">
+    <SideBySide
+      topper="Epoxy Garage Floor Installation"
+      title="Edmonton’s Professional Epoxy Garage Floor Installation"
+      body={[
+        `Discover the best solution for your garage with Solid Concrete Coating Ltd.’s epoxy
     and polyaspartic garage floor installations. Our Edmonton epoxy flooring delivers a sleek,
     durable surface that resists stains, hot‑tire pickup, abrasions, and everyday wear—while
-    elevating your home’s look. Designed for residential and light‑commercial garages,
+    elevating your home’s look.`,
+        `
+     Designed for residential and light‑commercial garages,
     our systems are easy to clean, non‑porous, and built for Alberta’s seasons.
-    Upgrade your garage with a long‑lasting, high‑performance finish that blends style and strength.`}
-    image={res1}
-    alt="garage floor"
-  />
+    Upgrade your garage with a long‑lasting, high‑performance finish that blends style and strength.`,
+      ]}
+      image={res1}
+      alt="garage floor"
+    />
+  </div>
 
   <BadgeContent />
 
-  <WhyChooseUs class="bg-neutral-100" />
+  <WhyChooseUs />
 
-  <Reviews />
+  <Reviews class="bg-neutral-100" />
 
-  <FAQ class="bg-neutral-100" />
-
-  <section class="px-4 py-section-padding font-mont">
-    <div
-      class="mx-auto grid max-w-300 items-start gap-6 p-4 md:gap-10 md:p-6 lg:grid-cols-2"
-    >
+  <FAQ>
+    <section class="px-4 py-section-padding font-mont">
       <div
-        class="flex flex-col gap-4 border border-neutral-950 bg-neutral-50 p-4 md:mb-6"
+        class="mx-auto grid max-w-300 items-start gap-6 p-4 md:gap-10 md:p-6 lg:grid-cols-2"
       >
-        <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
-          {installProcessData.title}
-        </h2>
-        <p class="mb-4 leading-[1.8] lg:text-lg">
-          {installProcessData.description}
-        </p>
+        <div
+          class="flex flex-col gap-4 border border-neutral-950 bg-neutral-50 p-4 md:mb-6"
+        >
+          <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
+            {installProcessData.title}
+          </h2>
+          <p class="mb-4 leading-[1.8] lg:text-lg">
+            {installProcessData.description}
+          </p>
 
-        <ContactCta label="Get a Qoute" />
+          <ContactCta label="Get a Qoute" />
+        </div>
+        <div>
+          {
+            installProcessData.steps.map((step) => (
+              <div class="mb-6 lg:mb-10">
+                <h3 class="mb-2 text-heading font-extrabold tracking-wide uppercase">
+                  {step.title}
+                </h3>
+                <p class="leading-[1.8] lg:text-lg">{step.body}</p>
+              </div>
+            ))
+          }
+        </div>
       </div>
-      <div>
-        {
-          installProcessData.steps.map((step) => (
-            <div class="mb-6 lg:mb-10">
-              <h3 class="mb-2 text-heading font-extrabold tracking-wide uppercase">
-                {step.title}
-              </h3>
-              <p class="leading-[1.8] lg:text-lg">{step.body}</p>
-            </div>
-          ))
-        }
-      </div>
-    </div>
-  </section>
+    </section>
 
-  <CTA />
+    <CTA />
+  </FAQ>
 </BaseLayout>
