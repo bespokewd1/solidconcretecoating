@@ -13,6 +13,7 @@ import service1 from "@assets/images/services/service-1.jpg";
 import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import ContactCta from "@components/ContactCta.astro";
+import Portfolio from "@components/Portfolio.astro";
 
 type ServiceInfo = {
   Image: ImageMetadata;
@@ -169,7 +170,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <section class="px-4 pt-0 pb-section-padding">
     <div
-      class="mx-auto grid max-w-300 grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5 p-4 md:gap-6 md:p-6"
+      class="mx-auto grid max-w-300 grid-cols-1 gap-5 p-4 md:grid-cols-3 md:gap-6 md:p-6"
     >
       {
         services.map((service) => (
@@ -272,6 +273,8 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--                   Gallery                    -->
   <!-- ============================================ -->
+
+  <Portfolio />
 
   <section id="gallery">
     <div class="cs-container">

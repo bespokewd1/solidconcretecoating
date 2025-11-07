@@ -19,6 +19,18 @@ const blogsCollection = defineCollection({
 		}),
 });
 
+const galleryCollection = defineCollection({
+	loader: glob({ pattern: "**/[^_]*.{md,mdx}", base: "./src/content/gallery" }),
+	schema: ({ image }) =>
+		z.object({
+			image: image(),
+			imageAlt: z.string(),
+			title: z.string().optional(),
+			date: z.date(),
+		}),
+});
+
 export const collections = {
 	blog: blogsCollection,
+  gallery: galleryCollection
 };
