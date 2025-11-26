@@ -1,8 +1,10 @@
 @import "tailwindcss" important;
+@plugin "@toolwind/corner-shape";
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/monserrat/montserrat-v31-latin-900.woff2") format("woff2");
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-900.woff2")
+    format("woff2");
   font-weight: 900;
   font-style: normal;
   font-display: swap;
@@ -10,7 +12,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/monserrat/montserrat-v31-latin-500.woff2") format("woff2");
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-500.woff2")
+    format("woff2");
   font-weight: 500;
   font-style: normal;
   font-display: swap;
@@ -18,7 +21,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/monserrat/montserrat-v31-latin-600.woff2") format("woff2");
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-600.woff2")
+    format("woff2");
   font-weight: 600;
   font-style: normal;
   font-display: swap;
@@ -26,7 +30,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/monserrat/montserrat-v31-latin-700.woff2") format("woff2");
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-700.woff2")
+    format("woff2");
   font-weight: 700;
   font-style: normal;
   font-display: swap;
@@ -34,7 +39,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/monserrat/montserrat-v31-latin-800.woff2") format("woff2");
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-800.woff2")
+    format("woff2");
   font-weight: 800;
   font-style: normal;
   font-display: swap;
@@ -42,7 +48,8 @@
 
 @font-face {
   font-family: "Montserrat";
-  src: url("/assets/fonts/monserrat/montserrat-v31-latin-regular.woff2") format("woff2");
+  src: url("/assets/fonts/monserrat/montserrat-v31-latin-regular.woff2")
+    format("woff2");
   font-weight: 400; /* Regular weight is typically 400 */
   font-style: normal;
   font-display: swap;
@@ -53,12 +60,11 @@
     "Montserrat", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
     "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 
-    --breakpoint-xs: 30rem;
-    --spacing-section-padding: clamp(3.75rem, 7.82vw, 6.25rem);
-    --text-heading: clamp(1.4rem,5vw,1.625rem);
-    --text-heading-v2: clamp(1.625rem,5vw,2.5rem);
+  --breakpoint-xs: 30rem;
+  --spacing-section-padding: clamp(3.75rem, 7.82vw, 6.25rem);
+  --text-heading: clamp(1.4rem, 5vw, 1.625rem);
+  --text-heading-v2: clamp(1.625rem, 5vw, 2.5rem);
 }
-
 
 html::selection {
   background: var(--color-amber-300);

@@ -32,10 +32,5 @@
     "key": "About Us",
     "url": "/about/",
     "children": []
-  },
-  {
-    "key": "Blog",
-    "url": "/blog/",
-    "children": []
   }
 ]

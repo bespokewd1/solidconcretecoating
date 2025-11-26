@@ -1,12 +1,11 @@
 ---
 import navData from "@data/navData.json";
 import { Icon } from "astro-icon/components";
-import DarkModeToggle from "@components/DarkModeToggle.astro";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
-<header id="cs-navigation" class="bg-neutral-950">
-  <div class="cs-container">
+<header id="cs-navigation" class="bg-neutral-950/40 backdrop-blur-md">
+  <div class="cs-container lg:pr-10">
     <!--Nav Logo-->
     <a href="/" class="cs-logo" aria-label="back to home">
       <img
@@ -44,7 +43,7 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
             navData.map((entry) => (
               <li
                 class:list={[
-                  "cs-li",
+                  "cs-li group transition-colors duration-400 hover:bg-neutral-900",
                   { "cs-dropdown": entry.children?.length > 0 },
                 ]}
               >
@@ -54,7 +53,7 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
                     aria-expanded="false"
                     aria-controls={`submenu-${entry.key}`}
                     class:list={[
-                      "cs-li-link cs-dropdown-button",
+                      "cs-li-link cs-dropdown-button font-bold transition-colors duration-400 group-hover:text-amber-300 before:hidden",
                       { "cs-active": Astro.url.pathname.includes(entry.url) },
                     ]}
                   >
@@ -66,7 +65,7 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
                   <a
                     href={entry.url}
                     class:list={[
-                      "cs-li-link",
+                      "cs-li-link font-bold transition-colors duration-400 group-hover:text-amber-300 before:hidden",
                       { "cs-active": Astro.url.pathname === entry.url },
                     ]}
                     aria-current={
@@ -108,8 +107,12 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
     </nav>
     <a
       href="/contact"
-      class="cs-button-solid cs-nav-button border-2 border-amber-300 bg-neutral-950 text-neutral-100 transition-colors duration-300 before:hidden hover:border-neutral-100 hover:bg-neutral-500"
-      >Contact Us</a
+      class:list={[
+        "cs-button-solid cs-nav-button",
+        "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color] delay-0 duration-400 before:hidden",
+        "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+        "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+      ]}>Contact Us</a
     >
     <!--Dark Mode toggle: remove component if you don't want to enable a dark mode toggle-->
     <!-- <DarkModeToggle /> -->
@@ -574,8 +577,9 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
         /* if you have 8 or more links in your dropdown nav, uncomment the columns property to make the list into 2 even columns. Change it to 3 or 4 if you need extra columns. Then remove the transition delays on the cs-drop-li so they don't have weird scattered animations */
         // columns: 2;
         position: absolute;
-        top: 100%;
-        z-index: -100;
+        top: 95%;
+        left: 0;
+        z-index: 100;
         overflow: hidden;
         transform: scaleY(0);
         transition:
@@ -723,7 +727,7 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
 
       .cs-container {
         width: 100%;
-        max-width: (1280/16rem);
+        /*max-width: (1280/16rem);*/
         margin: auto;
         display: flex;
         justify-content: flex-end;
@@ -763,14 +767,20 @@ import DarkModeToggle from "@components/DarkModeToggle.astro";
         justify-content: flex-start;
         align-items: center;
         /* 20px - 36px */
-        gap: clamp(1.25rem, 2.6vw, 2.25rem);
+        /*gap: clamp(1.25rem, 2.6vw, 2.25rem);*/
+        padding-block: 1.25rem;
       }
 
       .cs-li {
         list-style: none;
-        padding: (32/16rem) 0;
+        padding: 1rem 1.25rem;
         /* prevent flexbox from squishing it */
         flex: none;
+        border-left: 1px solid white;
+
+        &:nth-last-child(1) {
+          border-right: 1px solid white;
+        }
       }
 
       .cs-li-link {
