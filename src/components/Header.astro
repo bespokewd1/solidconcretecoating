@@ -1,6 +1,7 @@
 ---
 import navData from "@data/navData.json";
 import { Icon } from "astro-icon/components";
+import { Image } from "astro-lqip/components";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
@@ -8,13 +9,15 @@ import { Icon } from "astro-icon/components";
   <div class="cs-container lg:pr-10">
     <!--Nav Logo-->
     <a href="/" class="cs-logo" aria-label="back to home">
-      <img
-        src="/assets/svgs/logo-black.svg"
+      <Image
+        src="https://bespokewebdesign.ca/assets/images/bespokelogo1234.png"
         alt=""
         width="210"
         height="29"
         aria-hidden="true"
         decoding="async"
+        lqip="base64"
+        lqipSize={10}
       />
     </a>
     <!--Navigation List-->

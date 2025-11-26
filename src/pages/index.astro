@@ -93,7 +93,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
             href={`tel:${clientData.phoneForTel}`}
             class="text-4xl font-black text-neutral-900 transition-colors duration-300 hover:text-amber-500"
           >
-            (123) 456-7890
+            {clientData.phoneFormatted}
           </a>
         </div>
 
