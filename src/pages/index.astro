@@ -31,7 +31,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
   <section
     id="hero-section"
-    class="relative flex h-auto w-full items-center overflow-hidden sm:h-[700px] lg:h-dvh"
+    class="relative flex h-auto w-full items-center overflow-hidden pt-17.5 sm:h-[700px] md:pt-24 lg:h-dvh"
   >
     <!-- BACKGROUND WRAPPER (Target for Scale Up 1 -> 1.2) -->
     <div
@@ -54,28 +54,28 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     <div
       class="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-8 lg:px-12"
     >
-      <!-- THE WHITE CARD (Like Image 2) -->
+      <!-- THE WHITE CARD  -->
       <div
         id="hero-content-box"
-        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm bg-white/95 p-8 shadow-2xl backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 md:p-12"
+        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm p-8 shadow-[inset_2px_0_0_0_var(--color-amber-500)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:bg-white/95 sm:shadow-2xl md:p-12"
       >
         <!-- Small Header -->
         <span
-          class="mb-2 block text-lg font-bold tracking-wider text-neutral-800 uppercase"
+          class="mb-2 block text-lg font-bold tracking-wider text-neutral-950 uppercase text-shadow-lg/20 sm:text-neutral-800"
         >
           Solid Concrete Coating
         </span>
 
         <!-- Main Headline -->
         <h1
-          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm sm:text-5xl"
+          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm text-shadow-lg/20 sm:text-5xl"
         >
           Premium Epoxy Flooring <br class="hidden lg:block" /> in Edmonton
         </h1>
 
         <!-- Paragraph -->
         <p
-          class="mb-8 font-mont text-base leading-relaxed text-neutral-600 sm:text-lg"
+          class="mb-8 font-mont text-base leading-relaxed text-neutral-950 text-shadow-md sm:text-lg sm:text-neutral-600"
         >
           Transform your concrete surfaces with professional-grade coatings
           built for beauty, protection, and performance. Edmonton's #1 Floor
@@ -85,13 +85,13 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         <!-- Call to Action Area -->
         <div class="mb-6 flex flex-col gap-2 text-left">
           <span
-            class="text-sm font-bold tracking-widest text-neutral-800 uppercase"
+            class="text-sm font-bold tracking-widest text-neutral-800 uppercase text-shadow-lg/20"
           >
             Call Now to Get a Free Quote
           </span>
           <a
             href={`tel:${clientData.phoneForTel}`}
-            class="text-4xl font-black text-neutral-900 transition-colors duration-300 hover:text-amber-500"
+            class="text-4xl font-black text-neutral-900 transition-colors duration-300 text-shadow-lg/20 hover:text-amber-500"
           >
             {clientData.phoneFormatted}
           </a>
