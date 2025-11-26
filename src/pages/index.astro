@@ -2,7 +2,8 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import FAQ from "@components/FAQ.astro";
-import { Image } from "astro:assets";
+// import { Image } from "astro:assets";
+import { Image } from "astro-lqip/components";
 import clientData from "@data/client.json";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
@@ -28,49 +29,86 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!--                    Hero                      -->
   <!-- ============================================ -->
 
-  <section class="relative pt-17 md:pt-18 lg:pt-21.25 xl:pt-23.75">
-    <div class="absolute inset-0 -z-1 h-full w-full">
+  <section
+    id="hero-section"
+    class="relative flex h-auto w-full items-center overflow-hidden sm:h-[700px] lg:h-dvh"
+  >
+    <!-- BACKGROUND WRAPPER (Target for Scale Up 1 -> 1.2) -->
+    <div
+      id="hero-bg-wrapper"
+      class="absolute inset-0 z-0 h-full w-full will-change-transform"
+    >
       <Image
         src={landingImage}
         alt="Epoxy Flooring Edmonton"
-        class="absolute inset-0 z-0 h-full w-full object-cover"
+        class="h-full w-full object-cover"
         loading="eager"
+        lqip="base64"
+        lqipSize={10}
       />
-      <!-- Black Overlay -->
-      <div class="absolute inset-0 z-10 bg-black opacity-30"></div>
+      <!-- Dark Overlay (Optional, helps text pop if image is bright) -->
+      <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
+    <!-- CONTENT CONTAINER (Target for Scale Down 1 -> 0.6) -->
     <div
-      class="relative z-1 flex h-135 flex-col items-center justify-center lg:mx-auto lg:max-w-300 lg:items-start lg:py-20 xl:h-177"
+      class="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-8 lg:px-12"
     >
-      <div class="flex flex-col gap-5 p-4 md:p-6 lg:max-w-160">
-        <!-- font-size: ; -->
-        <h1
-          class="font-mont text-[1.8125rem] leading-[1.4em] font-extrabold text-neutral-100 text-shadow-lg/30 sm:text-[3.125rem]"
+      <!-- THE WHITE CARD (Like Image 2) -->
+      <div
+        id="hero-content-box"
+        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm bg-white/95 p-8 shadow-2xl backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 md:p-12"
+      >
+        <!-- Small Header -->
+        <span
+          class="mb-2 block text-lg font-bold tracking-wider text-neutral-800 uppercase"
         >
-          Premium Epoxy Flooring in Edmonton
+          Solid Concrete Coating
+        </span>
+
+        <!-- Main Headline -->
+        <h1
+          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm sm:text-5xl"
+        >
+          Premium Epoxy Flooring <br class="hidden lg:block" /> in Edmonton
         </h1>
+
+        <!-- Paragraph -->
         <p
-          class="font-mont text-[clamp(1.2rem,1.5vw,1.2rem)] leading-[1.8em] font-bold text-pretty text-neutral-100 text-shadow-md/30 md:mb-8"
+          class="mb-8 font-mont text-base leading-relaxed text-neutral-600 sm:text-lg"
         >
           Transform your concrete surfaces with professional-grade coatings
-          built for beauty, protection, and performance.
+          built for beauty, protection, and performance. Edmonton's #1 Floor
+          Coating Installer.
         </p>
-        <div class="flex flex-wrap items-center gap-5">
-          <ContactCta label="Request a Qoute" />
 
+        <!-- Call to Action Area -->
+        <div class="mb-6 flex flex-col gap-2 text-left">
+          <span
+            class="text-sm font-bold tracking-widest text-neutral-800 uppercase"
+          >
+            Call Now to Get a Free Quote
+          </span>
           <a
             href={`tel:${clientData.phoneForTel}`}
-            class="cs-button-solid group w-fit gap-2 bg-neutral-800 px-0 font-mont text-[0.9375rem] font-bold text-neutral-100 transition-colors duration-300 before:hidden"
+            class="text-4xl font-black text-neutral-900 transition-colors duration-300 hover:text-amber-500"
           >
-            <span
-              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-neutral-950 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
-            >
-              <Icon name={"tabler:phone-filled"} class={"size-5"} />
-              (123) 456-7890
-            </span>
+            (123) 456-7890
           </a>
         </div>
+
+        <!-- Button -->
+        <a
+          href="/contact"
+          class:list={[
+            "inline-block px-8 py-4 font-bold",
+            "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+            "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+            "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+          ]}
+        >
+          Get A Free Quote
+        </a>
       </div>
     </div>
   </section>
@@ -123,6 +161,64 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
   <CTA />
 </BaseLayout>
+
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  // Register the plugin
+  gsap.registerPlugin(ScrollTrigger);
+
+  // Initialize function to keep scope clean
+  const initHeroAnimation = () => {
+    const section = document.querySelector("#hero-section");
+    const bgImage = document.querySelector("#hero-bg-wrapper");
+    const contentBox = document.querySelector("#hero-content-box");
+
+    if (!section || !bgImage || !contentBox) return;
+
+    // Create a timeline linked to the scroll of the hero section
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: section,
+        start: "top top", // When top of section hits top of viewport
+        end: "bottom top", // When bottom of section hits top of viewport
+        scrub: true, // Smoothly scrub the animation based on scroll position
+        // markers: true, // Uncomment for debugging
+      },
+    });
+
+    // 1. Scale UP the background image (1 -> 1.2)
+    tl.to(
+      bgImage,
+      {
+        scale: 1.3,
+        ease: "none", // Linear ease is best for scrubbed animations
+        force3D: true, // Forces GPU acceleration
+      },
+      0,
+    ); // The '0' ensures this starts at the beginning of the timeline
+
+    // 2. Scale DOWN the content box (1 -> 0.6)
+    // We also add a slight opacity drop to mimic the depth effect in your screenshots
+    tl.to(
+      contentBox,
+      {
+        scale: 0.6,
+        opacity: 1, // Fade out as it gets smaller/farther away
+        ease: "none",
+        force3D: true,
+      },
+      0,
+    ); // The '0' ensures this runs simultaneously with the background
+  };
+
+  // Run on load
+  initHeroAnimation();
+
+  // Astro View Transitions support (if you are using them)
+  document.addEventListener("astro:page-load", initHeroAnimation);
+</script>
 <style lang="less">
   /* STYLES FOR ABOVE THE FOLD */
 
