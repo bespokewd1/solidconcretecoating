@@ -2,6 +2,7 @@
 import clientData from "@data/client.json";
 import { Icon } from "astro-icon/components";
 import ContactCta from "@components/ContactCta.astro";
+import CTALink from "./CTALink.astro";
 ---
 
 <div class="mx-auto flex max-w-300 flex-col gap-5 p-4 md:gap-6 md:p-6">
@@ -36,7 +37,16 @@ import ContactCta from "@components/ContactCta.astro";
       </a>
     </div>
     <div>
-      <ContactCta label="Free Estimate" />
+      <!-- <ContactCta label="Free Estimate" /> -->
+      <CTALink
+        label="Free Estimate"
+        class:list={[
+          "inline-block px-8 py-4 font-bold",
+          "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+          "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+          "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+        ]}
+      />
     </div>
   </div>
 </div>

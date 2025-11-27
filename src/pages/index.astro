@@ -7,19 +7,50 @@ import { Image } from "astro-lqip/components";
 import clientData from "@data/client.json";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
-import landingImage from "@assets/images/home-landing.png"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import landingImage from "@assets/images/home-landing.png";
+import resFloor from "@assets/images/services/res-floor-1.png";
+import comFloor from "@assets/images/services/commerce-1.png";
 import about from "@assets/images/about.png";
 import { getImage } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import ContactCta from "@components/ContactCta.astro";
 import Portfolio from "@components/Portfolio.astro";
 import ServiceCards from "@components/ServiceCards.astro";
+import ServiceFeature from "@components/ServiceFeature.astro";
 import Reviews from "@components/Reviews.astro";
 import SideBySide from "@components/SideBySide.astro";
 import TrustBadge from "@components/TrustBadge.astro";
 import ContactHeader from "@components/ContactHeader.astro";
 import BadgeContent from "@components/BadgeContent.astro";
 import WhyChooseUs from "@components/WhyChooseUs.astro";
+import CTALink from "@components/CTALink.astro";
+
+type ServiceInfo = {
+  href: string;
+  title: string;
+  description: string;
+  image: ImageMetadata;
+  imageAlt: string;
+};
+
+const serviceInfo: ServiceInfo[] = [
+  {
+    href: "/services/epoxy-flooring",
+    title: "Residential",
+    description:
+      "Protect, extend, and upgrade your home’s concrete floors with durable epoxy.",
+    image: resFloor,
+    imageAlt: "Epoxy Flooring",
+  },
+  {
+    href: "/services/concrete-coating",
+    title: "Commercial",
+    description:
+      "Durable, professional‑grade epoxy floors built for busy commercial spaces.",
+    image: comFloor,
+    imageAlt: "Concrete Coating",
+  },
+];
 
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
@@ -50,9 +81,13 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
       <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
-    <!-- CONTENT CONTAINER (Target for Scale Down 1 -> 0.6) -->
+    <!-- CONTENT CONTAINER  -->
     <div
       class="relative z-10 mx-auto flex h-full w-full max-w-7xl items-center px-4 sm:px-8 lg:px-12"
+      data-reveal-fr-r
+      data-distance-x="100"
+      data-delay-s="0.25"
+      data-once="true"
     >
       <!-- THE WHITE CARD  -->
       <div
@@ -62,6 +97,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         <!-- Small Header -->
         <span
           class="mb-2 block text-lg font-bold tracking-wider text-neutral-950 uppercase text-shadow-lg/20 sm:text-neutral-800"
+          data-stagger-b
+          data-distance-y="150"
+          data-delay-s="0.6"
+          data-once="true"
         >
           Solid Concrete Coating
         </span>
@@ -69,6 +108,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         <!-- Main Headline -->
         <h1
           class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm text-shadow-lg/20 sm:text-5xl"
+          data-stagger-b
+          data-distance-y="150"
+          data-delay-s="0.55"
+          data-once="true"
         >
           Premium Epoxy Flooring <br class="hidden lg:block" /> in Edmonton
         </h1>
@@ -76,6 +119,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         <!-- Paragraph -->
         <p
           class="mb-8 font-mont text-base leading-relaxed text-neutral-950 text-shadow-md sm:text-lg sm:text-neutral-600"
+          data-stagger-b
+          data-distance-y="150"
+          data-delay-s="0.5"
+          data-once="true"
         >
           Transform your concrete surfaces with professional-grade coatings
           built for beauty, protection, and performance. Edmonton's #1 Floor
@@ -83,7 +130,13 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         </p>
 
         <!-- Call to Action Area -->
-        <div class="mb-6 flex flex-col gap-2 text-left">
+        <div
+          class="mb-6 flex flex-col gap-2 text-left"
+          data-stagger-b
+          data-distance-y="150"
+          data-delay-s="0.45"
+          data-once="true"
+        >
           <span
             class="text-sm font-bold tracking-widest text-neutral-800 uppercase text-shadow-lg/20"
           >
@@ -98,17 +151,72 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         </div>
 
         <!-- Button -->
-        <a
-          href="/contact"
+        <CTALink
+          data-stagger-b
+          data-distance-y="150"
+          data-delay-s="0.4"
+          data-once="true"
           class:list={[
             "inline-block px-8 py-4 font-bold",
             "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
             "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
             "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
           ]}
-        >
-          Get A Free Quote
-        </a>
+        />
+      </div>
+    </div>
+  </section>
+
+  <section class="px-4 py-6 font-mont">
+    <div class="">
+      <h2
+        class="pt-6 pb-8 text-center text-2xl text-h2 font-bold text-neutral-950"
+      >
+        What are you looking for?
+      </h2>
+      <div
+        data-stagger-child-b
+        data-distance-y="60"
+        data-delay-s="0.2"
+        data-once="true"
+        class="mx-auto flex max-w-3xl flex-col gap-y-4 lg:max-w-full lg:flex-row"
+      >
+        {
+          serviceInfo.map((service) => (
+            <div class="group grid before:z-10 before:bg-black/30 before:[grid-area:1/1]">
+              <div class="max-h-162.5 overflow-hidden [grid-area:1/1]">
+                <Image
+                  src={service.image}
+                  alt={service.imageAlt}
+                  class="h-full object-cover transition-transform group-hover:scale-105"
+                  loading="eager"
+                  lqip="base64"
+                  lqipSize={10}
+                />
+              </div>
+              <div class="z-11 place-self-center p-4 [grid-area:1/1]">
+                <h3 class="mb-4 text-center text-5xl font-semibold text-neutral-50 text-shadow-lg/20">
+                  {service.title}
+                </h3>
+
+                <p class="text-center text-neutral-50 text-shadow-md/30">
+                  {service.description}
+                </p>
+              </div>
+
+              <a
+                href={service.href}
+                class:list={[
+                  "inline-block border-2 border-neutral-950 px-8 py-4 text-center text-xl font-bold",
+                  "bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden hover:border-amber-300",
+                  "hover:bg-neutral-900 hover:text-neutral-50",
+                ]}
+              >
+                Learn More
+              </a>
+            </div>
+          ))
+        }
       </div>
     </div>
   </section>
@@ -118,7 +226,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     <TrustBadge />
   </section>
 
-  <ServiceCards class={"pt-section-padding bg-neutral-100"} />
+  <ServiceFeature class={"pt-section-padding bg-neutral-100"} />
 
   <!-- ============================================ -->
   <!--                 Side By Side                 -->

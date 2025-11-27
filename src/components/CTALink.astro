@@ -1,0 +1,13 @@
+---
+import type { HTMLAttributes } from "astro/types";
+
+type Props = Omit<HTMLAttributes<"a">, "href"> & {
+  label?: string;
+};
+
+const { label = "Get A Free Quote", ...rest } = Astro.props as Props;
+---
+
+<a href="/contact" {...rest}>
+  {label}
+</a>

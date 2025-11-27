@@ -1,0 +1,121 @@
+---
+import poly from "@assets/images/coatings/poly.png";
+import epoxy from "@assets/images/coatings/epoxy.png";
+import sealed from "@assets/images/coatings/sealed.png";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section">;
+
+type ServiceInfo = {
+  Image: ImageMetadata;
+  title: string;
+  description: string;
+  href: string;
+  linkLabel: string;
+};
+
+const services: ServiceInfo[] = [
+  {
+    Image: poly,
+    title: "Polyaspartic Coatings",
+    description: `Our polyaspartic systems deliver exceptional durability and UV resistance,
+    making them ideal for Edmonton’s changing temperatures.
+    These fast‑curing coatings won’t chip, peel, or scratch and stand up to hot‑tire pickup, chemicals, and heavy use.
+    Choose from popular decorative flakes or let us customize a color and flake blend that perfectly matches your garage, shop, or outdoor space.`,
+    href: "/",
+    linkLabel: "Polyaspartic Coatings",
+  },
+  {
+    Image: epoxy,
+    title: "Epoxy Coatings",
+    description: `Our epoxy flooring combines premium resins and hardeners to create a seamless,
+    high‑gloss surface that bonds tightly to concrete. Engineered for long‑lasting performance,
+    it resists stains, impacts, and moisture—perfect for garages, basements, warehouses, and commercial spaces.
+    With a wide range of colors and flake options, we tailor each floor to suit your style and traffic demands.`,
+    href: "/",
+    linkLabel: "Epoxy Coatings",
+  },
+  {
+    Image: sealed,
+    title: "Driveway Sealing",
+    description: `Protect and refresh your driveway with our professional concrete sealing services in Edmonton.
+    We use high‑quality sealers that guard against moisture, salt, oil, and freeze‑thaw damage while enhancing color and curb appeal.
+    A sealed driveway is easier to clean, lasts longer, and keeps your property looking sharp season after season.`,
+    href: "/",
+    linkLabel: "Driveway Sealing",
+  },
+];
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section
+  class="px-4 pt-0 pb-section-padding"
+  class:list={[className]}
+  {...props}
+>
+    <h2 class="text-h2 font-bold text-center mb-8">Our Specializations</h2>
+  <div
+    class="mx-auto grid grid-cols-1 gap-5 p-4 sm:max-lg:max-w-150 md:gap-6 md:p-6 lg:grid-cols-3"
+  >
+    {
+      services.map((service) => (
+        <article class="bg-neutral-200">
+          <div class="grid grid-rows-[1fr_1fr] h-full -translate-1.5 flex-col items-center bg-neutral-50">
+            <Image
+              src={service.Image}
+              alt={service.title}
+              class={"object-cover size-full"}
+            />
+
+            <div class="flex flex-1 h-full flex-col gap-5 p-4 lg:px-8 lg:pb-8">
+              <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase">
+                {service.title}
+              </h2>
+
+              <p class="flex-1 font-mont leading-[1.8rem] tracking-normal">
+                {service.description}
+              </p>
+
+              <a
+                href={service.href}
+                class:list={[
+                  "p-4 items-center gap-3 font-bold group flex justify-center",
+                  "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+                  "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+                  "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+                ]}
+              >
+                  {service.linkLabel}
+                  <Icon
+                    name={"tabler:chevron-right"}
+                    class={
+                      "size-5 transition-transform duration-400 group-hover:translate-x-2"
+                    }
+                  />
+              </a>
+
+
+              <!-- <a
+                href={service.href}
+                class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+              >
+                <span class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100">
+                  {service.linkLabel}
+                  <Icon
+                    name={"tabler:chevron-right"}
+                    class={
+                      "size-5 transition-transform group-hover:translate-x-1"
+                    }
+                  />
+                </span>
+              </a> -->
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
