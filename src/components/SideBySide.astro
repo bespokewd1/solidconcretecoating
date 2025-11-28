@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import ContactCta from "./ContactCta.astro";
+import CTALink from "./CTALink.astro";
 
 type Props = HTMLAttributes<"section"> & {
   image: ImageMetadata; // import from astro:assets in the page and pass it in
@@ -71,7 +72,15 @@ const textOrder = alignment === "right" ? "order-1" : "order-2";
         }
       </p>
 
-      <ContactCta class={"mt-6"} label="Request a Qoute" />
+      <CTALink
+        label="Request a Qoute"
+        class:list={[
+          "mt-6 inline-block px-8 py-4 font-bold",
+          "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+          "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+          "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+        ]}
+      />
     </div>
   </div>
 </section>

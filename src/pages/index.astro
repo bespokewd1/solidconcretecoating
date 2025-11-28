@@ -183,12 +183,12 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
       >
         {
           serviceInfo.map((service) => (
-            <div class="group grid before:z-10 before:bg-black/30 before:[grid-area:1/1]">
+            <div class="group grid flex-1 before:z-10 before:bg-black/30 before:[grid-area:1/1]">
               <div class="max-h-162.5 overflow-hidden [grid-area:1/1]">
                 <Image
                   src={service.image}
                   alt={service.imageAlt}
-                  class="h-full object-cover transition-transform group-hover:scale-105"
+                  class="size-full object-cover transition-transform group-hover:scale-105"
                   loading="eager"
                   lqip="base64"
                   lqipSize={10}
@@ -241,11 +241,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   />
 
   <!-- ============================================ -->
-  <!--            Extra Content To Rank             -->
-  <!-- ============================================ -->
-  <BadgeContent />
-
-  <!-- ============================================ -->
   <!--                   Gallery                    -->
   <!-- ============================================ -->
 
@@ -254,8 +249,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--                   Why Choose Us                    -->
   <!-- ============================================ -->
-
-  <WhyChooseUs />
 
   <!-- ============================================ -->
   <!--                    FAQ                       -->

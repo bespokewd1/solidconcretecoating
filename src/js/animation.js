@@ -285,6 +285,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const delay = parseFloat(container.dataset.delayS) || 0;
     const duration = parseFloat(container.dataset.duratonS) || 0.5;
     const direction = container.dataset.direction || "bottom-right";
+    const runOnce = container.dataset.once === "true";
 
     let offsetX = 0;
     let offsetY = 0;
