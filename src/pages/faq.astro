@@ -1,0 +1,433 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+import { faqs } from "@data/faqs";
+import { renderMd } from "@utils/markdown";
+import type { RenderedFaq } from "@types/faq-types";
+import type { HTMLAttributes } from "astro/types";
+type Props = HTMLAttributes<"section">;
+
+// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
+import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import { getImage } from "astro:assets";
+const optimizedImage = await getImage({ src: landingImage, format: "avif" });
+
+// Pre-render Markdown to HTML at build/SSR time
+const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
+  ...f,
+  html: renderMd(f.answer),
+}));
+---
+
+<BaseLayout>
+  <section id="faq-1741" class="bg-neutral-50">
+    <div class="cs-container flex-col">
+      <div
+        class="cs-content w-full pt-8"
+        data-once="true"
+        data-reveal
+        data-direction="top"
+      >
+        <span
+          class="w-full text-center text-sm font-medium tracking-wide text-amber-500 uppercase italic"
+        >
+          Frequently Asked Questions
+        </span>
+        <!-- mb-4 text-heading font-extrabold tracking-wide uppercase -->
+
+        <h1
+          class="w-full py-0 text-center text-2xl text-h2 font-bold text-neutral-950"
+        >
+          Answers to Common Questions
+        </h1>
+        <div class="mx-auto mt-4 flex gap-4">
+          <a
+            href="#poly-faq"
+            aria-label="read more reviews"
+            class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+            data-reveal
+            data-direction="left"
+            data-once="true"
+            data-distance-x="500"
+          >
+            <span
+              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+            >
+              Polyaspartic FAQ
+            </span>
+          </a>
+
+          <a
+            href="#epoxy-faq"
+            aria-label="read more reviews"
+            class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+            data-reveal
+            data-direction="right"
+            data-once="true"
+            data-distance-x="500"
+          >
+            <span
+              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+            >
+              Epoxy FAQ
+            </span>
+          </a>
+        </div>
+        <!-- <h1
+          class="cs-title max-w-full font-mont text-heading font-bold tracking-wide uppercase"
+        >
+        </h1> -->
+      </div>
+
+      <div id="poly-faq" class="cs-flex-group mx-auto max-w-200">
+        <h2
+          class="mb-4 max-w-full font-mont text-heading font-bold tracking-wide text-amber-500 uppercase"
+        >
+          Polyaspartic FAQ
+        </h2>
+        <ul class="cs-faq-group">
+          {
+            renderedFaqs.map((faq, idx) => (
+              <li
+                class="cs-faq-item relative overflow-visible bg-neutral-50 font-mont"
+                data-reveal
+                data-direction={idx % 2 === 0 ? "left" : "right"}
+                data-delay-s={idx * 0.2}
+                data-once="true"
+                data-distance-x="500"
+                class:list={[
+                  idx === 0 ? "active" : "",
+                  "before:absolute before:inset-0 before:-z-1 before:size-full before:translate-1.5 before:bg-neutral-200",
+                ]}
+              >
+                <button
+                  class="cs-button aria-[expanded='false']:bg-amber-50"
+                  aria-expanded={idx === 0 ? "true" : "false"}
+                  aria-controls={`faq-panel-${idx}`}
+                  id={`faq-button-${idx}`}
+                >
+                  <span class="cs-button-text">{faq.question}</span>
+                </button>
+                <div
+                  id={`faq-panel-${idx}`}
+                  class:list={`[&_li+li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5`}
+                  class="cs-item-text bg-neutral-50"
+                  role="region"
+                  aria-labelledby={`faq-button-${idx}`}
+                  set:html={faq.html}
+                />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <div id="epoxy-faq" class="cs-flex-group mx-auto max-w-200">
+        <h2
+          class="mb-4 max-w-full font-mont text-heading font-bold tracking-wide text-amber-500 uppercase"
+        >
+          Epoxy FAQ
+        </h2>
+        <ul class="cs-faq-group">
+          {
+            renderedFaqs.map((faq, idx) => (
+              <li
+                class="cs-faq-item relative overflow-visible bg-neutral-50 font-mont"
+                data-reveal
+                data-direction={idx % 2 === 0 ? "left" : "right"}
+                data-delay-s={idx * 0.2}
+                data-once="true"
+                data-distance-x="500"
+                class:list={[
+                  idx === 0 ? "active" : "",
+                  "before:absolute before:inset-0 before:-z-1 before:size-full before:translate-1.5 before:bg-neutral-200",
+                ]}
+              >
+                <button
+                  class="cs-button aria-[expanded='false']:bg-amber-50"
+                  aria-expanded={idx === 0 ? "true" : "false"}
+                  aria-controls={`faq-panel-${idx}`}
+                  id={`faq-button-${idx}`}
+                >
+                  <span class="cs-button-text">{faq.question}</span>
+                </button>
+                <div
+                  id={`faq-panel-${idx}`}
+                  class:list={`[&_li+li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5`}
+                  class="cs-item-text bg-neutral-50"
+                  role="region"
+                  aria-labelledby={`faq-button-${idx}`}
+                  set:html={faq.html}
+                />
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Astro:page-load wrapper for View Transitions purposes
+    document.addEventListener("astro:page-load", () => {
+      const faqItems = Array.from(document.querySelectorAll(".cs-faq-item"));
+
+      for (const item of faqItems) {
+        const btn = item.querySelector(".cs-button");
+        const panel = item.querySelector(".cs-item-text");
+
+        const onClick = () => {
+          const nowActive = !item.classList.contains("active");
+          item.classList.toggle("active");
+
+          // Update aria-expanded for accessibility
+          if (btn) btn.setAttribute("aria-expanded", String(nowActive));
+        };
+
+        item.addEventListener("click", onClick);
+      }
+    });
+  </script>
+
+  <style lang="less">
+    html {
+      scroll-behavior: smooth;
+    }
+
+    #poly-faq,
+    #epoxy-faq {
+      scroll-margin-top: 7rem;
+    }
+    /* Mobile - 360px */
+    @media only screen and (min-width: 0rem) {
+      #faq-1741 {
+        padding: var(--sectionPadding);
+        position: relative;
+
+        .cs-container {
+          width: 100%;
+          max-width: (584/16rem);
+          margin: 2em auto;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          gap: clamp(3rem, 6vw, 4rem);
+        }
+
+        .cs-content {
+          text-align: center;
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .cs-title {
+          max-width: 15ch;
+          margin: 0 0 (32/16rem);
+        }
+
+        .cs-faq-group {
+          width: 100%;
+          margin: 0;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: (12/16rem);
+        }
+
+        .cs-faq-item {
+          list-style: none;
+          width: 100%;
+          overflow: hidden;
+          transition: border-bottom 0.3s;
+
+          &.active {
+            .cs-button {
+              background-color: var(--color-amber-300);
+              color: var(--color-neutral-950);
+
+              &:before {
+                background-color: var(--color-neutral-950);
+                transform: rotate(315deg);
+              }
+
+              &:after {
+                background-color: var(--color-neutral-950);
+                transform: rotate(-315deg);
+              }
+            }
+
+            .cs-item-text {
+              height: auto;
+              padding: (16/16rem) clamp(1rem, 2vw, 1.5rem);
+              opacity: 1;
+              border: 1px solid #e8e8e8;
+            }
+          }
+        }
+
+        .cs-button {
+          font-size: clamp(1rem, 2.5vw, 1.25rem);
+          font-weight: bold;
+          line-height: 1.2em;
+          text-align: left;
+          width: 100%;
+          padding: (16/16rem);
+          padding-left: (52/16rem);
+          background-color: transparent;
+          color: var(--headerColor);
+          border: 1px solid #e8e8e8;
+          display: block;
+          position: relative;
+          transition:
+            background-color 0.3s,
+            color 0.3s;
+
+          &:hover {
+            cursor: pointer;
+          }
+
+          &:before {
+            content: "";
+            width: (8/16rem);
+            height: (2/16rem);
+            background-color: var(--headerColor);
+            opacity: 1;
+            display: block;
+            position: absolute;
+            top: 45%;
+            left: (18/16rem);
+            transform: rotate(45deg);
+            transition: transform 0.5s;
+            transform-origin: left center;
+          }
+
+          &:after {
+            content: "";
+            width: (8/16rem);
+            height: (2/16rem);
+            background-color: var(--headerColor);
+            opacity: 1;
+            display: block;
+            position: absolute;
+            top: 45%;
+            left: (21/16rem);
+            transform: rotate(-45deg);
+            transition: transform 0.5s;
+            transform-origin: right center;
+          }
+        }
+
+        /* IMPORTANT: allow wrapping; no whitespace-pre */
+        .cs-item-text {
+          font-size: clamp(0.875rem, 1.5vw, 1rem);
+          line-height: 1.5em;
+          height: 0;
+          margin: 0;
+          overflow: hidden;
+          color: var(--color-neutral-950);
+          opacity: 0;
+          transition:
+            opacity 0.3s,
+            padding-bottom 0.3s;
+          white-space: normal;
+
+          /* Optional: style Markdown output */
+          p {
+            margin: 0 0 0.75rem;
+          }
+          ul,
+          ol {
+            margin: 0.5rem 0 1rem 1.25rem;
+          }
+          li + li {
+            margin-top: 0.25rem;
+          }
+          strong {
+            font-weight: 700;
+          }
+        }
+      }
+    }
+
+    /* Tablet - 768px */
+    @media only screen and (min-width: 48rem) {
+      #faq-1741 {
+        .cs-gallery {
+          max-width: (1720/16rem);
+        }
+
+        .cs-picture {
+          grid-column: span 1;
+        }
+      }
+    }
+
+    /* Desktop - 1024px */
+    @media only screen and (min-width: 64rem) {
+      #faq-1741 {
+        .cs-container {
+          max-width: (1280/16rem);
+          flex-direction: row;
+          justify-content: space-between;
+          align-items: stretch;
+        }
+
+        .cs-content {
+          text-align: left;
+          width: 40%;
+          align-items: flex-start;
+          flex: none;
+        }
+      }
+    }
+
+    /* Dark Mode */
+    @media only screen and (min-width: 0rem) {
+      body.dark-mode {
+        #faq-1741 {
+          .cs-title,
+          .cs-item-text {
+            color: var(--bodyTextColorWhite);
+          }
+
+          .cs-topper {
+            color: var(--primaryLight);
+          }
+
+          .cs-faq-item {
+            &.active {
+              .cs-button {
+                background-color: var(--secondary);
+                color: var(--bodyTextColorWhite);
+
+                &:before,
+                &:after {
+                  background-color: var(--bodyTextColorWhite);
+                }
+              }
+
+              .cs-item-text {
+                padding-top: clamp(1.25rem, 1.3vw, 1.5rem);
+                border-color: var(--accent);
+              }
+            }
+          }
+
+          .cs-button {
+            color: var(--bodyTextColorWhite);
+            border-color: var(--accent);
+
+            &:before,
+            &:after {
+              background-color: var(--bodyTextColorWhite);
+            }
+          }
+        }
+      }
+    }
+  </style>
+</BaseLayout>

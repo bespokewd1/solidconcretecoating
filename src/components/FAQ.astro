@@ -46,7 +46,7 @@ const { ...props } = Astro.props;
               ]}
             >
               <button
-                class="cs-button"
+                class="cs-button aria-[expanded='false']:bg-amber-50"
                 aria-expanded={idx === 0 ? "true" : "false"}
                 aria-controls={`faq-panel-${idx}`}
                 id={`faq-button-${idx}`}
