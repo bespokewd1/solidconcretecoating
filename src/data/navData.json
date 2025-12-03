@@ -5,27 +5,35 @@
     "children": []
   },
   {
-    "key": "Residential",
-    "url": "/residential/",
+    "key": "Services",
+    "url": "/services/",
     "children": [
       {
-        "key": "Epoxy Residential Floors",
-        "url": "/residential/epoxy-residential-floors/"
+        "key": "Residential Coatings",
+        "url": "/services/#residential-coatings"
       },
       {
-        "key": "Epoxy Garage Floors",
-        "url": "/residential/epoxy-garage-floors/"
+        "key": "Commercial & Industrial Flooring",
+        "url": "/services/#commercial-industrial-flooring"
+      },
+      {
+        "key": "Concrete Sealing & Repair",
+        "url": "/services/#concrete-sealing-repair"
+      },
+      {
+        "key": "Flake Colors / Customization",
+        "url": "/services/#flake-colors-customization"
       }
     ]
   },
   {
-    "key": "Commercial",
-    "url": "/commercial-epoxy-floors/",
+    "key": "Gallery",
+    "url": "/gallery/",
     "children": []
   },
   {
-    "key": "Industrial",
-    "url": "/industrial-epoxy-floors/",
+    "key": "FAQ",
+    "url": "/faq/",
     "children": []
   },
   {

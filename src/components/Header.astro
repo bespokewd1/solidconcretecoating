@@ -2,6 +2,7 @@
 import navData from "@data/navData.json";
 import { Icon } from "astro-icon/components";
 import { Image } from "astro-lqip/components";
+import mainLogo from "@assets/images/main-logo.png";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
@@ -10,10 +11,8 @@ import { Image } from "astro-lqip/components";
     <!--Nav Logo-->
     <a href="/" class="cs-logo" aria-label="back to home">
       <Image
-        src="https://bespokewebdesign.ca/assets/images/bespokelogo1234.png"
-        alt=""
-        width="210"
-        height="29"
+        src={mainLogo}
+        alt="Solid Concrete Coating"
         aria-hidden="true"
         decoding="async"
         lqip="base64"
@@ -21,7 +20,7 @@ import { Image } from "astro-lqip/components";
       />
     </a>
     <!--Navigation List-->
-    <nav class="cs-nav" role="navigation">
+    <nav class="cs-nav font-mont" role="navigation">
       <!--Mobile Nav Toggle-->
       <button
         class="cs-toggle"
@@ -111,7 +110,7 @@ import { Image } from "astro-lqip/components";
     <a
       href="/contact"
       class:list={[
-        "cs-button-solid cs-nav-button",
+        "cs-button-solid cs-nav-button font-mont",
         "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
         "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
         "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",

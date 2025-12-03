@@ -4,6 +4,7 @@ import type { GetImageResult } from "astro";
 import client from "@data/client.json";
 import Header from "@components/Header.astro";
 import Footer from "@components/Footer.astro";
+import StickyCta from "@components/StickyCta.astro";
 import "@styles/root.less";
 import "@styles/dark.less";
 import "../styles/global.css";
@@ -122,7 +123,7 @@ const {
     <script src="@js/nav.js"></script>
     <script src="@js/animation.js"></script>
   </head>
-  <body class="font-mont">
+  <body class="relative font-mont">
     <!-- Screen reader skip main nav -->
     <a class="skip" aria-label="skip to main content" href="#main"
       >Click To Skip To Main Content</a
@@ -132,6 +133,7 @@ const {
     <main id="main">
       <slot />
     </main>
+    <StickyCta />
     <Footer />
   </body>
 </html>

@@ -1,0 +1,41 @@
+---
+import { Icon } from "astro-icon/components";
+import CTALink from "./CTALink.astro";
+
+import clientData from "@data/client.json";
+---
+
+<aside
+  class="bg-red fixed bottom-0 left-0 z-50 w-full lg:hidden"
+  data-stagger-b
+  data-distance-y="350"
+  data-once="true"
+>
+  <div class="mx-auto flex w-full max-w-3xl">
+    <div
+      class="flex flex-1 items-center justify-center gap-[clamp(calc(var(--spacing)*0),3dvw,calc(var(--spacing)*2))] bg-amber-50 text-left sm:gap-2"
+      data-once="true"
+    >
+      <Icon
+        name={"tabler:phone"}
+        class="text-[clamp(var(--text-lg),3dvw,var(--text-3xl))]"
+      />
+      <a
+        href={`tel:${clientData.phoneForTel}`}
+        class="text-[clamp(var(--text-sm),3dvw,var(--text-3xl))] font-black text-neutral-900 transition-colors duration-300 text-shadow-lg/20 hover:text-amber-500 sm:text-shadow-none"
+      >
+        {clientData.phoneFormatted}
+      </a>
+    </div>
+
+    <!-- Button -->
+    <CTALink
+      class:list={[
+        "inline-block flex-1 px-[clamp(calc(var(--spacing)*1),2dvw,calc(var(--spacing)*4))] py-4 text-center text-[clamp(var(--text-sm),3dvw,var(--text-xl))] font-bold",
+        "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+        "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+        "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+      ]}
+    />
+  </div>
+</aside>

@@ -59,7 +59,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--                    Hero                      -->
   <!-- ============================================ -->
-
   <section
     id="hero-section"
     class="relative flex h-auto w-full items-center overflow-hidden pt-17.5 sm:h-[700px] md:pt-24 lg:h-dvh"
@@ -94,9 +93,9 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         id="hero-content-box"
         class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm p-8 shadow-[inset_2px_0_0_0_var(--color-amber-500)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:bg-white/95 sm:shadow-2xl md:p-12"
       >
-        <!-- Small Header -->
+        <!--  topper Small Header -->
         <span
-          class="mb-2 block text-lg font-bold tracking-wider text-neutral-950 uppercase text-shadow-lg/20 sm:text-neutral-800"
+          class="mb-2 block text-lg font-bold tracking-wider text-neutral-950 uppercase text-shadow-lg/20 sm:text-neutral-800 sm:text-shadow-none"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.6"
@@ -107,18 +106,18 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
         <!-- Main Headline -->
         <h1
-          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm text-shadow-lg/20 sm:text-5xl"
+          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm text-shadow-lg/20 sm:text-5xl sm:text-shadow-none"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.55"
           data-once="true"
         >
-          Premium Epoxy Flooring <br class="hidden lg:block" /> in Edmonton
+          Premium Concrete Coatings for Homes & Businesses
         </h1>
 
         <!-- Paragraph -->
         <p
-          class="mb-8 font-mont text-base leading-relaxed text-neutral-950 text-shadow-md sm:text-lg sm:text-neutral-600"
+          class="mb-8 font-mont text-base leading-relaxed text-neutral-950 text-shadow-md sm:text-lg sm:text-neutral-600 sm:text-shadow-none"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.5"
@@ -138,13 +137,13 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           data-once="true"
         >
           <span
-            class="text-sm font-bold tracking-widest text-neutral-800 uppercase text-shadow-lg/20"
+            class="text-sm font-bold tracking-widest text-neutral-800 uppercase text-shadow-lg/20 sm:text-shadow-none"
           >
             Call Now to Get a Free Quote
           </span>
           <a
             href={`tel:${clientData.phoneForTel}`}
-            class="text-4xl font-black text-neutral-900 transition-colors duration-300 text-shadow-lg/20 hover:text-amber-500"
+            class="text-4xl font-black text-neutral-900 transition-colors duration-300 text-shadow-lg/20 hover:text-amber-500 sm:text-shadow-none"
           >
             {clientData.phoneFormatted}
           </a>
@@ -195,7 +194,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
                 />
               </div>
               <div class="z-11 place-self-center p-4 [grid-area:1/1]">
-                <h3 class="mb-4 text-center text-5xl font-semibold text-neutral-50 text-shadow-lg/20">
+                <h3 class="mb-4 text-center text-3xl font-semibold text-neutral-50 text-shadow-lg/20 sm:text-5xl">
                   {service.title}
                 </h3>
 

@@ -3,6 +3,7 @@ import client from "@data/client.json";
 import navData from "@data/navData.json";
 import { Image } from "astro-lqip/components";
 import { getCurrentYear } from "@js/utils";
+import mainLogo from "@assets/images/main-logo.png";
 
 const currentYear = getCurrentYear();
 ---
@@ -15,10 +16,8 @@ const currentYear = getCurrentYear();
         ><Image
           loading="lazy"
           decoding="async"
-          src="https://bespokewebdesign.ca/assets/images/bespokelogo1234.png"
+          src={mainLogo}
           alt="logo"
-          width="264"
-          height="78"
           lqip="base64"
           lqipSize={10}
         /></a
