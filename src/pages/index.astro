@@ -24,6 +24,9 @@ import ContactHeader from "@components/ContactHeader.astro";
 import BadgeContent from "@components/BadgeContent.astro";
 import WhyChooseUs from "@components/WhyChooseUs.astro";
 import CTALink from "@components/CTALink.astro";
+import TrustBadges from "@components/TrustBadges.astro";
+import ServiceHighlights from "@components/ServiceHighlights.astro";
+import WhyChoose from "@components/WhyChoose.astro";
 
 type ServiceInfo = {
   href: string;
@@ -61,7 +64,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <section
     id="hero-section"
-    class="relative flex h-auto w-full items-center overflow-hidden pt-17.5 sm:h-[700px] md:pt-24 lg:h-dvh"
+    class="relative flex h-auto w-full items-center overflow-hidden pt-17.5 sm:h-[700px] md:pt-24 lg:h-[calc(100dvh-6.5625rem)]"
   >
     <!-- BACKGROUND WRAPPER (Target for Scale Up 1 -> 1.2) -->
     <div
@@ -76,7 +79,6 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         lqip="base64"
         lqipSize={10}
       />
-      <!-- Dark Overlay (Optional, helps text pop if image is bright) -->
       <div class="absolute inset-0 bg-black/20"></div>
     </div>
 
@@ -167,7 +169,11 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     </div>
   </section>
 
-  <section class="px-4 py-6 font-mont">
+  <TrustBadges />
+  <ServiceHighlights />
+
+  <WhyChoose />
+  <!-- <section class="px-4 py-6 font-mont">
     <div class="">
       <h2
         class="pt-6 pb-8 text-center text-2xl text-h2 font-bold text-neutral-950"
@@ -219,7 +225,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         }
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section class="px-4 pt-6">
     <ContactHeader />

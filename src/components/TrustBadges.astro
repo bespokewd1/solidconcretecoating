@@ -1,0 +1,94 @@
+---
+// src/components/TrustBadges.astro
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section">;
+
+type Badge = {
+  icon: string;
+  label: string;
+};
+
+const badges: Badge[] = [
+  {
+    icon: "tabler:rosette-discount-check",
+    label: "100% Satisfaction Guaranteed",
+  },
+  { icon: "tabler:leaf", label: "Eco-Friendly Products" },
+  { icon: "tabler:shield-check", label: "Insured & Bonded" },
+  { icon: "tabler:award", label: "Quality Workmanship" },
+  { icon: "tabler:file-invoice", label: "Free Estimates" },
+  { icon: "tabler:certificate", label: "Certified Installer" },
+  { icon: "tabler:credit-card", label: "Financing Available" },
+];
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section
+  class:list={["overflow-hidden bg-neutral-900 py-6 lg:h-26.25", className]}
+  {...props}
+>
+  <div class="relative">
+    <!-- Scrolling container -->
+    <div
+      class="scrollbar-hide mask-bg-3 relative mx-auto flex w-full items-center justify-end"
+    >
+      <!-- {
+        [...badges, ...badges].map((badge) => (
+          <div class="flex shrink-0 items-center gap-3">
+            <div class="flex size-10 items-center justify-center rounded-full bg-amber-300/10 md:size-12">
+              <Icon name={badge.icon} class="size-5 text-amber-300 md:size-6" />
+            </div>
+            <span class="font-mont text-sm font-medium whitespace-nowrap text-neutral-200 md:text-base">
+              {badge.label}
+            </span>
+          </div>
+        ))
+      } -->
+
+      {
+        [...Array(2)].map((_, index) => (
+          <div
+            aria-hidden={index === 1}
+            class="flex shrink-0 animate-move-to-right items-center gap-8 pl-8"
+          >
+            {badges.map((badge) => (
+              <div class="flex shrink-0 items-center gap-2">
+                <div class="flex size-10 items-center justify-center rounded-full bg-amber-300/10 md:size-12">
+                  <Icon
+                    name={badge.icon}
+                    class="size-5 text-amber-300 md:size-6"
+                  />
+                </div>
+                <span class="font-mont text-sm font-medium whitespace-nowrap text-neutral-200 md:text-base">
+                  {badge.label}
+                </span>
+              </div>
+            ))}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .animate-scroll {
+    animation: scroll 30s linear infinite;
+  }
+
+  .animate-scroll:hover {
+    animation-play-state: paused;
+  }
+</style>

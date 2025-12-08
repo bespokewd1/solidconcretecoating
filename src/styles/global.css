@@ -65,9 +65,60 @@
   --text-heading: clamp(1.4rem, 5vw, 1.625rem);
   --text-h2: clamp(1.875rem, 5dvw, 3rem);
   --text-heading-v2: clamp(1.625rem, 5vw, 2.5rem);
+
+  --animate-move-to-left: move-to-left 30s infinite linear;
+  --animate-move-to-right: move-to-right 30s infinite linear;
+  --animate-move-to-top: move-to-top 30s infinite linear;
+}
+
+@keyframes move-to-top {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(-100%);
+  }
+}
+
+@keyframes move-to-left {
+  from {
+    translate: 0;
+  }
+
+  to {
+    translate: -100%;
+  }
+}
+
+@keyframes move-to-right {
+  from {
+    translate: 0;
+  }
+
+  to {
+    translate: 100%;
+  }
 }
 
 html::selection {
   background: var(--color-amber-300);
   color: var(--color-neutral-950);
+}
+
+.mask-bg-3 {
+  mask-image: linear-gradient(to right, transparent, #000 3% 97%, transparent);
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+.mask-bg-3-vertical {
+  /* mask-image: linear-gradient(to bottom,transparent, #000 3% 97%, transparent); */
+  mask-image: linear-gradient(to bottom, transparent, #000 3% 97%, transparent);
 }

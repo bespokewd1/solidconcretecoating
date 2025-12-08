@@ -1,0 +1,136 @@
+---
+// src/components/WhyChooseUs.astro
+import { Icon } from "astro-icon/components";
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section">;
+
+type Highlight = {
+  icon: string;
+  title: string;
+  description: string;
+};
+
+const highlights: Highlight[] = [
+  {
+    icon: "tabler:calendar-check",
+    title: "Fast & Easy Scheduling",
+    description: "Book your service in minutes with our streamlined scheduling system.",
+  },
+  {
+    icon: "tabler:adjustments-horizontal",
+    title: "Customized Solutions",
+    description: "Coatings tailored to your space, style, and specific requirements.",
+  },
+  {
+    icon: "tabler:certificate-2",
+    title: "Warranty & Quality",
+    description: "Durable finishes backed by our commitment to excellence.",
+  },
+  {
+    icon: "tabler:headset",
+    title: "Responsive Customer Service",
+    description: "We answer calls, emails, and texts promptly—always here to help.",
+  },
+];
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section
+  class:list={["px-4 py-section-padding bg-neutral-900", className]}
+  {...props}
+>
+  <div class="mx-auto max-w-7xl">
+    <div class="grid gap-12 lg:grid-cols-2 lg:items-center lg:gap-16">
+      <!-- Left: Content -->
+      <div>
+        <span
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-amber-300 uppercase"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-once="true"
+        >
+          Why Choose Us
+        </span>
+        <h2
+          class="mb-6 font-mont text-h2 font-bold text-neutral-50"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          Experience You Can Trust
+        </h2>
+        <p
+          class="mb-8 font-mont text-lg leading-relaxed text-neutral-300"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          Solid Concrete Coating brings years of hands-on experience in
+          construction, coatings, and concrete work. We bring that expertise to
+          every project—delivering floors that look stunning and last for years.
+        </p>
+
+        <!-- CTA Button -->
+        <div
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.2"
+          data-once="true"
+        >
+          <a
+            href="/contact"
+            class:list={[
+              "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
+              "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-all duration-400",
+              "hover:rounded-lg hover:bg-transparent hover:text-amber-300",
+              "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+            ]}
+          >
+            Get Your Free Quote
+            <Icon name="tabler:chevron-right" class="size-5" />
+          </a>
+        </div>
+      </div>
+
+      <!-- Right: Highlights Grid -->
+      <div
+        class="grid gap-4 sm:grid-cols-2"
+        data-stagger-child-b
+        data-distance-y="40"
+        data-delay-s="0.25"
+        data-once="true"
+      >
+        {
+          highlights.map((highlight) => (
+            <div class="group rounded-sm border border-neutral-700 bg-neutral-800/50 p-6 transition-all duration-300 hover:border-amber-300/50 hover:bg-neutral-800">
+              <!-- Icon container -->
+              <div class="mb-4 flex size-12 items-center justify-center rounded-full bg-amber-300/10 transition-colors duration-300 group-hover:bg-amber-300/20">
+                <Icon
+                  name={highlight.icon}
+                  class="size-6 text-amber-300"
+                />
+
+              </div>
+
+              <!-- Content -->
+              <h3 class="mb-2 font-mont text-lg font-bold text-neutral-50">
+                {highlight.title}
+              </h3>
+              <p class="font-mont text-sm leading-relaxed text-neutral-400">
+                {highlight.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
