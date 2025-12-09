@@ -1,13 +1,15 @@
 ---
 import { Icon } from "astro-icon/components";
 import { Image } from "astro-lqip/components";
+import BeforeAfterSlider from "@components/BeforeAfterSlider.astro";
 
 import type { HTMLAttributes } from "astro/types";
 
 type Props = HTMLAttributes<"section">;
 
-import resFloor from "@assets/images/services/res-floor-1.png";
-import poly from "@assets/images/coatings/poly.png";
+import resFloor from "@assets/images/services/b4-after-res.webp";
+import poly from "@assets/images/services/flake-1.png";
+import resFloor2 from "@assets/images/services/res-floor-1.png";
 
 const { class: className, ...props } = Astro.props;
 ---
@@ -120,49 +122,47 @@ const { class: className, ...props } = Astro.props;
 
       <!-- Image Grid -->
       <div
-        class="grid grid-cols-2 gap-4"
+        class="grid grid-cols-2 grid-rows-[auto_auto_1fr] gap-4"
         data-reveal
         data-direction="right"
         data-distance-x="50"
         data-delay-s="0.15"
         data-once="true"
       >
-        <div class="space-y-4">
-          <div class="overflow-hidden rounded-sm shadow-lg">
-            <div
-              class="h-48 w-full transition-transform duration-500 hover:scale-105 sm:h-64"
-            >
-              <Image
-                src={resFloor}
-                alt="Residential garage floor coating"
-                class="size-full object-cover"
-                loading="lazy"
-                lqip="base64"
-                lqipSize={10}
-              />
-            </div>
-          </div>
-          <div class="overflow-hidden rounded-sm bg-amber-300 p-6 shadow-lg">
-            <p class="font-mont text-2xl font-bold text-neutral-900">10+</p>
-            <p class="font-mont text-sm text-neutral-700">Years Experience</p>
+        <div class="col-span-full overflow-hidden rounded-sm shadow-lg">
+          <!-- <div class="h-48 w-full sm:h-64"> -->
+          <div class="">
+            <BeforeAfterSlider beforeImage={resFloor} afterImage={resFloor2} />
+            <!-- <Image
+              src={resFloor}
+              alt="Residential garage floor coating"
+              class="size-full object-cover"
+              loading="lazy"
+              lqip="base64"
+              lqipSize={10}
+            /> -->
           </div>
         </div>
-        <div class="mt-8 space-y-4">
-          <div class="overflow-hidden rounded-sm bg-neutral-900 p-6 shadow-lg">
-            <p class="font-mont text-2xl font-bold text-amber-300">500+</p>
-            <p class="font-mont text-sm text-neutral-400">Homes Completed</p>
-          </div>
-          <div class="overflow-hidden rounded-sm shadow-lg">
-            <div
-              class="h-48 w-full transition-transform duration-500 hover:scale-105 sm:h-64"
-            >
-              <Image
-                src={poly}
-                alt="Epoxy coating layers diagram"
-                class="size-full object-cover"
-                loading="lazy"
-              />
-            </div>
+        <div
+          class="col-start-1 col-end-2 overflow-hidden rounded-sm bg-amber-300 p-6 shadow-lg"
+        >
+          <p class="font-mont text-2xl font-bold text-neutral-900">Years</p>
+          <p class="font-mont text-sm text-neutral-700">Of Experience</p>
+        </div>
+        <div
+          class="col-start-2 col-end-3 overflow-hidden rounded-sm bg-neutral-900 p-6 shadow-lg"
+        >
+          <p class="font-mont text-2xl font-bold text-amber-300">Hundreds</p>
+          <p class="font-mont text-sm text-neutral-400">Of Homes Completed</p>
+        </div>
+        <div class="col-span-full overflow-hidden">
+          <div class="h-48 w-full sm:h-min">
+            <Image
+              src={poly}
+              alt="Epoxy coating layers diagram"
+              class="size-full object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </div>
