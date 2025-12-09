@@ -1,0 +1,171 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro-lqip/components";
+
+import type { HTMLAttributes } from "astro/types";
+
+type Props = HTMLAttributes<"section">;
+
+import resFloor from "@assets/images/services/res-floor-1.png";
+import poly from "@assets/images/coatings/poly.png";
+
+const { class: className, ...props } = Astro.props;
+---
+
+<section
+  id="residential-coatings"
+  class:list={["scroll-mt-32 px-4 py-section-padding sm:px-8", className]}
+  {...props}
+>
+  <div class="mx-auto max-w-7xl">
+    <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+      <!-- Content -->
+      <div
+        data-reveal
+        data-direction="left"
+        data-distance-x="50"
+        data-once="true"
+      >
+        <div class="mb-4 flex items-center gap-3">
+          <div
+            class="flex size-12 items-center justify-center rounded-full bg-amber-300/15"
+          >
+            <Icon name="tabler:home-2" class="size-6 text-amber-600" />
+          </div>
+          <span
+            class="font-mont text-sm font-bold tracking-widest text-amber-600 uppercase"
+          >
+            Residential
+          </span>
+        </div>
+
+        <h2
+          class="mb-6 font-mont text-3xl font-bold text-neutral-900 sm:text-4xl"
+        >
+          Residential Concrete Coatings
+        </h2>
+
+        <p class="mb-8 font-mont text-lg leading-relaxed text-neutral-600">
+          Upgrade your home's flooring with our residential concrete coatings.
+          Perfect for garages, basements, patios, and driveways. Our coatings
+          are scratch-resistant, easy to maintain, and customizable with
+          multiple flake colors.
+        </p>
+
+        <!-- Popular Uses -->
+        <div class="mb-8">
+          <h3
+            class="mb-4 font-mont text-sm font-bold tracking-widest text-neutral-500 uppercase"
+          >
+            Popular Uses
+          </h3>
+          <div class="grid grid-cols-2 gap-3">
+            {
+              [
+                { icon: "tabler:car", text: "Garage Floors" },
+                { icon: "tabler:stairs-down", text: "Basements" },
+                { icon: "tabler:plant-2", text: "Outdoor Patios" },
+                { icon: "tabler:road", text: "Driveways" },
+              ].map((item) => (
+                <div class="flex items-center gap-3 rounded-sm bg-neutral-50 p-3">
+                  <Icon name={item.icon} class="size-5 text-amber-500" />
+                  <span class="font-mont text-sm font-medium text-neutral-700">
+                    {item.text}
+                  </span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Benefits -->
+        <div class="mb-8">
+          <h3
+            class="mb-4 font-mont text-sm font-bold tracking-widest text-neutral-500 uppercase"
+          >
+            Benefits
+          </h3>
+          <ul class="space-y-3">
+            {
+              [
+                "Scratch & Stain Resistant",
+                "Easy to Maintain",
+                "Adds Value to Your Home",
+                "Non-Slip Surface Options",
+              ].map((benefit) => (
+                <li class="flex items-center gap-3 font-mont text-neutral-700">
+                  <Icon
+                    name="tabler:circle-check-filled"
+                    class="size-5 shrink-0 text-amber-500"
+                  />
+                  {benefit}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <a
+          href="/contact"
+          class:list={[
+            "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
+            "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-all duration-400",
+            "hover:rounded-lg hover:border-neutral-900 hover:bg-neutral-900 hover:text-neutral-50",
+          ]}
+        >
+          Get a Free Quote
+          <Icon name="tabler:arrow-right" class="size-5" />
+        </a>
+      </div>
+
+      <!-- Image Grid -->
+      <div
+        class="grid grid-cols-2 gap-4"
+        data-reveal
+        data-direction="right"
+        data-distance-x="50"
+        data-delay-s="0.15"
+        data-once="true"
+      >
+        <div class="space-y-4">
+          <div class="overflow-hidden rounded-sm shadow-lg">
+            <div
+              class="h-48 w-full transition-transform duration-500 hover:scale-105 sm:h-64"
+            >
+              <Image
+                src={resFloor}
+                alt="Residential garage floor coating"
+                class="size-full object-cover"
+                loading="lazy"
+                lqip="base64"
+                lqipSize={10}
+              />
+            </div>
+          </div>
+          <div class="overflow-hidden rounded-sm bg-amber-300 p-6 shadow-lg">
+            <p class="font-mont text-2xl font-bold text-neutral-900">10+</p>
+            <p class="font-mont text-sm text-neutral-700">Years Experience</p>
+          </div>
+        </div>
+        <div class="mt-8 space-y-4">
+          <div class="overflow-hidden rounded-sm bg-neutral-900 p-6 shadow-lg">
+            <p class="font-mont text-2xl font-bold text-amber-300">500+</p>
+            <p class="font-mont text-sm text-neutral-400">Homes Completed</p>
+          </div>
+          <div class="overflow-hidden rounded-sm shadow-lg">
+            <div
+              class="h-48 w-full transition-transform duration-500 hover:scale-105 sm:h-64"
+            >
+              <Image
+                src={poly}
+                alt="Epoxy coating layers diagram"
+                class="size-full object-cover"
+                loading="lazy"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
