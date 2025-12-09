@@ -1,0 +1,208 @@
+---
+// BeforeAfterSlider.astro
+import { Image } from "astro:assets";
+
+interface Props {
+  beforeImage: ImageMetadata;
+  afterImage: ImageMetadata;
+  beforeLabel?: string;
+  beforeAlt?: string;
+  afterLabel?: string;
+  afterAlt?: string;
+  initialPosition?: number;
+}
+
+const {
+  beforeImage,
+  afterImage,
+  beforeLabel = "Before image",
+  beforeAlt = "Before image",
+  afterLabel = "After image",
+  afterAlt = "After image",
+  initialPosition = 50,
+} = Astro.props;
+---
+
+<div
+  class="before-after-slider group relative w-full max-w-3xl overflow-hidden rounded-lg select-none"
+  data-initial-position={initialPosition}
+>
+  <!-- After Image (Bottom Layer) -->
+  <div class="after-image-wrapper">
+    <Image
+      src={afterImage}
+      alt={afterAlt}
+      class="h-auto w-full object-cover"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 768px) 100vw, 800px"
+    />
+    <span
+      class="absolute top-2 right-2 rounded bg-neutral-900/70 px-2 py-1 text-xs font-medium text-nowrap text-neutral-50"
+    >
+      {afterLabel}
+    </span>
+  </div>
+
+  <!-- Before Image (Top Layer - Clipped) -->
+  <div
+    class="before-image-wrapper absolute inset-0 overflow-hidden"
+    style={`width: ${initialPosition}%`}
+  >
+    <Image
+      src={beforeImage}
+      alt={beforeAlt}
+      class="h-full w-full object-cover"
+      style="min-width: 100cqw"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 768px) 100vw, 800px"
+    />
+    <span
+      class="absolute top-2 left-2 rounded bg-neutral-900/70 px-2 py-1 text-xs font-medium text-nowrap text-neutral-50"
+    >
+      {beforeLabel}
+    </span>
+  </div>
+
+  <!-- Slider Line & Handle -->
+  <div
+    class="slider-line absolute top-0 bottom-0 z-10 w-1 -translate-x-1/2 cursor-ew-resize bg-amber-300 shadow-lg"
+    style={`left: ${initialPosition}%`}
+  >
+    <!-- Slider Handle Button -->
+    <button
+      type="button"
+      class="slider-handle absolute top-1/2 left-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border-4 border-amber-300 bg-neutral-900 shadow-lg transition-transform hover:scale-110 focus:scale-110 focus:ring-2 focus:ring-amber-400 focus:ring-offset-2 focus:ring-offset-neutral-900 focus:outline-none"
+      aria-label="Drag to compare images"
+    >
+      <!-- Arrow Icons -->
+      <svg
+        class="h-5 w-5 text-amber-300"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M8 9l-3 3 3 3m8-6l3 3-3 3"></path>
+      </svg>
+    </button>
+  </div>
+</div>
+
+<style>
+  .before-after-slider {
+    container-type: inline-size;
+  }
+</style>
+
+<script>
+  class BeforeAfterSlider {
+    private container: HTMLElement;
+    private beforeWrapper: HTMLElement;
+    private sliderLine: HTMLElement;
+    private isDragging = false;
+
+    constructor(container: HTMLElement) {
+      this.container = container;
+      this.beforeWrapper = container.querySelector(
+        ".before-image-wrapper",
+      ) as HTMLElement;
+      this.sliderLine = container.querySelector(".slider-line") as HTMLElement;
+
+      this.init();
+    }
+
+    private init(): void {
+      // Mouse events
+      this.sliderLine.addEventListener("mousedown", this.startDrag.bind(this));
+      document.addEventListener("mousemove", this.drag.bind(this));
+      document.addEventListener("mouseup", this.stopDrag.bind(this));
+
+      // Touch events
+      this.sliderLine.addEventListener("touchstart", this.startDrag.bind(this));
+      document.addEventListener("touchmove", this.drag.bind(this));
+      document.addEventListener("touchend", this.stopDrag.bind(this));
+
+      // Keyboard accessibility
+      this.sliderLine
+        .querySelector("button")
+        ?.addEventListener("keydown", this.handleKeyboard.bind(this));
+
+      // Click anywhere on container to move slider
+      this.container.addEventListener("click", this.handleClick.bind(this));
+    }
+
+    private startDrag(e: MouseEvent | TouchEvent): void {
+      e.preventDefault();
+      this.isDragging = true;
+      this.container.classList.add("dragging");
+    }
+
+    private stopDrag(): void {
+      this.isDragging = false;
+      this.container.classList.remove("dragging");
+    }
+
+    private drag(e: MouseEvent | TouchEvent): void {
+      if (!this.isDragging) return;
+
+      const clientX =
+        e instanceof MouseEvent ? e.clientX : e.touches[0].clientX;
+      this.updatePosition(clientX);
+    }
+
+    private handleClick(e: MouseEvent): void {
+      if (this.isDragging) return;
+      this.updatePosition(e.clientX);
+    }
+
+    private handleKeyboard(e: KeyboardEvent): void {
+      const rect = this.container.getBoundingClientRect();
+      const currentPercent = parseFloat(this.beforeWrapper.style.width) || 50;
+      const step = 2; // 2% per key press
+
+      let newPercent = currentPercent;
+
+      if (e.key === "ArrowLeft") {
+        newPercent = Math.max(0, currentPercent - step);
+      } else if (e.key === "ArrowRight") {
+        newPercent = Math.min(100, currentPercent + step);
+      } else {
+        return;
+      }
+
+      e.preventDefault();
+      this.setPosition(newPercent);
+    }
+
+    private updatePosition(clientX: number): void {
+      const rect = this.container.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const percent = Math.max(0, Math.min(100, (x / rect.width) * 100));
+
+      this.setPosition(percent);
+    }
+
+    private setPosition(percent: number): void {
+      this.beforeWrapper.style.width = `${percent}%`;
+      this.sliderLine.style.left = `${percent}%`;
+    }
+  }
+
+  // Initialize all sliders on page load
+  function initSliders(): void {
+    document
+      .querySelectorAll<HTMLElement>(".before-after-slider")
+      .forEach((container) => {
+        new BeforeAfterSlider(container);
+      });
+  }
+
+  // Run on initial load
+  initSliders();
+
+  // Re-run after Astro page transitions (View Transitions)
+  document.addEventListener("astro:page-load", initSliders);
+</script>

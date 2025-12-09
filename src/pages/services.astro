@@ -3,6 +3,8 @@
 
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Residential from "@components/Services/Residential.astro";
+import Commercial from "@components/Services/Commercial.astro";
+import Restoration from "@components/Services/Restoration.astro";
 
 import { Icon } from "astro-icon/components";
 // import { Image } from "astro:assets";
@@ -12,10 +14,7 @@ import CTA from "@components/CTA.astro";
 
 // Import local images - replace these with your actual images
 // For now, using placeholder structure
-import resFloor from "@assets/images/services/res-floor-1.png";
-import comFloor from "@assets/images/services/commerce-1.png";
 import sealed from "@assets/images/coatings/sealed.png";
-import poly from "@assets/images/coatings/poly.png";
 import landingImage from "@assets/images/home-landing.png";
 
 type ServiceSection = {
@@ -178,128 +177,31 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!-- ============================================ -->
   <!--       Commercial & Industrial Flooring      -->
   <!-- ============================================ -->
-  <section
-    id="commercial-industrial-flooring"
-    class="scroll-mt-32 bg-neutral-50 px-4 py-section-padding sm:px-8"
-  >
-    <div class="mx-auto max-w-7xl">
-      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
-        <!-- Image - Order first on desktop -->
-        <div
-          class="order-2 lg:order-1"
-          data-reveal
-          data-direction="left"
-          data-distance-x="50"
-          data-once="true"
-        >
-          <div class="relative">
-            <!-- Main Image -->
-            <div class="overflow-hidden rounded-sm shadow-2xl">
-              <div class="h-80 w-full sm:h-[500px]">
-                <Image
-                  src={comFloor}
-                  alt="Commercial epoxy flooring installation"
-                  class="object-cover  size-full"
-                  loading="lazy"
-                />
-              </div>
-            </div>
-            <!-- Floating Badge -->
-            <div class="absolute -right-4 -bottom-4 z-1 rounded-sm bg-amber-300 p-6 shadow-xl sm:-right-8 sm:-bottom-8">
-              <Icon name="tabler:building-factory-2" class="mb-2 size-8 text-neutral-900" />
-              <p class="font-mont text-sm font-bold text-neutral-900">Industrial<br/>Grade</p>
-            </div>
-          </div>
-        </div>
+  <Commercial />
 
-        <!-- Content -->
-        <div
-          class="order-1 lg:order-2"
-          data-reveal
-          data-direction="right"
-          data-distance-x="50"
-          data-delay-s="0.15"
-          data-once="true"
-        >
-          <div class="mb-4 flex items-center gap-3">
-            <div class="flex size-12 items-center justify-center rounded-full bg-amber-300/15">
-              <Icon name="tabler:building-factory-2" class="size-6 text-amber-600" />
-            </div>
-            <span class="font-mont text-sm font-bold tracking-widest text-amber-600 uppercase">
-              Commercial
-            </span>
-          </div>
+  <!-- Divider -->
+  <div class="mx-auto max-w-7xl px-4 sm:px-8">
+    <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
+  </div>
 
-          <h2 class="mb-6 font-mont text-3xl font-bold text-neutral-900 sm:text-4xl">
-            Commercial & Industrial Flooring
-          </h2>
+  <!-- ============================================ -->
+  <!--          Restoration Services               -->
+  <!-- ============================================ -->
+  <Restoration />
 
-          <p class="mb-8 font-mont text-lg leading-relaxed text-neutral-600">
-            We provide commercial and industrial concrete coating solutions built to withstand heavy traffic, machinery, and chemicals. Ideal for warehouses, gyms, restaurants, showrooms, and retail spaces.
-          </p>
+  <!-- Divider -->
+  <!-- <div class="mx-auto max-w-7xl px-4 sm:px-8">
+    <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
+  </div> -->
 
-          <!-- Industries Served -->
-          <div class="mb-8">
-            <h3 class="mb-4 font-mont text-sm font-bold tracking-widest text-neutral-500 uppercase">
-              Industries Served
-            </h3>
-            <div class="grid grid-cols-2 gap-3">
-              {[
-                { icon: "tabler:building-warehouse", text: "Warehouses & Factories" },
-                { icon: "tabler:chef-hat", text: "Restaurants & Cafeterias" },
-                { icon: "tabler:shopping-cart", text: "Retail & Showrooms" },
-                { icon: "tabler:barbell", text: "Fitness Centers" },
-              ].map((item) => (
-                <div class="flex items-center gap-3 rounded-sm bg-white p-3 shadow-sm">
-                  <Icon name={item.icon} class="size-5 text-amber-500" />
-                  <span class="font-mont text-sm font-medium text-neutral-700">{item.text}</span>
-                </div>
-              ))}
-            </div>
-          </div>
 
-          <!-- Benefits -->
-          <div class="mb-8">
-            <h3 class="mb-4 font-mont text-sm font-bold tracking-widest text-neutral-500 uppercase">
-              Benefits
-            </h3>
-            <ul class="space-y-3">
-              {[
-                "Durable & Long-Lasting",
-                "Slip-Resistant & Safe",
-                "Easy to Clean & Maintain",
-                "Customizable Finishes for Branding",
-              ].map((benefit) => (
-                <li class="flex items-center gap-3 font-mont text-neutral-700">
-                  <Icon name="tabler:circle-check-filled" class="size-5 shrink-0 text-amber-500" />
-                  {benefit}
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <a
-            href="/contact"
-            class:list={[
-              "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
-              "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-all duration-400",
-              "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50 hover:border-neutral-900",
-            ]}
-          >
-            Request Commercial Quote
-            <Icon name="tabler:arrow-right" class="size-5" />
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
 
   <!-- ============================================ -->
   <!--          Concrete Sealing & Repair          -->
   <!-- ============================================ -->
   <section
     id="concrete-sealing-repair"
-    class="scroll-mt-32 px-4 py-section-padding sm:px-8"
+    class=" scroll-mt-32 px-4 py-section-padding sm:px-8"
   >
     <div class="mx-auto max-w-7xl">
       <!-- Section Header -->
