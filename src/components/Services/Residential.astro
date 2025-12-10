@@ -2,6 +2,7 @@
 import { Icon } from "astro-icon/components";
 import { Image } from "astro-lqip/components";
 import BeforeAfterSlider from "@components/BeforeAfterSlider.astro";
+import CTALink from "@components/CTALink.astro";
 
 import type { HTMLAttributes } from "astro/types";
 
@@ -30,24 +31,24 @@ const { class: className, ...props } = Astro.props;
       >
         <div class="mb-4 flex items-center gap-3">
           <div
-            class="flex size-12 items-center justify-center rounded-full bg-amber-300/15"
+            class="flex size-12 items-center justify-center rounded-full bg-accent/10"
           >
-            <Icon name="tabler:home-2" class="size-6 text-amber-600" />
+            <Icon name="tabler:home-2" class="size-6 text-accent" />
           </div>
           <span
-            class="font-mont text-sm font-bold tracking-widest text-amber-600 uppercase"
+            class="font-mont text-sm font-bold tracking-widest text-accent uppercase"
           >
             Residential
           </span>
         </div>
 
         <h2
-          class="mb-6 font-mont text-3xl font-bold text-neutral-900 sm:text-4xl"
+          class="mb-6 font-mont text-3xl font-bold text-fore-dark sm:text-4xl"
         >
           Residential Concrete Coatings
         </h2>
 
-        <p class="mb-8 font-mont text-lg leading-relaxed text-neutral-600">
+        <p class="mb-8 font-mont text-lg leading-relaxed text-fore-dark/80">
           Upgrade your home's flooring with our residential concrete coatings.
           Perfect for garages, basements, patios, and driveways. Our coatings
           are scratch-resistant, easy to maintain, and customizable with
@@ -57,7 +58,7 @@ const { class: className, ...props } = Astro.props;
         <!-- Popular Uses -->
         <div class="mb-8">
           <h3
-            class="mb-4 font-mont text-sm font-bold tracking-widest text-neutral-500 uppercase"
+            class="mb-4 font-mont text-sm font-bold tracking-widest text-fore-dark/50 uppercase"
           >
             Popular Uses
           </h3>
@@ -69,9 +70,9 @@ const { class: className, ...props } = Astro.props;
                 { icon: "tabler:plant-2", text: "Outdoor Patios" },
                 { icon: "tabler:road", text: "Driveways" },
               ].map((item) => (
-                <div class="flex items-center gap-3 rounded-sm bg-neutral-50 p-3">
-                  <Icon name={item.icon} class="size-5 text-amber-500" />
-                  <span class="font-mont text-sm font-medium text-neutral-700">
+                <div class="flex items-center gap-3 rounded-sm bg-fore-light p-3">
+                  <Icon name={item.icon} class="size-5 text-accent" />
+                  <span class="font-mont text-sm font-medium text-fore-dark/60">
                     {item.text}
                   </span>
                 </div>
@@ -98,7 +99,7 @@ const { class: className, ...props } = Astro.props;
                 <li class="flex items-center gap-3 font-mont text-neutral-700">
                   <Icon
                     name="tabler:circle-check-filled"
-                    class="size-5 shrink-0 text-amber-500"
+                    class="size-5 shrink-0 text-primary"
                   />
                   {benefit}
                 </li>
@@ -107,7 +108,8 @@ const { class: className, ...props } = Astro.props;
           </ul>
         </div>
 
-        <a
+        <CTALink variant="primary" showIcon={true} />
+        <!-- <a
           href="/contact"
           class:list={[
             "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
@@ -117,7 +119,7 @@ const { class: className, ...props } = Astro.props;
         >
           Get a Free Quote
           <Icon name="tabler:arrow-right" class="size-5" />
-        </a>
+        </a> -->
       </div>
 
       <!-- Image Grid -->
@@ -144,16 +146,16 @@ const { class: className, ...props } = Astro.props;
           </div>
         </div>
         <div
-          class="col-start-1 col-end-2 overflow-hidden rounded-sm bg-amber-300 p-6 shadow-lg"
+          class="col-start-1 col-end-2 overflow-hidden rounded-sm bg-primary p-6 shadow-lg"
         >
-          <p class="font-mont text-2xl font-bold text-neutral-900">Years</p>
-          <p class="font-mont text-sm text-neutral-700">Of Experience</p>
+          <p class="font-mont text-2xl font-bold text-fore-light">Years</p>
+          <p class="font-mont text-sm text-fore-light/80">Of Experience</p>
         </div>
         <div
-          class="col-start-2 col-end-3 overflow-hidden rounded-sm bg-neutral-900 p-6 shadow-lg"
+          class="col-start-2 col-end-3 overflow-hidden rounded-sm bg-fore-light p-6 shadow-lg"
         >
-          <p class="font-mont text-2xl font-bold text-amber-300">Hundreds</p>
-          <p class="font-mont text-sm text-neutral-400">Of Homes Completed</p>
+          <p class="font-mont text-2xl font-bold text-primary">Hundreds</p>
+          <p class="font-mont text-sm text-primary/80">Of Homes Completed</p>
         </div>
         <div class="col-span-full overflow-hidden">
           <div class="h-48 w-full sm:h-min">

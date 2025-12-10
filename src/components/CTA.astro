@@ -9,6 +9,7 @@ import mobileImage from "@assets/images/CTA/cta.png";
 import desktopImage from "@assets/images/CTA/cta.png";
 import fallbackImage from "@assets/images/CTA/cta.png";
 import ContactCta from "./ContactCta.astro";
+import CTALink from "./CTALink.astro";
 ---
 
 <section id="cta">
@@ -26,7 +27,9 @@ import ContactCta from "./ContactCta.astro";
       hassle.
     </p>
 
-    <ContactCta label="Get a Free Estimate" />
+    <!-- <ContactCta label="Get a Free Estimate" /> -->
+
+    <CTALink label="Get a Free Estimate" variant="primary" showIcon={true} />
   </div>
   <CSPicture
     mobileImgUrl={mobileImage}

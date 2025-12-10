@@ -56,13 +56,15 @@ const textOrder = alignment === "right" ? "order-1" : "order-2";
 
     <div class={`${textOrder} font-mont`}>
       <span
-        class="text-sm font-medium tracking-wider text-amber-500 uppercase italic"
+        class="text-sm font-medium tracking-wider text-accent uppercase italic"
         >{topper}</span
       >
-      <h2 class="mb-4 text-heading font-extrabold tracking-wide uppercase">
+      <h2
+        class="mb-4 text-heading font-extrabold tracking-wide text-fore-dark uppercase"
+      >
         {title}
       </h2>
-      <p class="leading-[1.8] lg:text-lg">
+      <p class="mb-4 leading-[1.8] text-fore-dark/90 lg:text-lg">
         {
           Array.isArray(body)
             ? body.map((paragraph) => (
@@ -72,15 +74,7 @@ const textOrder = alignment === "right" ? "order-1" : "order-2";
         }
       </p>
 
-      <CTALink
-        label="Request a Qoute"
-        class:list={[
-          "mt-6 inline-block px-8 py-4 font-bold",
-          "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
-          "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
-          "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
-        ]}
-      />
+      <CTALink label="Request a Qoute" variant="primary" />
     </div>
   </div>
 </section>

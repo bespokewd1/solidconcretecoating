@@ -82,7 +82,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-8">
       <div class="max-w-3xl">
         <span
-          class="mb-4 inline-block font-mont text-sm font-bold tracking-widest text-amber-300 uppercase"
+          class="mb-4 inline-block font-mont text-sm font-bold tracking-widest text-accent uppercase"
           data-reveal
           data-direction="left"
           data-distance-x="30"
@@ -91,7 +91,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           Our Services
         </span>
         <h1
-          class="mb-6 font-mont text-4xl font-extrabold leading-tight text-neutral-50 sm:text-5xl lg:text-6xl"
+          class="mb-6 font-mont text-4xl font-extrabold leading-tight text-fore-light sm:text-5xl lg:text-6xl"
           data-reveal
           data-direction="left"
           data-distance-x="30"
@@ -101,7 +101,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           Premium Concrete Coating Solutions
         </h1>
         <p
-          class="mb-8 font-mont text-lg leading-relaxed text-neutral-300 sm:text-xl"
+          class="mb-8 font-mont text-lg leading-relaxed text-fore-light/80 sm:text-xl"
           data-reveal
           data-direction="left"
           data-distance-x="30"
@@ -123,7 +123,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           {serviceSections.map((section) => (
             <a
               href={`#${section.id}`}
-              class="group inline-flex items-center gap-2 rounded-full border border-neutral-700 bg-neutral-800/50 px-4 py-2 font-mont text-sm font-medium text-neutral-300 transition-all duration-300 hover:border-amber-300/50 hover:bg-amber-300/10 hover:text-amber-300"
+              class="group inline-flex items-center gap-2 rounded-full inset-shadow-border/30 bg-fore-dark/30 px-4 py-2 font-mont text-sm font-medium text-neutral-300 transition-all duration-300 hover:inset-shadow-border hover:bg-primary/30 hover:text-accent"
             >
               <Icon name={section.icon} class="size-4" />
               {section.label}
@@ -134,14 +134,14 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
     </div>
 
     <!-- Decorative element -->
-    <div class="absolute right-0 bottom-0 hidden h-64 w-64 translate-x-1/4 translate-y-1/4 rounded-full bg-amber-300/5 blur-3xl lg:block"></div>
+    <div class="absolute right-0 bottom-0 hidden h-64 w-64 translate-x-1/4 translate-y-1/4 rounded-full bg-accent/5 blur-3xl lg:block"></div>
   </section>
 
   <!-- ============================================ -->
   <!--            Sticky Section Nav               -->
   <!-- ============================================ -->
   <nav
-    class="sticky top-17.5 z-40 border-b border-neutral-200 bg-white/95 backdrop-blur-sm md:top-24"
+    class="sticky top-17.5 z-40 border-b border-fore-light/80 bg-white/95 backdrop-blur-sm md:top-24"
     id="service-nav"
   >
     <div class="mx-auto max-w-7xl px-4 sm:px-8">
@@ -149,12 +149,12 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         {serviceSections.map((section) => (
           <a
             href={`#${section.id}`}
-            class="service-nav-link group flex shrink-0 items-center gap-2 rounded-sm px-4 py-2.5 font-mont text-sm font-semibold text-neutral-600 transition-all duration-300 hover:bg-neutral-100 hover:text-neutral-900"
+            class="service-nav-link group flex shrink-0 items-center gap-2 rounded-sm px-4 py-2.5 font-mont text-sm font-semibold text-fore-dark/80 transition-all duration-300 hover:bg-fore-light hover:text-fore-dark"
             data-section={section.id}
           >
             <Icon
               name={section.icon}
-              class="size-4 text-neutral-400 transition-colors group-hover:text-amber-500"
+              class="size-4 text-primary/50 transition-colors group-hover:text-primary"
             />
             <span class="hidden sm:inline">{section.label}</span>
             <span class="sm:hidden">{section.label.split(' ')[0]}</span>
@@ -171,7 +171,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
   <!-- Divider -->
   <div class="mx-auto max-w-7xl px-4 sm:px-8">
-    <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
+    <div class="h-px bg-gradient-to-r from-transparent via-fore-light to-transparent"></div>
   </div>
 
   <!-- ============================================ -->
@@ -181,7 +181,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
   <!-- Divider -->
   <div class="mx-auto max-w-7xl px-4 sm:px-8">
-    <div class="h-px bg-gradient-to-r from-transparent via-neutral-200 to-transparent"></div>
+    <div class="h-px bg-gradient-to-r from-transparent via-fore-light to-transparent"></div>
   </div>
 
   <!-- ============================================ -->
@@ -587,15 +587,15 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         navLinks.forEach((link) => {
           const linkSection = link.getAttribute("data-section");
           if (linkSection === sectionId) {
-            link.classList.add("bg-amber-300/20", "text-amber-600");
-            link.classList.remove("text-neutral-600");
-            link.querySelector("svg")?.classList.add("text-amber-500");
-            link.querySelector("svg")?.classList.remove("text-neutral-400");
+            link.classList.add("bg-fore-light", "text-fore-dark");
+            link.classList.remove("text-fore-dark/80");
+            link.querySelector("svg")?.classList.add("text-primary");
+            link.querySelector("svg")?.classList.remove("text-primary/50");
           } else {
-            link.classList.remove("bg-amber-300/20", "text-amber-600");
-            link.classList.add("text-neutral-600");
-            link.querySelector("svg")?.classList.remove("text-amber-500");
-            link.querySelector("svg")?.classList.add("text-neutral-400");
+            link.classList.remove("bg-fore-light", "text-fore-dark");
+            link.classList.add("text-fore-dark/80");
+            link.querySelector("svg")?.classList.remove("text-primary");
+            link.querySelector("svg")?.classList.add("text-primary/50");
           }
         });
       }

@@ -70,7 +70,7 @@ import mainLogo from "@assets/images/main-logo.png";
                     aria-expanded="false"
                     aria-controls={`submenu-${entry.key}`}
                     class:list={[
-                      "cs-li-link cs-dropdown-button font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:text-fore-light before:hidden",
+                      "cs-li-link cs-dropdown-button hidden font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:text-fore-light before:hidden lg:block",
                       { "cs-active": Astro.url.pathname.includes(entry.url) },
                     ]}
                   >
@@ -95,26 +95,53 @@ import mainLogo from "@assets/images/main-logo.png";
 
                 {entry.children?.length > 0 && (
                   // If entry has children in navData.json, create a drop down menu
-                  <ul
-                    id={`submenu-${entry.key}`}
-                    class="cs-drop-ul bg-fore-light"
-                  >
-                    {entry.children.map((child) => (
-                      <li class="cs-drop-li">
-                        <a
-                          href={child.url}
-                          class="cs-li-link cs-drop-link text-fore-dark transition-colors duration-500 hover:bg-primary hover:text-fore-light"
-                          aria-current={
-                            Astro.url.pathname === child.url
-                              ? "page"
-                              : undefined
-                          }
+                  <Fragment>
+                    <ul
+                      id={`submenu-${entry.key}`}
+                      class="cs-drop-ul hidden bg-fore-light lg:block"
+                    >
+                      {entry.children.map((child) => (
+                        <li class="cs-drop-li">
+                          <a
+                            href={child.url}
+                            class="cs-li-link cs-drop-link text-fore-dark transition-colors duration-500 hover:bg-primary hover:text-fore-light"
+                            aria-current={
+                              Astro.url.pathname === child.url
+                                ? "page"
+                                : undefined
+                            }
+                          >
+                            {child.key}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <ul class="cs-ul h-fit p-0 lg:hidden">
+                      {entry.children.map((child) => (
+                        <li
+                          class:list={[
+                            "cs-li group transition-colors duration-400 hover:bg-primary",
+                          ]}
                         >
-                          {child.key}
-                        </a>
-                      </li>
-                    ))}
-                  </ul>
+                          <a
+                            href={child.url}
+                            class:list={[
+                              "cs-li-link font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:text-fore-light before:hidden",
+                              { "cs-active": Astro.url.pathname === child.url },
+                            ]}
+                            aria-current={
+                              Astro.url.pathname === child.url
+                                ? "page"
+                                : undefined
+                            }
+                          >
+                            {child.key}
+                          </a>
+                        </li>
+                      ))}
+                    </ul>
+                  </Fragment>
                 )}
               </li>
             ))
@@ -128,7 +155,7 @@ import mainLogo from "@assets/images/main-logo.png";
     <CTALink
       label="Contact Us"
       variant="primary"
-      class="hidden uppercase lg:hidden"
+      class="hidden uppercase lg:inline-flex"
     />
     <!-- <a
       href="/contact"

@@ -60,13 +60,13 @@ const { class: className, ...props } = Astro.props;
 >
   <div class="mx-auto max-w-[82.625rem]">
     <span
-      class="block text-center text-sm font-medium tracking-wide text-amber-500 uppercase italic"
+      class="block text-center text-sm font-medium tracking-wide text-accent uppercase italic"
     >
       Our Portfolio
     </span>
 
     <h2
-      class="mx-auto mb-10 max-w-[38.8125rem] text-center text-heading font-extrabold tracking-wide uppercase"
+      class="mx-auto mb-10 max-w-[38.8125rem] text-center text-heading font-extrabold tracking-wide text-fore-dark uppercase"
     >
       Epoxy Flooring Portfolio in Edmonton: Garage, Basement, Commercial &
       Industrial Finishes
@@ -80,7 +80,7 @@ const { class: className, ...props } = Astro.props;
 
     {
       allImages.length === 0 && (
-        <div class="my-8 text-center text-gray-500">
+        <div class="my-8 text-center text-fore-dark/80">
           <p>No gallery images found. Add some images in the CMS!</p>
         </div>
       )
