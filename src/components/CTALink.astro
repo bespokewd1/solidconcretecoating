@@ -1,13 +1,45 @@
 ---
 import type { HTMLAttributes } from "astro/types";
+import { Icon } from "astro-icon/components";
 
 type Props = Omit<HTMLAttributes<"a">, "href"> & {
   label?: string;
+  variant?: "primary" | "default";
+  showIcon?: boolean;
 };
 
-const { label = "Get A Free Quote", ...rest } = Astro.props as Props;
+const {
+  label = "Get A Free Quote",
+  variant = "default",
+  showIcon = false,
+  class: className = "",
+  ...rest
+} = Astro.props as Props;
 ---
 
-<a href="/contact" {...rest}>
+<a
+  href="/contact"
+  class:list={[
+    variant === "primary"
+      ? [
+          "group inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
+          "bg-primary text-fore-light inset-shadow-border transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+          "hover:rounded-lg hover:bg-fore-light hover:text-fore-dark",
+          "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+          className,
+        ]
+      : [className],
+  ]}
+  {...rest}
+>
   {label}
+
+  {
+    showIcon && (
+      <Icon
+        name="tabler:chevron-right"
+        class="size-5 transition-transform duration-400 group-hover:translate-x-2"
+      />
+    )
+  }
 </a>

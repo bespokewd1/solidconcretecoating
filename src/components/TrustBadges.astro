@@ -56,13 +56,13 @@ const { class: className, ...props } = Astro.props;
           >
             {badges.map((badge) => (
               <div class="flex shrink-0 items-center gap-2">
-                <div class="flex size-10 items-center justify-center rounded-full bg-amber-300/10 md:size-12">
+                <div class="flex size-10 items-center justify-center rounded-full bg-fore-light/10 md:size-12">
                   <Icon
                     name={badge.icon}
-                    class="size-5 text-amber-300 md:size-6"
+                    class="size-5 text-accent md:size-6"
                   />
                 </div>
-                <span class="font-mont text-sm font-medium whitespace-nowrap text-neutral-200 md:text-base">
+                <span class="font-mont text-sm font-medium whitespace-nowrap text-fore-light md:text-base">
                   {badge.label}
                 </span>
               </div>

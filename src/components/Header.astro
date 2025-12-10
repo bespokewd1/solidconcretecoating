@@ -1,18 +1,36 @@
 ---
 import navData from "@data/navData.json";
 import { Icon } from "astro-icon/components";
+import CTALink from "@components/CTALink.astro";
+
 import { Image } from "astro-lqip/components";
 import mainLogo from "@assets/images/main-logo.png";
 ---
 
 <!-- ============================================ --><!--                 Navigation                   --><!-- ============================================ -->
-<header id="cs-navigation" class="bg-neutral-950/40 backdrop-blur-md">
+<header
+  id="cs-navigation"
+  class="bg-transparent bg-linear-to-b from-fore-light from-45% via-fore-light/50 via-75% to-pink-500/0"
+>
+  <div
+    class="pointer-events-none absolute inset-0 -z-1 h-[200%] w-full backdrop-blur-sm"
+    style="mask:linear-gradient(to bottom, rgba(255, 255, 255) 0% 50%, transparent 50% 100%)"
+  >
+  </div>
+
+  <div
+    class="pointer-events-none absolute inset-0 -z-1 h-full translate-y-full bg-fore-light/10"
+    style="mask:linear-gradient(to bottom, black 0, black 6px, transparent 6px);backdrop-filter: blur(4px) brightness(120%);"
+  >
+  </div>
+
   <div class="cs-container lg:pr-10">
     <!--Nav Logo-->
     <a href="/" class="cs-logo" aria-label="back to home">
       <Image
         src={mainLogo}
         alt="Solid Concrete Coating"
+        class="drop-shadow-xs/50"
         aria-hidden="true"
         decoding="async"
         lqip="base64"
@@ -30,12 +48,9 @@ import mainLogo from "@assets/images/main-logo.png";
         aria-label="Toggle mobile menu."
       >
         <div class="cs-box" aria-hidden="true">
-          <span class="cs-line cs-line1 bg-neutral-100" aria-hidden="true"
-          ></span>
-          <span class="cs-line cs-line2 bg-neutral-100" aria-hidden="true"
-          ></span>
-          <span class="cs-line cs-line3 bg-neutral-100" aria-hidden="true"
-          ></span>
+          <span class="cs-line cs-line1 bg-fore-dark" aria-hidden="true"></span>
+          <span class="cs-line cs-line2 bg-fore-dark" aria-hidden="true"></span>
+          <span class="cs-line cs-line3 bg-fore-dark" aria-hidden="true"></span>
         </div>
       </button>
       <!-- If you want to use another navigation stitch and enjoy the benefits of dynamic routing, replace the .cs-ul-wrapper in the navigation stitch with this one below -->
@@ -45,7 +60,7 @@ import mainLogo from "@assets/images/main-logo.png";
             navData.map((entry) => (
               <li
                 class:list={[
-                  "cs-li group transition-colors duration-400 hover:bg-neutral-900",
+                  "cs-li group transition-colors duration-400 hover:bg-primary",
                   { "cs-dropdown": entry.children?.length > 0 },
                 ]}
               >
@@ -55,7 +70,7 @@ import mainLogo from "@assets/images/main-logo.png";
                     aria-expanded="false"
                     aria-controls={`submenu-${entry.key}`}
                     class:list={[
-                      "cs-li-link cs-dropdown-button font-bold transition-colors duration-400 group-hover:text-amber-300 before:hidden",
+                      "cs-li-link cs-dropdown-button font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:text-fore-light before:hidden",
                       { "cs-active": Astro.url.pathname.includes(entry.url) },
                     ]}
                   >
@@ -67,7 +82,7 @@ import mainLogo from "@assets/images/main-logo.png";
                   <a
                     href={entry.url}
                     class:list={[
-                      "cs-li-link font-bold transition-colors duration-400 group-hover:text-amber-300 before:hidden",
+                      "cs-li-link font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:text-fore-light before:hidden",
                       { "cs-active": Astro.url.pathname === entry.url },
                     ]}
                     aria-current={
@@ -82,13 +97,13 @@ import mainLogo from "@assets/images/main-logo.png";
                   // If entry has children in navData.json, create a drop down menu
                   <ul
                     id={`submenu-${entry.key}`}
-                    class="cs-drop-ul bg-neutral-950"
+                    class="cs-drop-ul bg-fore-light"
                   >
                     {entry.children.map((child) => (
                       <li class="cs-drop-li">
                         <a
                           href={child.url}
-                          class="cs-li-link cs-drop-link transition-colors duration-500 hover:bg-neutral-100 hover:text-neutral-950"
+                          class="cs-li-link cs-drop-link text-fore-dark transition-colors duration-500 hover:bg-primary hover:text-fore-light"
                           aria-current={
                             Astro.url.pathname === child.url
                               ? "page"
@@ -107,15 +122,16 @@ import mainLogo from "@assets/images/main-logo.png";
         </ul>
       </div>
     </nav>
-    <a
+    <CTALink label="Contact Us" variant="primary" class="uppercase" />
+    <!-- <a
       href="/contact"
       class:list={[
         "cs-button-solid cs-nav-button font-mont",
-        "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
-        "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
+        "bg-primary text-fore-light inset-shadow-border transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+        "hover:rounded-lg hover:bg-fore-light hover:text-fore-dark",
         "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
       ]}>Contact Us</a
-    >
+    > -->
     <!--Dark Mode toggle: remove component if you don't want to enable a dark mode toggle-->
     <!-- <DarkModeToggle /> -->
   </div>

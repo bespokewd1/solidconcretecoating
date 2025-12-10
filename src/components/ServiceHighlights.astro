@@ -53,12 +53,15 @@ const directions = ["top-left", "top-right", "bottom-left", "bottom-right"];
 const { class: className, ...props } = Astro.props;
 ---
 
-<section class:list={["px-4 py-section-padding", className]} {...props}>
+<section
+  class:list={["bg-fore-light px-4 py-section-padding", className]}
+  {...props}
+>
   <div class="mx-auto max-w-7xl">
     <!-- Header -->
     <div class="mb-12 text-center">
       <span
-        class="mb-2 block font-mont text-sm font-bold tracking-widest text-amber-500 uppercase"
+        class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
         data-stagger-b
         data-distance-y="30"
         data-delay-s="0.1"
@@ -67,7 +70,7 @@ const { class: className, ...props } = Astro.props;
         Our Services
       </span>
       <h2
-        class="font-mont text-h2 font-bold text-neutral-950"
+        class="font-mont text-h2 font-bold text-fore-dark"
         data-stagger-b
         data-distance-y="30"
         data-delay-s="0.15"
@@ -94,17 +97,17 @@ const { class: className, ...props } = Astro.props;
               data-direction={direction}
               data-once="true"
               href={service.href}
-              class="group relative grid items-end overflow-hidden rounded-sm bg-neutral-50 p-0 shadow-md"
+              class="group relative grid items-end overflow-hidden rounded-sm bg-fore-light p-0 shadow-md"
             >
               <div class="-z-1 size-full [grid-area:1/1]">
                 <Image
                   src={service.img}
                   alt={service.title}
-                  class="size-full object-cover text-amber-600 transition-transform duration-300 group-hover:scale-105"
+                  class="size-full object-cover transition-transform duration-300 group-hover:scale-105"
                 />
               </div>
               <div class="flex flex-col gap-1 bg-linear-180 from-transparent to-black mask-[linear-gradient(360deg,#000_80%,transparent)] p-6 pt-10 backdrop-blur-[5px] [grid-area:1/1]">
-                <h3 class="font-mont text-lg font-bold text-neutral-50 transition-colors duration-300 group-hover:text-amber-600">
+                <h3 class="font-mont text-lg font-bold text-fore-light transition-colors duration-300">
                   {service.title}
                 </h3>
                 <p class="mb-4 font-mont text-sm leading-relaxed text-neutral-100">
@@ -114,8 +117,8 @@ const { class: className, ...props } = Astro.props;
                 <div
                   class:list={[
                     "group flex w-fit items-center justify-center gap-3 p-2 px-4 font-bold",
-                    "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
-                    "group-hover:rounded-lg group-hover:bg-neutral-900 group-hover:text-neutral-50",
+                    "border-2 border-primary bg-primary text-fore-light transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+                    "group-hover:rounded-lg group-hover:bg-fore-light group-hover:text-fore-dark",
                     "corner-squircle supports-[corner-shape:squircle]:group-hover:rounded-[50px]",
                   ]}
                 >

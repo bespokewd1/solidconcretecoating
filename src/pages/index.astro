@@ -79,7 +79,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
         lqip="base64"
         lqipSize={10}
       />
-      <div class="absolute inset-0 bg-black/20"></div>
+      <div class="absolute inset-0 z-1 bg-fore-dark/20"></div>
     </div>
 
     <!-- CONTENT CONTAINER  -->
@@ -93,11 +93,11 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
       <!-- THE WHITE CARD  -->
       <div
         id="hero-content-box"
-        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm p-8 shadow-[inset_2px_0_0_0_var(--color-amber-500)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:bg-white/95 sm:shadow-2xl md:p-12"
+        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm p-8 shadow-[inset_2px_0_0_0_var(--color-accent)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:bg-white/95 sm:shadow-2xl md:p-12"
       >
         <!--  topper Small Header -->
         <span
-          class="mb-2 block text-lg font-bold tracking-wider text-neutral-950 uppercase text-shadow-lg/20 sm:text-neutral-800 sm:text-shadow-none"
+          class="mb-2 block text-lg font-bold tracking-wider text-fore-light uppercase text-shadow-lg/20 sm:text-fore-dark sm:text-shadow-none"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.6"
@@ -108,7 +108,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
         <!-- Main Headline -->
         <h1
-          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-amber-500 drop-shadow-sm text-shadow-lg/20 sm:text-5xl sm:text-shadow-none"
+          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-accent drop-shadow-sm text-shadow-lg/20 sm:text-5xl sm:text-shadow-none"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.55"
@@ -119,7 +119,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
         <!-- Paragraph -->
         <p
-          class="mb-8 font-mont text-base leading-relaxed text-balance text-neutral-950 text-shadow-md sm:text-lg sm:text-neutral-600 sm:text-shadow-none"
+          class="mb-8 font-mont text-base leading-relaxed text-balance text-fore-light text-shadow-md sm:text-lg sm:text-fore-dark sm:text-shadow-none"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.5"
@@ -140,30 +140,32 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           data-once="true"
         >
           <span
-            class="text-sm font-bold tracking-widest text-neutral-800 uppercase text-shadow-lg/20 sm:text-shadow-none"
+            class="text-sm font-bold tracking-widest text-fore-light/80 uppercase text-shadow-lg/20 sm:text-fore-dark/80 sm:text-shadow-none"
           >
             Call Now to Get a Free Quote
           </span>
           <a
             href={`tel:${clientData.phoneForTel}`}
-            class="text-4xl font-black text-neutral-900 transition-colors duration-300 text-shadow-lg/20 hover:text-amber-500 sm:text-shadow-none"
+            class="text-4xl font-black text-fore-light transition-colors duration-300 text-shadow-lg/20 hover:text-primary sm:text-fore-dark sm:text-shadow-none"
           >
             {clientData.phoneFormatted}
           </a>
         </div>
 
         <!-- Button -->
+
+        <!-- class:list={[
+          "inline-block px-8 py-4 font-mont font-bold",
+          "bg-primary text-fore-light inset-shadow-border transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+          "hover:rounded-lg hover:bg-fore-light hover:text-fore-dark",
+          "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+        ]} -->
         <CTALink
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.4"
           data-once="true"
-          class:list={[
-            "inline-block px-8 py-4 font-bold",
-            "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
-            "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
-            "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
-          ]}
+          variant="primary"
         />
       </div>
     </div>

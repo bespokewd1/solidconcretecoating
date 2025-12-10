@@ -2,6 +2,7 @@
 // src/components/WhyChooseUs.astro
 import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
+import CTALink from "@components/CTALink.astro";
 
 type Props = HTMLAttributes<"section">;
 
@@ -46,7 +47,7 @@ const { class: className, ...props } = Astro.props;
       <!-- Left: Content -->
       <div>
         <span
-          class="mb-2 block font-mont text-sm font-bold tracking-widest text-amber-300 uppercase"
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
           data-reveal
           data-direction="left"
           data-distance-x="30"
@@ -55,7 +56,7 @@ const { class: className, ...props } = Astro.props;
           Why Choose Us
         </span>
         <h2
-          class="mb-6 font-mont text-h2 font-bold text-neutral-50"
+          class="mb-6 font-mont text-h2 font-bold text-fore-light"
           data-reveal
           data-direction="left"
           data-distance-x="30"
@@ -65,7 +66,7 @@ const { class: className, ...props } = Astro.props;
           Experience You Can Trust
         </h2>
         <p
-          class="mb-8 font-mont text-lg leading-relaxed text-neutral-300"
+          class="mb-8 font-mont text-lg leading-relaxed text-fore-light/80"
           data-reveal
           data-direction="left"
           data-distance-x="30"
@@ -85,18 +86,19 @@ const { class: className, ...props } = Astro.props;
           data-delay-s="0.2"
           data-once="true"
         >
-          <a
+            <CTALink label="Get Your Free Quote" showIcon={true} variant="primary"/>
+          <!-- <a
             href="/contact"
             class:list={[
-              "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
+              "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold group",
               "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-all duration-400",
               "hover:rounded-lg hover:bg-transparent hover:text-amber-300",
               "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
             ]}
           >
             Get Your Free Quote
-            <Icon name="tabler:chevron-right" class="size-5" />
-          </a>
+            <Icon name="tabler:chevron-right" class="size-5 transition-transform duration-400 group-hover:translate-x-2" />
+          </a> -->
         </div>
       </div>
 
