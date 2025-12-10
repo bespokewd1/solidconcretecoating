@@ -4,10 +4,10 @@
   "phoneForTel": "780-708-5345",
   "phoneFormatted": "(780) 708-5345",
   "address": {
-    "lineOne": "First Address Line",
-    "lineTwo": "Second Address Line",
-    "city": "Denver",
-    "state": "CO",
+    "lineOne": "Edmonton, Alberta, Canada",
+    "lineTwo": "",
+    "city": "",
+    "state": "",
     "zip": "80206",
     "mapLink": "https://goo.gl/maps/UAQn4vuGDiwv7DV39"
   },
