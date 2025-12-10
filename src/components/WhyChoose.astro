@@ -112,12 +112,12 @@ const { class: className, ...props } = Astro.props;
       >
         {
           highlights.map((highlight) => (
-            <div class="group rounded-sm border border-neutral-700 bg-neutral-800/50 p-6 transition-all duration-300 hover:border-amber-300/50 hover:bg-neutral-800">
+            <div class="group rounded-sm inset-shadow-border/30 bg-fore-dark/30 p-6 transition-[background,box-shadow,background-color] duration-400 ease-in hover:inset-shadow-border hover:bg-fore-dark">
               <!-- Icon container -->
-              <div class="mb-4 flex size-12 items-center justify-center rounded-full bg-amber-300/10 transition-colors duration-300 group-hover:bg-amber-300/20">
+              <div class="mb-4 flex size-12 items-center justify-center rounded-full bg-fore-light/10 transition-colors duration-300 group-hover:bg-fore-light/20">
                 <Icon
                   name={highlight.icon}
-                  class="size-6 text-amber-300"
+                  class="size-6 text-accent/80 group-hover:text-accent transition-colors duration-400 ease-in"
                 />
 
               </div>

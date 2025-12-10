@@ -1,8 +1,9 @@
 ---
 import type { HTMLAttributes } from "astro/types";
 import { Icon } from "astro-icon/components";
+import cn from "@utils/cn";
 
-type Props = Omit<HTMLAttributes<"a">, "href"> & {
+type Props = HTMLAttributes<"a"> & {
   label?: string;
   variant?: "primary" | "default";
   showIcon?: boolean;
@@ -11,6 +12,7 @@ type Props = Omit<HTMLAttributes<"a">, "href"> & {
 const {
   label = "Get A Free Quote",
   variant = "default",
+  href: link = "/contact",
   showIcon = false,
   class: className = "",
   ...rest
@@ -18,8 +20,8 @@ const {
 ---
 
 <a
-  href="/contact"
-  class:list={[
+  href={link}
+  class:list={cn(
     variant === "primary"
       ? [
           "group inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
@@ -29,7 +31,7 @@ const {
           className,
         ]
       : [className],
-  ]}
+  )}
   {...rest}
 >
   {label}

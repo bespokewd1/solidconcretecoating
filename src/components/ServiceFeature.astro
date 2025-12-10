@@ -2,6 +2,7 @@
 import poly from "@assets/images/coatings/poly.png";
 import epoxy from "@assets/images/coatings/epoxy.png";
 import sealed from "@assets/images/coatings/sealed.png";
+import CTALink from "@components/CTALink.astro";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
@@ -25,7 +26,7 @@ const services: ServiceInfo[] = [
     making them ideal for Edmonton’s changing temperatures.
     These fast‑curing coatings won’t chip, peel, or scratch and stand up to hot‑tire pickup, chemicals, and heavy use.
     Choose from popular decorative flakes or let us customize a color and flake blend that perfectly matches your garage, shop, or outdoor space.`,
-    href: "/",
+    href: "/services",
     linkLabel: "Polyaspartic Coatings",
   },
   {
@@ -35,7 +36,7 @@ const services: ServiceInfo[] = [
     high‑gloss surface that bonds tightly to concrete. Engineered for long‑lasting performance,
     it resists stains, impacts, and moisture—perfect for garages, basements, warehouses, and commercial spaces.
     With a wide range of colors and flake options, we tailor each floor to suit your style and traffic demands.`,
-    href: "/",
+    href: "/services",
     linkLabel: "Epoxy Coatings",
   },
   {
@@ -44,7 +45,7 @@ const services: ServiceInfo[] = [
     description: `Protect and refresh your driveway with our professional concrete sealing services in Edmonton.
     We use high‑quality sealers that guard against moisture, salt, oil, and freeze‑thaw damage while enhancing color and curb appeal.
     A sealed driveway is easier to clean, lasts longer, and keeps your property looking sharp season after season.`,
-    href: "/",
+    href: "/services",
     linkLabel: "Driveway Sealing",
   },
 ];
@@ -81,15 +82,15 @@ const { class: className, ...props } = Astro.props;
             />
 
             <div class="flex flex-1 h-full flex-col gap-5 p-4 lg:px-8 lg:pb-8">
-              <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase">
+              <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase text-fore-dark">
                 {service.title}
               </h2>
 
-              <p class="flex-1 font-mont leading-[1.8rem] tracking-normal">
+              <p class="flex-1 font-mont leading-[1.8rem] tracking-normal text-fore-dark/90">
                 {service.description}
               </p>
 
-              <a
+              <!-- <a
                 href={service.href}
                 class:list={[
                   "p-4 items-center gap-3 font-bold group flex justify-center",
@@ -105,7 +106,8 @@ const { class: className, ...props } = Astro.props;
                       "size-5 transition-transform duration-400 group-hover:translate-x-2"
                     }
                   />
-              </a>
+              </a> -->
+              <CTALink href={service.href} variant="primary" label={service.linkLabel} class="justify-center" showIcon={true}/>
 
 
               <!-- <a
