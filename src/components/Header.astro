@@ -119,10 +119,17 @@ import mainLogo from "@assets/images/main-logo.png";
               </li>
             ))
           }
+          <li class="lg:hidden">
+            <CTALink label="Contact Us" variant="primary" class="uppercase" />
+          </li>
         </ul>
       </div>
     </nav>
-    <CTALink label="Contact Us" variant="primary" class="uppercase" />
+    <CTALink
+      label="Contact Us"
+      variant="primary"
+      class="hidden uppercase lg:hidden"
+    />
     <!-- <a
       href="/contact"
       class:list={[
