@@ -119,16 +119,27 @@ import { Icon } from "astro-icon/components";
 
   <div data-netlify-recaptcha="true" class="mt-1"></div>
 
+  <!-- class="cs-button-solid group mx-auto w-full max-w-75 gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden" -->
   <button
     type="submit"
-    class="cs-button-solid group mx-auto w-full max-w-75 gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+    class:list={[
+      "group mx-auto inline-flex w-full max-w-75 items-center justify-center gap-2 px-8 py-4 font-mont font-bold",
+      "border-2 border-primary bg-primary text-fore-dark inset-shadow-border transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
+      "hover:rounded-lg hover:bg-fore-dark hover:text-fore-light",
+      "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+    ]}
   >
-    <span
+    Send
+    <Icon
+      name={"tabler:send-2"}
+      class={"size-5 transition-transform duration-400 group-hover:translate-x-2"}
+    />
+    <!-- <span
       class="inline-flex w-full -translate-x-px -translate-y-0.5 items-center justify-center gap-3 bg-amber-300 px-7.5 text-center duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
     >
       Send
       <Icon name={"tabler:send-2"} class={"size-5"} />
-    </span>
+    </span> -->
   </button>
   <!-- <button
           class="rounded-none bg-amber-300 px-5 py-3 font-bold tracking-wide text-neutral-50 transition-colors duration-200 focus:ring-2 focus:ring-amber-300 focus:outline-none md:px-6 md:py-3.5"

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
+import CTALink from "@components/CTALink.astro";
 import Landing from "@components/Landing.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
@@ -212,7 +213,8 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
         </div>
       </div>
-      <a href="/contact" class="cs-button-solid">Get Free Quote</a>
+      <!-- <a href="/contact" class="cs-button-solid">Get Free Quote</a> -->
+      <CTALink variant="primary">Get Free Quote</CTALink>
     </div>
   </section>
   <CTA />

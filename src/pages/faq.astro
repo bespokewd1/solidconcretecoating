@@ -10,6 +10,7 @@ type Props = HTMLAttributes<"section">;
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
 import { getImage } from "astro:assets";
+import Topper from "@components/Topper.astro";
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
 // Pre-render Markdown to HTML at build/SSR time
@@ -20,7 +21,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
 ---
 
 <BaseLayout>
-  <section id="faq-1741" class="bg-neutral-50">
+  <section id="faq-1741" class="bg-white">
     <div class="cs-container flex-col">
       <div
         class="cs-content w-full pt-8"
@@ -28,15 +29,17 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
         data-reveal
         data-direction="top"
       >
-        <span
-          class="w-full text-center text-sm font-medium tracking-wide text-amber-500 uppercase italic"
-        >
+        <Topper class="self-center" iconName="tabler:help-circle">
           Frequently Asked Questions
-        </span>
+        </Topper>
+        <!-- <span
+          class="w-full text-center text-sm font-medium tracking-wide text-accent uppercase italic"
+        >
+        </span> -->
         <!-- mb-4 text-heading font-extrabold tracking-wide uppercase -->
 
         <h1
-          class="w-full py-0 text-center text-2xl text-h2 font-bold text-neutral-950"
+          class="w-full py-0 text-center text-2xl text-h2 font-bold text-fore-dark"
         >
           Answers to Common Questions
         </h1>
@@ -44,14 +47,14 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
           <a
             href="#poly-faq"
             aria-label="read more reviews"
-            class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+            class="cs-button-solid group w-fit gap-2 bg-accent px-0 font-mont text-[0.9375rem] font-bold text-fore-dark transition-colors duration-300 before:hidden"
             data-reveal
             data-direction="left"
             data-once="true"
             data-distance-x="500"
           >
             <span
-              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-primary px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
             >
               Polyaspartic FAQ
             </span>
@@ -60,14 +63,14 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
           <a
             href="#epoxy-faq"
             aria-label="read more reviews"
-            class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
+            class="cs-button-solid group w-fit gap-2 bg-accent px-0 font-mont text-[0.9375rem] font-bold text-fore-dark transition-colors duration-300 before:hidden"
             data-reveal
             data-direction="right"
             data-once="true"
             data-distance-x="500"
           >
             <span
-              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
+              class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-primary px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
             >
               Epoxy FAQ
             </span>
@@ -81,7 +84,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
 
       <div id="poly-faq" class="cs-flex-group mx-auto max-w-200">
         <h2
-          class="mb-4 max-w-full font-mont text-heading font-bold tracking-wide text-amber-500 uppercase"
+          class="mb-4 max-w-full font-mont text-heading font-bold tracking-wide text-accent uppercase"
         >
           Polyaspartic FAQ
         </h2>
@@ -89,7 +92,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
           {
             renderedFaqs.map((faq, idx) => (
               <li
-                class="cs-faq-item relative overflow-visible bg-neutral-50 font-mont"
+                class="cs-faq-item relative overflow-visible bg-fore-light font-mont"
                 data-reveal
                 data-direction={idx % 2 === 0 ? "left" : "right"}
                 data-delay-s={idx * 0.2}
@@ -111,7 +114,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
                 <div
                   id={`faq-panel-${idx}`}
                   class:list={`[&_li+li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5`}
-                  class="cs-item-text bg-neutral-50"
+                  class="cs-item-text bg-fore-light"
                   role="region"
                   aria-labelledby={`faq-button-${idx}`}
                   set:html={faq.html}
@@ -124,7 +127,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
 
       <div id="epoxy-faq" class="cs-flex-group mx-auto max-w-200">
         <h2
-          class="mb-4 max-w-full font-mont text-heading font-bold tracking-wide text-amber-500 uppercase"
+          class="mb-4 max-w-full font-mont text-heading font-bold tracking-wide text-accent uppercase"
         >
           Epoxy FAQ
         </h2>
@@ -132,7 +135,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
           {
             renderedFaqs.map((faq, idx) => (
               <li
-                class="cs-faq-item relative overflow-visible bg-neutral-50 font-mont"
+                class="cs-faq-item relative overflow-visible bg-fore-light font-mont"
                 data-reveal
                 data-direction={idx % 2 === 0 ? "left" : "right"}
                 data-delay-s={idx * 0.2}
@@ -154,7 +157,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
                 <div
                   id={`faq-panel-${idx}`}
                   class:list={`[&_li+li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-5 [&_ul]:list-disc [&_ul]:pl-5`}
-                  class="cs-item-text bg-neutral-50"
+                  class="cs-item-text bg-fore-light"
                   role="region"
                   aria-labelledby={`faq-button-${idx}`}
                   set:html={faq.html}
@@ -246,16 +249,16 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
 
           &.active {
             .cs-button {
-              background-color: var(--color-amber-300);
-              color: var(--color-neutral-950);
+              background-color: var(--color-primary);
+              color: var(--color-fore-dark);
 
               &:before {
-                background-color: var(--color-neutral-950);
+                background-color: var(--color-fore-dark);
                 transform: rotate(315deg);
               }
 
               &:after {
-                background-color: var(--color-neutral-950);
+                background-color: var(--color-fore-dark);
                 transform: rotate(-315deg);
               }
             }
@@ -328,7 +331,7 @@ const renderedFaqs: RenderedFaq[] = faqs.map((f) => ({
           height: 0;
           margin: 0;
           overflow: hidden;
-          color: var(--color-neutral-950);
+          color: var(--color-fore-dark);
           opacity: 0;
           transition:
             opacity 0.3s,

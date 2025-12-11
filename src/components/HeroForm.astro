@@ -6,6 +6,7 @@ import clientData from "@data/client.json";
 import { Image } from "astro:assets";
 import type { HTMLAttributes } from "astro/types";
 import ContactForm from "./ContactForm.astro";
+import CTALink from "./CTALink.astro";
 
 type Props = HTMLAttributes<"section"> & {
   img: ImageMetadata;
@@ -46,9 +47,16 @@ const { title, subtitle, img, class: className, ...props } = Astro.props;
         {subtitle}
       </p>
       <div class="flex flex-wrap items-center gap-5">
-        <ContactCta label="Request a Qoute" />
+        <!-- <ContactCta label="Request a Qoute" /> -->
 
-        <a
+        <CTALink label={"Request a Qoute"} variant="primary" />
+
+        <CTALink href={`tel:${clientData.phoneForTel}`} variant="primary">
+          <Icon name={"tabler:phone-filled"} class={"size-5"} />
+          {clientData.phoneFormatted}
+        </CTALink>
+
+        <!-- <a
           href={`tel:${clientData.phoneForTel}`}
           class="cs-button-solid group w-fit gap-2 bg-neutral-800 px-0 font-mont text-[0.9375rem] font-bold text-neutral-100 transition-colors duration-300 before:hidden"
         >
@@ -58,7 +66,7 @@ const { title, subtitle, img, class: className, ...props } = Astro.props;
             <Icon name={"tabler:phone-filled"} class={"size-5"} />
             {clientData.phoneFormatted}
           </span>
-        </a>
+        </a> -->
       </div>
     </div>
 

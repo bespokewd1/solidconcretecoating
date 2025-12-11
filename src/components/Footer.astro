@@ -9,7 +9,7 @@ const currentYear = getCurrentYear();
 ---
 
 <!-- ============================================ --><!--                   Footer                     --><!-- ============================================ -->
-<footer id="footer">
+<footer id="footer" class="bg-neutral-50">
   <div class="container">
     <div class="left-section">
       <a class="logo" href="/"
@@ -22,40 +22,42 @@ const currentYear = getCurrentYear();
           lqipSize={10}
         /></a
       >
-      <p>
+      <!-- <p>
         Extra content if you need it, if not you can delete this whole p tag. I
         usually do.
-      </p>
+      </p> -->
     </div>
     <div class="right-section">
       <div class="lists">
         <ul>
           <li>
-            <h2>Information</h2>
+            <h2 class="text-fore-dark">Information</h2>
           </li>
           {
             navData.map((entry) => (
               <li class="cs-li">
-                <a href={entry.url}>{entry.key}</a>
+                <a class="text-fore-dark" href={entry.url}>
+                  {entry.key}
+                </a>
               </li>
             ))
           }
         </ul>
         <ul>
           <li>
-            <h2>Services</h2>
+            <h2 class="text-fore-dark">Services</h2>
           </li>
-          <li>Epoxy Residential Floors</li>
-          <li>Epoxy Garage Floors</li>
-          <li>Commercial Epoxy Floors</li>
-          <li>Industrial Epoxy Floors</li>
+          <li class="text-fore-dark">Residential Coatings</li>
+          <li class="text-fore-dark">Commercial & Industrial Flooring</li>
+          <li class="text-fore-dark">Concrete Sealing & Repair</li>
+          <li class="text-fore-dark">Flake Colors / Customization</li>
         </ul>
         <ul>
           <li>
-            <h2>Contact</h2>
+            <h2 class="text-fore-dark">Contact</h2>
           </li>
           <li>
-            <a href="/contact">
+            <a class="text-fore-dark" href="/contact">
               {client.address.lineOne}<br />
               {client.address.lineTwo}<br />
               {client.address.city}
@@ -64,13 +66,15 @@ const currentYear = getCurrentYear();
             </a>
           </li>
           <li>
-            <a href={`tel:${client.phoneForTel}`}>
+            <a class="text-fore-dark" href={`tel:${client.phoneForTel}`}>
               T:
               {client.phoneFormatted}
             </a>
           </li>
           <li>
-            <a href={`mailto:${client.email}`}>Click to Email</a>
+            <a class="text-fore-dark" href={`mailto:${client.email}`}
+              >Click to Email</a
+            >
           </li>
         </ul>
       </div>
@@ -78,11 +82,13 @@ const currentYear = getCurrentYear();
   </div>
 
   <div class="credit">
-    <span>Digital Marketing by</span>
+    <span class="text-fore-dark">Digital Marketing by</span>
     <a href="https://bespokewebdesign.ca/" target="_blank" rel="noopener"
       >Bespoke Web Design Edmonton</a
     >
-    <span class="copyright"> Copyright {currentYear} - Present</span>
+    <span class="copyright text-fore-dark">
+      Copyright {currentYear} - Present</span
+    >
   </div>
 </footer>
 

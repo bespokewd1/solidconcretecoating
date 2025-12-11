@@ -2,6 +2,9 @@
 import service1 from "@assets/images/services/service-1.png";
 import service2 from "@assets/images/services/service-2.png";
 import service3 from "@assets/images/services/service-3.png";
+
+import CTALink from "./CTALink.astro";
+
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import type { HTMLAttributes } from "astro/types";
@@ -77,8 +80,15 @@ const { class: className, ...props } = Astro.props;
               <p class="flex-1 font-mont leading-[1.8rem] tracking-normal">
                 {service.description}
               </p>
+              <CTALink
+                href={service.href}
+                label={service.linkLabel}
+                variant="primary"
+                showIcon={true}
+              >
+              </CTALink>
 
-              <a
+              <!-- <a
                 href={service.href}
                 class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
               >
@@ -86,7 +96,7 @@ const { class: className, ...props } = Astro.props;
                   {service.linkLabel}
                   <Icon name={"tabler:chevron-right"} class={"size-5"} />
                 </span>
-              </a>
+              </a> -->
             </div>
           </div>
         </article>
