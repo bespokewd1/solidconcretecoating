@@ -60,7 +60,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
             navData.map((entry) => (
               <li
                 class:list={[
-                  "cs-li group p-0 transition-colors duration-400",
+                  "cs-li group transition-colors duration-400 lg:p-0",
                   { "cs-dropdown": entry.children?.length > 0 },
                 ]}
               >
@@ -70,7 +70,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
                     aria-expanded="false"
                     aria-controls={`submenu-${entry.key}`}
                     class:list={[
-                      "cs-li-link cs-dropdown-button hidden px-5 py-4 font-bold text-fore-dark transition-colors duration-400 group-hover:bg-primary group-hover:text-fore-light before:hidden lg:block",
+                      "cs-li-link cs-dropdown-button hidden font-bold text-fore-dark transition-colors duration-400 group-hover:bg-primary group-hover:text-fore-light before:hidden lg:block lg:px-5 lg:py-4",
                       {
                         "bg-primary text-fore-dark":
                           Astro.url.pathname.includes(entry.url),
@@ -85,7 +85,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
                   <a
                     href={entry.url}
                     class:list={[
-                      "cs-li-link px-5 py-4 font-bold text-fore-dark transition-colors duration-400 group-hover:bg-primary group-hover:text-fore-light before:hidden",
+                      "cs-li-link font-bold text-fore-dark transition-colors duration-400 group-hover:bg-primary group-hover:text-fore-light before:hidden lg:px-5 lg:py-4",
                       {
                         "bg-primary text-fore-dark":
                           Astro.url.pathname === entry.url,
@@ -131,7 +131,8 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
                           <a
                             href={child.url}
                             class:list={[
-                              "cs-li-link px-4 py-5 font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:bg-primary group-hover:text-fore-light before:hidden",
+                              "cs-li-link font-bold text-fore-dark transition-colors duration-400 text-shadow-xs/50 group-hover:bg-primary group-hover:text-fore-light before:hidden lg:px-4 lg:py-5",
+                              'aria-[current="page"]:bg-primary aria-[current="page"]:text-fore-dark',
                             ]}
                             data-url={child.url}
                           >
@@ -179,10 +180,6 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
   //   "a[data-url]",
   // ) as NodeListOf<HTMLAnchorElement>;
 
-  import type { ACTION_ERROR_CODES, ACTION_QUERY_PARAMS } from "astro:actions";
-  import { BRAND } from "astro:schema";
-  import type { ClientRouter } from "astro:transitions";
-
   // const hashedPath = window.location.pathname + window.location.hash;
   // let currentLink: string | null = null;
 
@@ -196,29 +193,26 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
   //     link.setAttribute("aria-current", "page");
   //   }
   // });
-  document.addEventListener("astro:page-load", () => {
-    let activeElement: HTMLAnchorElement | null = null;
+  let activeElement: HTMLAnchorElement | null = null;
 
-    document.addEventListener("click", (event) => {
-      const hashedPath = window.location.pathname + window.location.hash;
+  document.addEventListener("click", (event) => {
+    const hashedPath = window.location.pathname + window.location.hash;
 
-      const target = event.target as HTMLElement | null;
-      const link = target?.closest<HTMLAnchorElement>("a[data-url]");
-      if (!link) return;
+    const target = event.target as HTMLElement | null;
+    const link = target?.closest<HTMLAnchorElement>("a[data-url]");
+    if (!link) return;
 
-      const url = link.dataset.url;
-      if (url !== hashedPath) return;
+    const url = link.dataset.url;
+    if (url !== hashedPath) return;
 
-      // Remove aria-current from previously active link
-      if (activeElement && activeElement !== link) {
-        console.log("Removing aria-current from", activeElement);
-        activeElement.removeAttribute("aria-current");
-      }
+    // Remove aria-current from previously active link
+    if (activeElement && activeElement !== link) {
+      activeElement.removeAttribute("aria-current");
+    }
 
-      // Set aria-current on the new active link
-      link.setAttribute("aria-current", "page");
-      activeElement = link;
-    });
+    // Set aria-current on the new active link
+    link.setAttribute("aria-current", "page");
+    activeElement = link;
   });
 </script>
 
