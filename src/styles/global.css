@@ -70,10 +70,14 @@
   --animate-move-to-right: move-to-right 30s infinite linear;
   --animate-move-to-top: move-to-top 30s infinite linear;
 
-  --color-fore-light: var(--color-indigo-50);
-  --color-fore-dark: var(--color-indigo-950);
-  --color-primary: var(--color-indigo-700);
-  --color-accent: var(--color-indigo-500);
+  /*--color-fore-light: var(--color-indigo-50);*/
+  --color-fore-light: white;
+  /*--color-fore-dark: var(--color-indigo-950);*/
+  --color-fore-dark: #1b264f;
+  /*--color-primary: var(--color-indigo-700);*/
+  --color-primary: hsl(44 61% 63% / 1);
+  /*--color-accent: var(--color-indigo-500);*/
+  --color-accent: hsl(44 71% 63% / 1);
 
   --inset-shadow-border: inset 0 0 3px 2px var(--color-primary);
 }
