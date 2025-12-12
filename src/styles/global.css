@@ -133,3 +133,38 @@ html::selection {
   /* mask-image: linear-gradient(to bottom,transparent, #000 3% 97%, transparent); */
   mask-image: linear-gradient(to bottom, transparent, #000 3% 97%, transparent);
 }
+
+/* Gleam / shine sweep */
+.btn-gleam::before {
+  content: "";
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  transform: rotate(20deg);
+  pointer-events: none;
+
+  /* the “gleam” */
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 100%
+  );
+
+  opacity: 0;
+  transition: left 600ms ease, opacity 200ms ease;
+}
+
+.btn-gleam:hover::before {
+  left: 140%;
+  opacity: 1;
+}
+
+/* Optional: better accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .btn-gleam::before {
+    transition: none;
+  }
+}

@@ -1,5 +1,11 @@
 ---
 import { Icon } from "astro-icon/components";
+
+type Props = {
+  variant?: "default" | "compact";
+};
+
+const { variant = "default" } = Astro.props;
 ---
 
 <form
@@ -7,7 +13,7 @@ import { Icon } from "astro-icon/components";
   method="POST"
   data-netlify="true"
   action="/"
-  class="flex flex-col gap-5 font-mont sm:gap-6"
+  class="flex flex-col gap-4 font-mont sm:gap-5"
 >
   <input type="hidden" name="form-name" value="contact" />
 
@@ -19,20 +25,20 @@ import { Icon } from "astro-icon/components";
       required
       placeholder="Name"
       class:list={[
-        "peer z-10 w-full rounded-none bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "peer z-10 w-full rounded-sm bg-neutral-50 px-4 py-3.5 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
         "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
-        "focus:translate-y-px focus:ring-2 focus:ring-amber-300 sm:py-4.5 md:py-4 md:pb-2",
+        "focus:translate-y-0.5 focus:ring-2 focus:ring-primary sm:py-4",
       ]}
       autocomplete="name"
     />
     <label
       for="name"
-      class="pointer-events-none absolute top-1/2 left-4 z-10 -translate-y-1/2 bg-transparent text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+      class="pointer-events-none absolute top-1/2 left-4 z-10 -translate-y-1/2 bg-transparent text-sm text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
     >
       Name
     </label>
     <div
-      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+      class="absolute inset-0 z-[-1] size-full translate-1 rounded-sm bg-neutral-300 transition-colors peer-focus:bg-primary"
     >
     </div>
   </div>
@@ -46,25 +52,25 @@ import { Icon } from "astro-icon/components";
       required
       placeholder="Email"
       class:list={[
-        "peer z-10 w-full rounded-none bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "peer z-10 w-full rounded-sm bg-neutral-50 px-4 py-3.5 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
         "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
-        "focus:translate-y-px focus:ring-2 focus:ring-amber-300 sm:py-4.5 md:py-4 md:pb-2",
+        "focus:translate-y-0.5 focus:ring-2 focus:ring-primary sm:py-4",
       ]}
       autocomplete="email"
     />
     <label
       for="email"
-      class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+      class="pointer-events-none absolute top-1/2 left-4 z-10 -translate-y-1/2 text-sm text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
     >
       Email
     </label>
-
     <div
-      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+      class="absolute inset-0 z-[-1] size-full translate-1 rounded-sm bg-neutral-300 transition-colors peer-focus:bg-primary"
     >
     </div>
   </div>
 
+  <!-- Phone -->
   <div class="relative z-1">
     <input
       id="phone"
@@ -74,20 +80,48 @@ import { Icon } from "astro-icon/components";
       inputmode="tel"
       autocomplete="tel"
       class:list={[
-        "peer z-10 w-full rounded-none bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "peer z-10 w-full rounded-sm bg-neutral-50 px-4 py-3.5 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
         "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
-        "focus:translate-y-px focus:ring-2 focus:ring-amber-300 sm:py-4.5 md:py-4 md:pb-2",
+        "focus:translate-y-0.5 focus:ring-2 focus:ring-primary sm:py-4",
       ]}
     />
     <label
       for="phone"
-      class="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+      class="pointer-events-none absolute top-1/2 left-4 z-10 -translate-y-1/2 text-sm text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
     >
       Phone
     </label>
-
     <div
-      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+      class="absolute inset-0 z-[-1] size-full translate-1 rounded-sm bg-neutral-300 transition-colors peer-focus:bg-primary"
+    >
+    </div>
+  </div>
+
+  <!-- Service Type (New field) -->
+  <div class="relative z-1">
+    <select
+      id="service"
+      name="service"
+      class:list={[
+        "peer z-10 w-full appearance-none rounded-sm bg-neutral-50 px-4 py-3.5 text-neutral-900 ring-1 ring-transparent",
+        "transition-[box-shadow,transform] duration-200 ease-out outline-none",
+        "focus:translate-y-0.5 focus:ring-2 focus:ring-primary sm:py-4",
+      ]}
+    >
+      <option value="" disabled selected>Select a Service</option>
+      <option value="residential">Residential Flooring</option>
+      <option value="commercial">Commercial Flooring</option>
+      <option value="industrial">Industrial Flooring</option>
+      <option value="sealing">Concrete Sealing</option>
+      <option value="repair">Concrete Repair</option>
+      <option value="other">Other</option>
+    </select>
+    <Icon
+      name="tabler:chevron-down"
+      class="pointer-events-none absolute top-1/2 right-4 size-5 -translate-y-1/2 text-neutral-500"
+    />
+    <div
+      class="absolute inset-0 z-[-1] size-full translate-1 rounded-sm bg-neutral-300 transition-colors peer-focus:bg-primary"
     >
     </div>
   </div>
@@ -99,51 +133,56 @@ import { Icon } from "astro-icon/components";
       name="message"
       required
       placeholder="Message"
-      rows="5"
+      rows="4"
       class:list={[
-        "peer z-10 w-full resize-y rounded-none bg-neutral-50 px-4 py-5 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
-        "transition-[padding,box-shadow] duration-200 ease-out outline-none focus:translate-y-0.5 focus:ring-2 focus:ring-amber-300 sm:py-6",
+        "peer z-10 w-full resize-y rounded-sm bg-neutral-50 px-4 py-4 text-neutral-900 placeholder-transparent ring-1 ring-transparent",
+        "transition-[padding,box-shadow,transform] duration-200 ease-out outline-none",
+        "focus:translate-y-0.5 focus:ring-2 focus:ring-primary sm:py-5",
       ]}></textarea>
     <label
       for="message"
-      class="pointer-events-none absolute top-4 left-4 z-10 text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
+      class="pointer-events-none absolute top-4 left-4 z-10 text-sm text-neutral-500 transition-all duration-200 ease-out peer-not-placeholder-shown:top-2 peer-not-placeholder-shown:text-xs peer-focus:top-2 peer-focus:text-xs peer-focus:text-neutral-700"
     >
-      Message
+      Tell us about your project
     </label>
-
     <div
-      class="absolute inset-0 z-[-1] size-full translate-1 bg-neutral-300 peer-focus:bg-amber-300"
+      class="absolute inset-0 z-[-1] size-full translate-1 rounded-sm bg-neutral-300 transition-colors peer-focus:bg-primary"
     >
     </div>
   </div>
 
+  <!-- Netlify reCAPTCHA -->
   <div data-netlify-recaptcha="true" class="mt-1"></div>
 
-  <!-- class="cs-button-solid group mx-auto w-full max-w-75 gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden" -->
+  <!-- Submit Button -->
   <button
     type="submit"
     class:list={[
-      "group mx-auto inline-flex w-full max-w-75 items-center justify-center gap-2 px-8 py-4 font-mont font-bold",
-      "border-2 border-primary bg-primary text-fore-dark inset-shadow-border transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
-      "hover:rounded-lg hover:bg-fore-dark hover:text-fore-light",
-      "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+      "group relative mx-auto inline-flex w-full max-w-xs items-center justify-center gap-2 overflow-hidden rounded-sm px-8 py-4 font-mont font-bold",
+      "bg-primary text-fore-dark transition-all duration-300",
+      "hover:bg-accent",
     ]}
   >
-    Send
-    <Icon
-      name={"tabler:send-2"}
-      class={"size-5 transition-transform duration-400 group-hover:translate-x-2"}
-    />
-    <!-- <span
-      class="inline-flex w-full -translate-x-px -translate-y-0.5 items-center justify-center gap-3 bg-amber-300 px-7.5 text-center duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100"
-    >
-      Send
-      <Icon name={"tabler:send-2"} class={"size-5"} />
-    </span> -->
+    <span class="relative z-10 flex items-center gap-2">
+      Send Message
+      <Icon
+        name="tabler:send-2"
+        class="size-5 transition-transform duration-300 group-hover:translate-x-1"
+      />
+    </span>
   </button>
-  <!-- <button
-          class="rounded-none bg-amber-300 px-5 py-3 font-bold tracking-wide text-neutral-50 transition-colors duration-200 focus:ring-2 focus:ring-amber-300 focus:outline-none md:px-6 md:py-3.5"
-        >
-          Send
-        </button> -->
+
+  <!-- Trust indicators -->
+  <div
+    class="mt-2 flex flex-wrap items-center justify-center gap-4 text-center"
+  >
+    <span class="flex items-center gap-1.5 font-mont text-xs text-neutral-400">
+      <Icon name="tabler:shield-check" class="size-4" />
+      Secure & Private
+    </span>
+    <span class="flex items-center gap-1.5 font-mont text-xs text-neutral-400">
+      <Icon name="tabler:clock" class="size-4" />
+      24hr Response
+    </span>
+  </div>
 </form>

@@ -2,24 +2,679 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import client from "@data/client.json";
 
-// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import landingImage from "@assets/images/landing/about-landing.png";
 import { getImage } from "astro:assets";
-import HeroForm from "@components/HeroForm.astro";
-import ServiceCards from "@components/ServiceCards.astro";
+import { Image } from "astro-lqip/components";
+import { Icon } from "astro-icon/components";
+import ContactForm from "@components/ContactForm.astro";
+import CTALink from "@components/CTALink.astro";
+
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
+
+const contactPeople = [
+  {
+    name: "Raymond",
+    phone: "780-708-5345",
+    phoneTel: "7807085345",
+    role: "Sales & Estimates",
+  },
+  {
+    name: "Chris",
+    phone: "825-865-8848",
+    phoneTel: "8258658848",
+    role: "Operations & Scheduling",
+  },
+];
+
+const reasons = [
+  {
+    icon: "tabler:clock-hour-4",
+    title: "Fast Response",
+    description: "We respond to all inquiries within 24 hours.",
+  },
+  {
+    icon: "tabler:file-text",
+    title: "Free Estimates",
+    description: "No-obligation quotes tailored to your project.",
+  },
+  {
+    icon: "tabler:credit-card",
+    title: "Financing Available",
+    description: "Flexible payment options through MPC Financing.",
+  },
+  {
+    icon: "tabler:map-pin",
+    title: "Edmonton & Area",
+    description: "Serving Edmonton and surrounding communities.",
+  },
+];
 ---
 
 <BaseLayout
-  title="Contact"
-  description="Meta description for the page"
+  title="Contact Us | Get a Free Quote"
+  description="Contact Solid Concrete Coating Ltd. for a free, no-obligation estimate. Premium epoxy flooring in Edmonton."
   ogImage={optimizedImage}
 >
-  <HeroForm
-    title="Premium Epoxy Flooring in Edmonton"
-    subtitle="Transform your concrete surfaces with professional-grade coatings built for beauty, protection, and performance."
-    img={landingImage}
-  />
+  <!-- ============================================ -->
+  <!--                 Hero Section                 -->
+  <!-- ============================================ -->
+  <section
+    class="relative overflow-hidden pt-20 pb-12 md:pt-28 md:pb-20 lg:pt-32"
+  >
+    <!-- Background -->
+    <div class="absolute inset-0 -z-1">
+      <Image
+        src={landingImage}
+        alt="Epoxy Flooring Edmonton"
+        class="h-full w-full object-cover"
+        loading="eager"
+        lqip="base64"
+        lqipSize={10}
+      />
+      <div
+        class="absolute inset-0 z-1 bg-gradient-to-br from-neutral-900/35 via-neutral-900/80 to-neutral-800/35"
+      >
+      </div>
+    </div>
 
-  <ServiceCards class={"pt-section-padding"} />
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-8">
+      <div class="grid gap-8 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+        <!-- Left Content -->
+        <div
+          class="flex flex-col justify-center rounded-sm bg-white/5 p-6 backdrop-blur-sm"
+          data-reveal
+          data-direction="left"
+          data-distance-x="50"
+          data-once="true"
+        >
+          <span
+            class="mb-3 inline-block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+          >
+            Get In Touch
+          </span>
+
+          <h1
+            class="mb-4 font-mont text-3xl leading-tight font-extrabold text-fore-light sm:text-4xl lg:text-5xl"
+          >
+            Ready to Transform Your Floors?
+          </h1>
+
+          <p
+            class="mb-6 font-mont text-base leading-relaxed text-fore-light/80 sm:text-lg md:mb-8"
+          >
+            Contact us today for a free, no-obligation estimate. Our team is
+            ready to help you choose the perfect flooring solution for your
+            space.
+          </p>
+
+          <!-- Contact Cards -->
+          <div class="mb-6 grid gap-4 sm:grid-cols-2 md:mb-8">
+            {
+              contactPeople.map((person) => (
+                <a
+                  href={`tel:${person.phoneTel}`}
+                  class="btn-gleam group relative flex items-center gap-4 overflow-hidden rounded-sm bg-white/10 p-4 backdrop-blur-sm transition-all duration-300 hover:bg-white/20"
+                >
+                  <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-accent/20">
+                    <Icon name="tabler:user" class="size-6 text-accent" />
+                  </div>
+
+                  <div class="relative z-10">
+                    <p class="font-mont text-sm font-bold text-fore-light">
+                      {person.name}
+                    </p>
+                    <p class="font-mont text-xs text-fore-light/60">
+                      {person.role}
+                    </p>
+                    <p class="font-mont text-sm font-semibold text-accent group-hover:underline">
+                      {person.phone}
+                    </p>
+                  </div>
+                </a>
+              ))
+            }
+          </div>
+
+          <!-- Email & Info -->
+          <div class="mb-6 space-y-3 md:mb-8">
+            <a
+              href={`mailto:${client.email}`}
+              class="group inline-flex items-center gap-3 font-mont text-sm text-fore-light/80 transition-colors hover:text-accent sm:text-base"
+            >
+              <Icon name="tabler:mail" class="size-5 text-accent" />
+              {client.email}
+            </a>
+
+            <div
+              class="flex items-center gap-3 font-mont text-sm text-fore-light/60"
+            >
+              <Icon name="tabler:info-circle" class="size-5 text-accent/60" />
+              <span>Mileage may apply depending on location.</span>
+            </div>
+          </div>
+
+          <!-- CTA Buttons -->
+          <div class="flex flex-wrap gap-3">
+            <CTALink href="#quote-form" variant="primary">
+              <Icon name="tabler:file-text" class="size-5" />
+              Get a Free Quote
+            </CTALink>
+            <!-- <a
+              class="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 font-mont text-sm font-bold text-fore-dark transition-all duration-300 hover:bg-accent sm:px-8 sm:py-4"
+            >
+              <Icon name="tabler:file-text" class="size-5" />
+              Get a Free Quote
+            </a> -->
+            <CTALink href={`tel:${client.phoneForTel}`} variant="outline">
+              <Icon
+                name="tabler:phone"
+                class="size-5 transition-transform duration-400 ease-out will-change-transform group-hover:scale-130"
+              />
+              Call Now
+            </CTALink>
+          </div>
+        </div>
+
+        <!-- Right - Form -->
+        <div
+          class="flex items-center justify-center"
+          data-reveal
+          data-direction="right"
+          data-distance-x="50"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          <div
+            id="quote-form"
+            class="w-full max-w-lg scroll-mt-24 rounded-sm bg-neutral-950 p-5 shadow-2xl sm:p-6 md:p-8"
+          >
+            <div class="mb-6 text-center">
+              <h2
+                class="font-mont text-xl font-bold text-fore-light sm:text-2xl"
+              >
+                Request a Free Quote
+              </h2>
+              <p class="mt-2 font-mont text-sm text-fore-light/60">
+                Fill out the form and we'll get back to you within 24 hours.
+              </p>
+            </div>
+            <ContactForm />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Why Contact Us                 -->
+  <!-- ============================================ -->
+  <section class="bg-fore-light px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-10 text-center md:mb-12">
+        <span
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-once="true"
+        >
+          Why Choose Us
+        </span>
+        <h2
+          class="font-mont text-2xl font-bold text-fore-dark sm:text-3xl md:text-4xl"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          What to Expect
+        </h2>
+      </div>
+
+      <div
+        class="grid gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        data-stagger-child-b
+        data-distance-y="40"
+        data-delay-s="0.2"
+        data-once="true"
+      >
+        {
+          reasons.map((reason) => (
+            <div class="group rounded-sm border border-primary/20 bg-white p-5 transition-all duration-300 hover:border-primary hover:shadow-lg sm:p-6">
+              <div class="mb-4 flex size-12 items-center justify-center rounded-full bg-accent/10 transition-colors duration-300 group-hover:bg-accent/20">
+                <Icon name={reason.icon} class="size-6 text-accent" />
+              </div>
+              <h3 class="mb-2 font-mont text-base font-bold text-fore-dark sm:text-lg">
+                {reason.title}
+              </h3>
+              <p class="font-mont text-sm leading-relaxed text-fore-dark/70">
+                {reason.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Financing Section              -->
+  <!-- ============================================ -->
+  <section class="px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div
+        class="overflow-hidden rounded-sm bg-gradient-to-br from-fore-dark to-neutral-800"
+        data-reveal
+        data-direction="bottom"
+        data-distance-y="40"
+        data-once="true"
+      >
+        <div
+          class="grid items-center gap-8 p-6 sm:p-8 md:p-10 lg:grid-cols-2 lg:gap-12 lg:p-12"
+        >
+          <!-- Content -->
+          <div>
+            <div class="mb-4 flex items-center gap-3">
+              <div
+                class="flex size-12 items-center justify-center rounded-full bg-accent/20"
+              >
+                <Icon name="tabler:credit-card" class="size-6 text-accent" />
+              </div>
+              <span
+                class="font-mont text-sm font-bold tracking-widest text-accent uppercase"
+              >
+                Flexible Payments
+              </span>
+            </div>
+
+            <h2
+              class="mb-4 font-mont text-2xl font-bold text-fore-light sm:text-3xl"
+            >
+              Financing Available
+            </h2>
+
+            <p
+              class="mb-6 font-mont text-base leading-relaxed text-fore-light/80"
+            >
+              Don't let budget constraints hold you back. We've partnered with
+              MPC Financing to offer flexible payment plans that fit your needs.
+              Get the floors you deserve today and pay over time.
+            </p>
+
+            <ul class="mb-6 space-y-3">
+              {
+                [
+                  "Easy application process",
+                  "Competitive interest rates",
+                  "Flexible payment terms",
+                  "Quick approval decisions",
+                ].map((item) => (
+                  <li class="flex items-center gap-3 font-mont text-sm text-fore-light/80">
+                    <Icon
+                      name="tabler:circle-check-filled"
+                      class="size-5 shrink-0 text-primary"
+                    />
+                    {item}
+                  </li>
+                ))
+              }
+            </ul>
+
+            <!-- target="_blank"
+              rel="noopener noreferrer" -->
+            <CTALink href="#" variant="primary">
+              Learn About Financing
+              <Icon
+                name="tabler:external-link"
+                class="size-5 transition-transform duration-200 ease-in group-hover:translate-x-2 group-hover:scale-130"
+              />
+            </CTALink>
+            <!-- <a
+              href="#"
+              class="inline-flex items-center gap-2 rounded-sm bg-primary px-6 py-3 font-mont text-sm font-bold text-fore-dark transition-all duration-300 hover:bg-accent"
+            >
+              Learn About Financing
+              <Icon name="tabler:external-link" class="size-5" />
+            </a> -->
+          </div>
+
+          <!-- Visual / Icon Grid -->
+          <div class="hidden lg:flex lg:items-center lg:justify-center">
+            <div class="grid grid-cols-2 gap-4">
+              {
+                [
+                  { icon: "tabler:percentage", label: "Low Rates" },
+                  { icon: "tabler:calendar", label: "Flexible Terms" },
+                  { icon: "tabler:bolt", label: "Fast Approval" },
+                  { icon: "tabler:shield-check", label: "Secure" },
+                ].map((item) => (
+                  <div class="flex flex-col items-center gap-2 rounded-sm bg-white/5 p-6 text-center">
+                    <Icon name={item.icon} class="size-10 text-accent" />
+                    <span class="font-mont text-sm font-semibold text-fore-light">
+                      {item.label}
+                    </span>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--               Careers Section               -->
+  <!-- ============================================ -->
+  <section class="bg-fore-light px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid items-center gap-8 lg:grid-cols-2 lg:gap-12">
+        <!-- Content -->
+        <div
+          data-reveal
+          data-direction="left"
+          data-distance-x="50"
+          data-once="true"
+        >
+          <div class="mb-4 flex items-center gap-3">
+            <div
+              class="flex size-12 items-center justify-center rounded-full bg-accent/10"
+            >
+              <Icon name="tabler:briefcase" class="size-6 text-accent" />
+            </div>
+            <span
+              class="font-mont text-sm font-bold tracking-widest text-accent uppercase"
+            >
+              Join Our Team
+            </span>
+          </div>
+
+          <h2
+            class="mb-4 font-mont text-2xl font-bold text-fore-dark sm:text-3xl md:text-4xl"
+          >
+            Career Opportunities
+          </h2>
+
+          <p
+            class="mb-6 font-mont text-base leading-relaxed text-fore-dark/80 sm:text-lg"
+          >
+            Looking to join our team? We're always seeking skilled installers
+            and subcontractors who share our commitment to quality and customer
+            satisfaction.
+          </p>
+
+          <div class="mb-6 space-y-4">
+            <h3
+              class="font-mont text-sm font-bold tracking-widest text-fore-dark/50 uppercase"
+            >
+              What We Offer
+            </h3>
+            <ul class="space-y-3">
+              {
+                [
+                  "Competitive compensation",
+                  "Flexible scheduling",
+                  "Ongoing training & development",
+                  "Supportive team environment",
+                ].map((benefit) => (
+                  <li class="flex items-center gap-3 font-mont text-fore-dark/70">
+                    <Icon
+                      name="tabler:circle-check-filled"
+                      class="size-5 shrink-0 text-primary"
+                    />
+                    {benefit}
+                  </li>
+                ))
+              }
+            </ul>
+          </div>
+
+          <div
+            class:list={[
+              "btn-gleam group relative overflow-hidden rounded-sm border border-primary/30 bg-primary/5 p-4 sm:p-5",
+              "transition-[color,border-radius] duration-300 ease-in-out",
+              "hover:rounded-lg hover:border-primary hover:bg-fore-dark hover:text-fore-light",
+              "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
+            ]}
+          >
+            <p
+              class="mb-3 font-mont text-sm font-semibold text-fore-dark transition-colors ease-in-out group-hover:text-fore-light"
+            >
+              Ready to apply?
+            </p>
+            <a
+              href="mailto:solidconcretecoating@gmail.com?subject=Job Application - Resume Attached"
+              class="inline-flex items-center gap-2 font-mont text-sm text-accent transition-colors hover:text-primary"
+            >
+              <Icon name="tabler:mail" class="size-5" />
+              Send your resume to <b>solidconcretecoating@gmail.com</b>
+              <Icon name="tabler:arrow-right" class="size-4" />
+            </a>
+          </div>
+        </div>
+
+        <!-- Visual -->
+        <div
+          class="flex items-center justify-center"
+          data-reveal
+          data-direction="right"
+          data-distance-x="50"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          <div class="grid grid-cols-2 gap-4">
+            {
+              [
+                {
+                  icon: "tabler:hammer",
+                  title: "Installers",
+                  description: "Experienced floor coating professionals",
+                },
+                {
+                  icon: "tabler:users",
+                  title: "Subcontractors",
+                  description: "Licensed teams with own equipment",
+                },
+                {
+                  icon: "tabler:truck",
+                  title: "Drivers",
+                  description: "Reliable transportation support",
+                },
+                {
+                  icon: "tabler:tools",
+                  title: "Apprentices",
+                  description: "Learn the trade hands-on",
+                },
+              ].map((position) => (
+                <div class="rounded-sm border border-primary/20 bg-white p-4 transition-all duration-300 hover:border-primary hover:shadow-md sm:p-5">
+                  <Icon name={position.icon} class="mb-3 size-8 text-accent" />
+                  <h3 class="mb-1 font-mont text-sm font-bold text-fore-dark sm:text-base">
+                    {position.title}
+                  </h3>
+                  <p class="font-mont text-xs text-fore-dark/60 sm:text-sm">
+                    {position.description}
+                  </p>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Service Area Map               -->
+  <!-- ============================================ -->
+  <section class="px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="mb-10 text-center md:mb-12">
+        <span
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-once="true"
+        >
+          Service Area
+        </span>
+        <h2
+          class="mb-4 font-mont text-2xl font-bold text-fore-dark sm:text-3xl md:text-4xl"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          Proudly Serving Edmonton & Surrounding Areas
+        </h2>
+        <p
+          class="mx-auto max-w-2xl font-mont text-base text-fore-dark/70"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          We provide professional epoxy flooring services throughout the
+          Edmonton metropolitan area and beyond.
+        </p>
+      </div>
+
+      <div
+        class="overflow-hidden rounded-sm shadow-lg"
+        data-reveal
+        data-direction="bottom"
+        data-distance-y="40"
+        data-delay-s="0.2"
+        data-once="true"
+      >
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d304622.83883578!2d-113.7243!3d53.5461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x53a0224580deff23%3A0x411fa00c4af6155d!2sEdmonton%2C%20AB!5e0!3m2!1sen!2sca!4v1"
+          width="100%"
+          height="400"
+          style="border:0;"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Service Area Map - Edmonton, Alberta"
+          class="w-full"></iframe>
+      </div>
+
+      <!-- Areas List -->
+      <div
+        class="mt-8 grid gap-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4"
+        data-stagger-child-b
+        data-distance-y="20"
+        data-delay-s="0.3"
+        data-once="true"
+      >
+        {
+          [
+            "Edmonton",
+            "St. Albert",
+            "Sherwood Park",
+            "Spruce Grove",
+            "Leduc",
+            "Beaumont",
+            "Fort Saskatchewan",
+            "Stony Plain",
+          ].map((area) => (
+            <div class="flex items-center gap-2 rounded-sm bg-fore-light p-3">
+              <Icon name="tabler:map-pin" class="size-4 text-accent" />
+              <span class="font-mont text-sm font-medium text-fore-dark/70">
+                {area}
+              </span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Final CTA Section              -->
+  <!-- ============================================ -->
+  <section class="bg-neutral-900 px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-4xl text-center">
+      <div
+        class="mb-6"
+        data-reveal
+        data-direction="bottom"
+        data-distance-y="30"
+        data-once="true"
+      >
+        <Icon
+          name="tabler:message-circle"
+          class="mx-auto size-12 text-accent"
+        />
+      </div>
+
+      <h2
+        class="mb-4 font-mont text-2xl font-bold text-fore-light sm:text-3xl md:text-4xl"
+        data-reveal
+        data-direction="bottom"
+        data-distance-y="30"
+        data-delay-s="0.1"
+        data-once="true"
+      >
+        Have Questions?
+      </h2>
+
+      <p
+        class="mb-8 font-mont text-base text-fore-light/80 sm:text-lg"
+        data-reveal
+        data-direction="bottom"
+        data-distance-y="30"
+        data-delay-s="0.15"
+        data-once="true"
+      >
+        Our team is here to help. Reach out today and let's discuss your
+        flooring project.
+      </p>
+
+      <div
+        class="flex flex-col items-center justify-center gap-4 sm:flex-row"
+        data-reveal
+        data-direction="bottom"
+        data-distance-y="30"
+        data-delay-s="0.2"
+        data-once="true"
+      >
+
+        <CTALink href="#quote-form" variant="primary">
+          <Icon name="tabler:file-text" class="size-5" />
+          Get Your Free Quote
+        </CTALink>
+
+        <CTALink href={`tel:${client.phoneForTel}`} variant="outline">
+          <Icon
+            name="tabler:phone"
+            class="size-5 transition-transform duration-400 ease-out will-change-transform group-hover:scale-130"
+          />
+          {client.phoneFormatted}
+        </CTALink>
+      </div>
+    </div>
+  </section>
 </BaseLayout>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      e.preventDefault();
+      const targetId = this.getAttribute("href")?.substring(1);
+      if (targetId) {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({
+            behavior: "smooth",
+            block: "start",
+          });
+        }
+      }
+    });
+  });
+</script>

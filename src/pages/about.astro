@@ -1,6 +1,7 @@
 ---
 // about.astro
 import BaseLayout from "@layouts/BaseLayout.astro";
+import client from "@data/client.json";
 import CTA from "@components/CTA.astro";
 import FAQ from "@components/FAQ.astro";
 import { Icon } from "astro-icon/components";
@@ -172,13 +173,21 @@ const stats = [
           data-once="true"
         >
           <CTALink label="Get a Free Quote" variant="primary" showIcon={true} />
-          <a
+
+            <CTALink href={`tel:${client.phoneForTel}`} variant="outline">
+              <Icon
+                name="tabler:phone"
+                class="size-5 transition-transform duration-400 ease-out will-change-transform group-hover:scale-130"
+              />
+              {client.phoneFormatted}
+            </CTALink>
+          <!-- <a
             href="tel:7807085345"
             class="inline-flex items-center gap-2 rounded-sm border-2 border-fore-light/30 bg-transparent px-6 py-3 font-mont font-bold text-fore-light transition-all duration-300 hover:border-accent hover:text-accent"
           >
             <Icon name="tabler:phone" class="size-5" />
             (780) 708-5345
-          </a>
+          </a> -->
         </div>
       </div>
     </div>
