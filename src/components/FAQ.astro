@@ -3,6 +3,7 @@ import { faqs } from "@data/faqs";
 import { renderMd } from "@utils/markdown";
 import type { RenderedFaq } from "@types/faq-types";
 import type { HTMLAttributes } from "astro/types";
+import Topper from "./Topper.astro";
 type Props = HTMLAttributes<"section">;
 
 // Pre-render Markdown to HTML at build/SSR time
@@ -17,12 +18,15 @@ const { ...props } = Astro.props;
 <section id="faq-1741" {...props}>
   <div class="cs-container">
     <div class="cs-content" data-once="true" data-reveal data-direction="top">
-      <span
+      <Topper iconName="tabler:message-question" class="justify-center">
+        Frequently Asked Questions
+      </Topper>
+      <!-- <span
         class="text-sm font-medium tracking-wide text-accent uppercase italic"
       >
         Frequently Asked Questions
       </span>
-      <span class="cs-topper"></span>
+      <span class="cs-topper"></span> -->
       <!-- mb-4 text-heading font-extrabold tracking-wide uppercase -->
       <h2
         class="cs-title max-w-full font-mont text-heading font-bold tracking-wide text-fore-dark uppercase"

@@ -1,48 +1,679 @@
 ---
+// about.astro
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
-import Landing from "@components/Landing.astro";
 import FAQ from "@components/FAQ.astro";
-import about from "@assets/images/about/about-1.png";
-
-// Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
-import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+import { Icon } from "astro-icon/components";
+import { Image } from "astro-lqip/components";
 import { getImage } from "astro:assets";
-import HeroForm from "@components/HeroForm.astro";
-import SideBySide from "@components/SideBySide.astro";
-const optimizedImage = await getImage({ src: landingImage, format: "avif" });
+import CTALink from "@components/CTALink.astro";
+
+// Import images - replace with your actual images
+import heroImage from "@assets/images/about/about-1.png";
+import teamImage from "@assets/images/services/res-floor-5.png";
+import workImage from "@assets/images/services/commerce-1.png";
+import TrustBadges from "@components/TrustBadges.astro";
+import Topper from "@components/Topper.astro";
+
+const optimizedImage = await getImage({ src: heroImage, format: "avif" });
+
+// Why Choose Us highlights
+const highlights = [
+  {
+    icon: "tabler:certificate",
+    title: "Experienced & Certified Installers",
+    description:
+      "Our team holds industry certifications and brings years of hands-on expertise to every project.",
+  },
+  {
+    icon: "tabler:leaf",
+    title: "High-Quality, Eco-Friendly Products",
+    description:
+      "We use premium, environmentally responsible coatings that are safe for your family and the planet.",
+  },
+  {
+    icon: "tabler:clock-bolt",
+    title: "Fast & Responsive Service",
+    description:
+      "Quick turnaround times and prompt communication from quote to completion.",
+  },
+  {
+    icon: "tabler:shield-check",
+    title: "Fully Insured & Bonded",
+    description:
+      "Complete peace of mind with comprehensive insurance coverage on every project.",
+  },
+];
+
+// Our values
+const values = [
+  {
+    icon: "tabler:diamond",
+    title: "Quality First",
+    description: "We never cut corners. Every floor we install meets our rigorous standards.",
+  },
+  {
+    icon: "tabler:users-group",
+    title: "Customer Focused",
+    description: "Your satisfaction drives everything we do, from first call to final walkthrough.",
+  },
+  {
+    icon: "tabler:bulb",
+    title: "Innovation",
+    description: "We stay current with the latest techniques and products in the industry.",
+  },
+  {
+    icon: "tabler:heart-handshake",
+    title: "Integrity",
+    description: "Honest pricing, transparent communication, and promises we keep.",
+  },
+];
+
+// Process steps
+const processSteps = [
+  {
+    step: "01",
+    title: "Free Consultation",
+    description:
+      "We visit your space, assess your needs, and provide a detailed quote—no obligation.",
+  },
+  {
+    step: "02",
+    title: "Surface Preparation",
+    description:
+      "Thorough cleaning, grinding, and repair to ensure optimal coating adhesion.",
+  },
+  {
+    step: "03",
+    title: "Professional Application",
+    description:
+      "Expert installation using premium materials and proven techniques.",
+  },
+  {
+    step: "04",
+    title: "Quality Inspection",
+    description:
+      "Final walkthrough to ensure every detail meets our high standards.",
+  },
+];
+
+// Stats
+const stats = [
+  { value: "10+", label: "Years Experience" },
+  { value: "500+", label: "Projects Completed" },
+  { value: "100%", label: "Satisfaction Rate" },
+  { value: "5", label: "Star Reviews" },
+];
 ---
 
 <BaseLayout
-  title="About"
-  description="Meta description for the page"
+  title="About Us | Solid Concrete Coating Ltd."
+  description="Learn about Edmonton's trusted epoxy flooring experts. Years of construction experience, certified installers, and eco-friendly products."
   ogImage={optimizedImage}
 >
-  <HeroForm
-    title="Premium Epoxy Flooring in Edmonton"
-    subtitle="Transform your concrete surfaces with professional-grade coatings built for beauty, protection, and performance."
-    img={landingImage}
-  />
+  <!-- ============================================ -->
+  <!--                  Hero Section                -->
+  <!-- ============================================ -->
+  <section
+    class="relative overflow-hidden bg-neutral-900 pt-28 pb-16 sm:pt-36 sm:pb-24 lg:pt-44 lg:pb-32"
+  >
+    <!-- Background Image -->
+    <div class="absolute inset-0 z-0">
+      <Image
+        src={heroImage}
+        alt="Epoxy flooring professionals at work"
+        class="h-full w-full object-cover opacity-30"
+        loading="eager"
+        lqip="base64"
+        lqipSize={10}
+      />
+      <div class="absolute inset-0 bg-gradient-to-br from-neutral-900 via-neutral-900/95 to-neutral-800"></div>
+    </div>
 
-  <div class="pt-section-padding">
-    <SideBySide
-      asSection
-      topper="Metallic Epoxy Floors"
-      title="Metallic Epoxy Floor Installation in Edmonton"
-      body={[
-        `Elevate your space with the high‑end look of metallic
-    epoxy from Solid Concrete Coating Ltd. Our specialty metallic systems create a deep, three‑dimensional
-    finish that can resemble flowing water, molten metal, or clouded skies—perfect for statement‑making residential and commercial interiors in Edmonton.`,
-        `
-Beyond the luxurious appearance, metallic epoxy delivers the same durability and protection you expect from premium epoxy and polyaspartic coatings: stain
-    and abrasion resistance, seamless application, and low maintenance. The glossy, non‑porous surface cleans easily and stands up to everyday wear, making it ideal for showrooms, foyers, rec rooms, studios, and more.
-    `,
-      ]}
-      image={about}
-      alt="deck floor"
-      alignment="right"
-    />
-  </div>
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-8">
+      <div class="max-w-3xl">
+
+        <Topper iconName="tabler:users-group">
+          About Us
+        </Topper>
+
+
+        <h1
+          class="mb-6 font-mont text-4xl font-extrabold leading-tight text-fore-light sm:text-5xl lg:text-6xl"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          Edmonton's Trusted
+          <span class="text-accent">Epoxy Flooring</span> Experts
+        </h1>
+
+        <p
+          class="mb-8 font-mont text-lg leading-relaxed text-fore-light/80 sm:text-xl"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          Our team brings years of hands-on construction and concrete experience
+          from previous trades. We bring that expertise to every project,
+          ensuring high-quality finishes, durability, and customer satisfaction.
+        </p>
+
+        <div
+          class="flex flex-wrap gap-4"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.2"
+          data-once="true"
+        >
+          <CTALink label="Get a Free Quote" variant="primary" showIcon={true} />
+          <a
+            href="tel:7807085345"
+            class="inline-flex items-center gap-2 rounded-sm border-2 border-fore-light/30 bg-transparent px-6 py-3 font-mont font-bold text-fore-light transition-all duration-300 hover:border-accent hover:text-accent"
+          >
+            <Icon name="tabler:phone" class="size-5" />
+            (780) 708-5345
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Decorative element -->
+    <div class="absolute right-0 bottom-0 hidden h-64 w-64 translate-x-1/4 translate-y-1/4 rounded-full bg-accent/5 blur-3xl lg:block"></div>
+  </section>
+
+  <TrustBadges />
+
+  <!-- ============================================ -->
+  <!--              Stats Bar Section               -->
+  <!-- ============================================ -->
+  <section class="bg-primary py-8 sm:py-12 hidden">
+    <div class="mx-auto max-w-7xl px-4 sm:px-8">
+      <div
+        class="grid grid-cols-2 gap-6 sm:gap-8 lg:grid-cols-4"
+        data-stagger-child-b
+        data-distance-y="20"
+        data-once="true"
+      >
+        {
+          stats.map((stat) => (
+            <div class="text-center">
+              <p class="font-mont text-3xl font-extrabold text-fore-light sm:text-4xl lg:text-5xl">
+                {stat.value}
+              </p>
+              <p class="mt-1 font-mont text-sm font-medium text-fore-light/80 sm:text-base">
+                {stat.label}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--            Why Choose Us Section             -->
+  <!-- ============================================ -->
+  <section class="bg-fore-light px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <!-- Section Header -->
+      <div class="mb-12 text-center lg:mb-16">
+        <Topper class="justify-center" iconName="tabler:star">
+          Why Choose Us
+        </Topper>
+        <!-- <div
+          class="mb-4 flex items-center justify-center gap-3"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-once="true"
+        >
+          <div class="flex size-12 items-center justify-center rounded-full bg-accent/10">
+            <Icon name="tabler:star" class="size-6 text-accent" />
+          </div>
+        </div>
+
+        <span
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.05"
+          data-once="true"
+        >
+          Why Choose Us
+        </span> -->
+
+        <h2
+          class="mb-6 font-mont text-3xl font-bold text-fore-dark sm:text-4xl"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          What Sets Us Apart
+        </h2>
+
+        <p
+          class="mx-auto max-w-2xl font-mont text-lg leading-relaxed text-fore-dark/80"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          When you choose Solid Concrete Coating, you're choosing a team
+          dedicated to excellence in every aspect of your project.
+        </p>
+      </div>
+
+      <!-- Highlights Grid -->
+      <div
+        class="grid gap-6 sm:grid-cols-2 lg:gap-8"
+        data-stagger-child-b
+        data-distance-y="40"
+        data-delay-s="0.2"
+        data-once="true"
+      >
+        {
+          highlights.map((item) => (
+            <div class="group relative overflow-hidden rounded-sm border border-primary/10 bg-white p-6 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-lg sm:p-8">
+              <!-- Accent bar -->
+              <div class="absolute top-0 left-0 h-1 w-full bg-gradient-to-r from-primary to-accent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+
+              <div class="mb-4 flex size-14 items-center justify-center rounded-full bg-accent/10 transition-colors duration-300 group-hover:bg-accent/20">
+                <Icon
+                  name={item.icon}
+                  class="size-7 text-accent transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+
+              <h3 class="mb-3 font-mont text-xl font-bold text-fore-dark">
+                {item.title}
+              </h3>
+
+              <p class="font-mont leading-relaxed text-fore-dark/70">
+                {item.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Our Story Section               -->
+  <!-- ============================================ -->
+  <section class="bg-white px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <!-- Image -->
+        <div
+          class="relative"
+          data-reveal
+          data-direction="left"
+          data-distance-x="50"
+          data-once="true"
+        >
+          <div class="overflow-hidden rounded-sm shadow-2xl">
+            <Image
+              src={teamImage}
+              alt="Solid Concrete Coating team at work"
+              class="h-80 w-full object-cover sm:h-[500px]"
+              loading="lazy"
+              lqip="base64"
+              lqipSize={10}
+            />
+          </div>
+
+          <!-- Floating experience badge -->
+          <div class="absolute -right-4 -bottom-4 z-10 rounded-sm bg-neutral-900 p-6 shadow-xl sm:-right-8 sm:-bottom-8">
+            <p class="font-mont text-3xl font-extrabold text-accent">Years</p>
+            <p class="font-mont text-sm font-medium text-fore-light/80">
+               of Experience
+            </p>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div
+          data-reveal
+          data-direction="right"
+          data-distance-x="50"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+
+        <Topper iconName="tabler:book">
+          Our Story
+        </Topper>
+          <!-- <span class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase">
+            Our Story
+          </span> -->
+
+          <h2 class="mb-6 font-mont text-3xl font-bold text-fore-dark sm:text-4xl">
+            Built on a Foundation of Experience
+          </h2>
+
+          <div class="space-y-4 font-mont text-lg leading-relaxed text-fore-dark/80">
+            <p>
+              Solid Concrete Coating Ltd. was founded by professionals with deep
+              roots in the construction industry. Our journey began in the
+              trades—working with concrete, masonry, and general contracting—where
+              we developed an eye for quality and a commitment to doing things
+              right.
+            </p>
+
+            <p>
+              That hands-on experience taught us what makes a coating system truly
+              last: proper surface preparation, premium materials, and meticulous
+              application. Today, we bring those principles to every garage,
+              basement, warehouse, and patio we transform.
+            </p>
+
+            <p>
+              Based in Edmonton, we're proud to serve homeowners and businesses
+              throughout the region with flooring solutions that combine beauty,
+              durability, and lasting value.
+            </p>
+          </div>
+
+          <div class="mt-8 flex flex-wrap gap-6">
+            <div class="flex items-center gap-3">
+              <Icon
+                name="tabler:map-pin"
+                class="size-6 text-accent"
+              />
+              <span class="font-mont font-medium text-fore-dark">
+                Edmonton, Alberta
+              </span>
+            </div>
+            <div class="flex items-center gap-3">
+              <Icon
+                name="tabler:building-community"
+                class="size-6 text-accent"
+              />
+              <span class="font-mont font-medium text-fore-dark">
+                Locally Owned
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Our Values Section              -->
+  <!-- ============================================ -->
+  <section class="bg-neutral-900 px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <!-- Section Header -->
+      <div class="mb-12 text-center lg:mb-16">
+        <!-- <span
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-once="true"
+        >
+          Our Values
+        </span> -->
+
+        <Topper iconName="tabler:scale" class="justify-center">
+          Our Values
+        </Topper>
+
+
+        <h2
+          class="mb-6 font-mont text-3xl font-bold text-fore-light sm:text-4xl"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          What We Stand For
+        </h2>
+
+        <p
+          class="mx-auto max-w-2xl font-mont text-lg leading-relaxed text-fore-light/80"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          These core values guide every decision we make and every floor we install.
+        </p>
+      </div>
+
+      <!-- Values Grid -->
+      <div
+        class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+        data-stagger-child-b
+        data-distance-y="40"
+        data-delay-s="0.2"
+        data-once="true"
+      >
+        {
+          values.map((value) => (
+            <div class="group rounded-sm bg-neutral-800 p-6 text-center transition-all duration-300 hover:bg-neutral-800/80">
+              <div class="mx-auto mb-4 flex size-16 items-center justify-center rounded-full bg-accent/10 transition-colors duration-300 group-hover:bg-accent/20">
+                <Icon
+                  name={value.icon}
+                  class="size-8 text-accent transition-transform duration-300 group-hover:scale-110"
+                />
+              </div>
+
+              <h3 class="mb-2 font-mont text-lg font-bold text-fore-light">
+                {value.title}
+              </h3>
+
+              <p class="font-mont text-sm leading-relaxed text-fore-light/70">
+                {value.description}
+              </p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--              Our Process Section             -->
+  <!-- ============================================ -->
+  <section class="bg-fore-light px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+        <!-- Content -->
+        <div>
+
+        <Topper iconName="tabler:road" class="justify-center">
+          Our Process
+        </Topper>
+          <!-- <span
+            class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+            data-reveal
+            data-direction="left"
+            data-distance-x="30"
+            data-once="true"
+          >
+            Our Process
+          </span> -->
+
+          <h2
+            class="mb-6 font-mont text-3xl font-bold text-fore-dark sm:text-4xl"
+            data-reveal
+            data-direction="left"
+            data-distance-x="30"
+            data-delay-s="0.1"
+            data-once="true"
+          >
+            How We Deliver Excellence
+          </h2>
+
+          <p
+            class="mb-8 font-mont text-lg leading-relaxed text-fore-dark/80"
+            data-reveal
+            data-direction="left"
+            data-distance-x="30"
+            data-delay-s="0.15"
+            data-once="true"
+          >
+            From your first call to the final walkthrough, we follow a proven
+            process designed to deliver exceptional results every time.
+          </p>
+
+          <!-- Process Steps -->
+          <div
+            class="space-y-6"
+            data-stagger-child-b
+            data-distance-y="30"
+            data-delay-s="0.2"
+            data-once="true"
+          >
+            {
+              processSteps.map((item, index) => (
+                <div class="group flex gap-4">
+                  <div class="flex size-12 shrink-0 items-center justify-center rounded-full bg-primary font-mont text-lg font-bold text-fore-light transition-transform duration-300 group-hover:scale-110">
+                    {item.step}
+                  </div>
+                  <div>
+                    <h3 class="mb-1 font-mont text-lg font-bold text-fore-dark">
+                      {item.title}
+                    </h3>
+                    <p class="font-mont text-fore-dark/70">{item.description}</p>
+                  </div>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div
+          class="relative"
+          data-reveal
+          data-direction="right"
+          data-distance-x="50"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          <div class="overflow-hidden rounded-sm shadow-2xl">
+            <Image
+              src={workImage}
+              alt="Professional epoxy floor installation process"
+              class="h-80 w-full object-cover sm:h-[500px]"
+              loading="lazy"
+              lqip="base64"
+              lqipSize={10}
+            />
+          </div>
+
+          <!-- Floating badge -->
+          <div class="absolute -bottom-4 -left-4 z-10 rounded-sm bg-accent p-4 shadow-xl sm:-bottom-6 sm:-left-6">
+            <Icon name="tabler:checks" class="size-8 text-fore-dark" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--           Trust & Certifications            -->
+  <!-- ============================================ -->
+  <section class="bg-white px-4 py-section-padding sm:px-8">
+    <div class="mx-auto max-w-7xl">
+      <div class="text-center">
+
+        <Topper iconName="tabler:shield-check" class="justify-center">
+          Your Peace of Mind
+        </Topper>
+        <!-- <span
+          class="mb-2 block font-mont text-sm font-bold tracking-widest text-accent uppercase"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-once="true"
+        >
+          Your Peace of Mind
+        </span> -->
+
+        <h2
+          class="mb-12 font-mont text-3xl font-bold text-fore-dark sm:text-4xl"
+          data-reveal
+          data-direction="bottom"
+          data-distance-y="30"
+          data-delay-s="0.1"
+          data-once="true"
+        >
+          Licensed, Insured & Guaranteed
+        </h2>
+
+        <!-- Trust badges -->
+        <div
+          class="grid gap-6 sm:grid-cols-2 lg:grid-cols-4"
+          data-stagger-child-b
+          data-distance-y="40"
+          data-delay-s="0.15"
+          data-once="true"
+        >
+          {
+            [
+              {
+                icon: "tabler:license",
+                title: "Licensed",
+                description: "Fully licensed to operate in Alberta",
+              },
+              {
+                icon: "tabler:shield-check",
+                title: "Insured",
+                description: "Comprehensive liability coverage",
+              },
+              {
+                icon: "tabler:file-certificate",
+                title: "Bonded",
+                description: "Bonded for your protection",
+              },
+              {
+                icon: "tabler:rosette-discount-check",
+                title: "Warranty",
+                description: "Workmanship guarantee included",
+              },
+            ].map((badge) => (
+              <div class="flex flex-col items-center rounded-sm border border-primary/10 p-6 transition-all duration-300 hover:border-primary/30 hover:shadow-md">
+                <div class="mb-4 flex size-16 items-center justify-center rounded-full bg-primary/10">
+                  <Icon name={badge.icon} class="size-8 text-primary" />
+                </div>
+                <h3 class="mb-1 font-mont text-lg font-bold text-fore-dark">
+                  {badge.title}
+                </h3>
+                <p class="font-mont text-sm text-fore-dark/70">
+                  {badge.description}
+                </p>
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================ -->
+  <!--                    FAQ                       -->
+  <!-- ============================================ -->
   <FAQ class="bg-neutral-100" />
+
+  <!-- ============================================ -->
+  <!--                    CTA                       -->
+  <!-- ============================================ -->
   <CTA />
 </BaseLayout>

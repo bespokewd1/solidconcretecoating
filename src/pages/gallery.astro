@@ -2,11 +2,56 @@
 import BaseLayout from "@layouts/BaseLayout.astro";
 import CTA from "@components/CTA.astro";
 import CTALink from "@components/CTALink.astro";
+import { Image } from "astro-lqip/components";
 import Landing from "@components/Landing.astro";
 
 // Optimize our landing image and pass it as props to the BaseLayout (for preloading) and Landing (for rendering)
 import landingImage from "@assets/images/landing.jpg"; // <-- THE PATH TO THE ASSET YOU WANT TO PRELOAD - The asset must live in src
+
 import { getImage } from "astro:assets";
+import Topper from "@components/Topper.astro";
+
+import scv1 from "@assets/images/services/commerce-1.png";
+import svc2 from "@assets/images/services/commerce-2.png";
+import svc3 from "@assets/images/services/commerce-3.png";
+
+import svc4 from "@assets/images/services/industry-1.png";
+import svc5 from "@assets/images/services/industry-2.png";
+import svc6 from "@assets/images/services/industry-3.png";
+
+import svc8 from "@assets/images/services/res-floor-2.png";
+import svc9 from "@assets/images/services/res-floor-3.png";
+import svc10 from "@assets/images/services/res-floor-4.png";
+import svc11 from "@assets/images/services/res-floor-5.png";
+
+import svc12 from "@assets/images/services/service-1.png";
+import svc13 from "@assets/images/services/service-2.png";
+import svc14 from "@assets/images/services/service-3.png";
+
+type ImageGallery = {
+  image: ImageMetadata;
+  imageAlt: string;
+};
+
+const allImages: ImageGallery[] = [
+  { image: scv1, imageAlt: "Commerce service image 1" },
+  { image: svc2, imageAlt: "Commerce service image 2" },
+  { image: svc3, imageAlt: "Commerce service image 3" },
+
+  { image: svc4, imageAlt: "Industry service image 1" },
+  { image: svc5, imageAlt: "Industry service image 2" },
+  { image: svc6, imageAlt: "Industry service image 3" },
+
+  { image: svc8, imageAlt: "Residential floor service image 2" },
+  { image: svc9, imageAlt: "Residential floor service image 3" },
+  { image: svc10, imageAlt: "Residential floor service image 4" },
+  { image: svc11, imageAlt: "Residential floor service image 5" },
+
+  { image: svc12, imageAlt: "Service image 1" },
+  { image: svc13, imageAlt: "Service image 2" },
+  { image: svc14, imageAlt: "Service image 3" },
+];
+
 const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 ---
 
@@ -19,7 +64,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
   <!--                    LANDING                   -->
   <!-- ============================================ -->
 
-  <Landing title="All projects" image={optimizedImage} />
+  <!-- <Landing title="All projects" image={optimizedImage} /> -->
 
   <!-- ============================================ -->
   <!--                   Gallery                    -->
@@ -27,193 +72,61 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
   <section id="gallery">
     <div class="cs-container">
-      <div class="cs-image-group">
-        <!-- Row 1-->
-        <div class="cs-row cs-row-1">
-          <picture class="cs-picture cs-picture1">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port1-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port1.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port1.jpg"
-              alt="new hallway"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture2">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port4-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port4.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port4.jpg"
-              alt="new home construction"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture3">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port7-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port7.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port7.jpg"
-              alt="building a new wall"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
-        </div>
-        <!-- Row 2 -->
-        <div class="cs-row cs-row-2">
-          <picture class="cs-picture cs-picture1">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port2-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port2.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port2.jpg"
-              alt="new kitchen"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture2">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port5-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port5.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port5.jpg"
-              alt="apartment addition"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture3">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port8-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port8.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port8.jpg"
-              alt="kew kitchen cabinets"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
-        </div>
-        <!-- Row 3 -->
-        <div class="cs-row cs-row-3">
-          <picture class="cs-picture cs-picture1">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port3-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port3.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port3.jpg"
-              alt="new kitchen"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture2">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port6-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port6.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port6.jpg"
-              alt="apartment addition"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
-          <picture class="cs-picture cs-picture3">
-            <source
-              media="(max-width: 600px)"
-              srcset="/assets/images/portfolio/port9-m.jpg"
-            />
-            <source
-              media="(min-width: 601px)"
-              srcset="/assets/images/portfolio/port9.jpg"
-            />
-            <img
-              aria-hidden="true"
-              decoding="async"
-              src="/assets/images/portfolio/port9.jpg"
-              alt="kew kitchen cabinets"
-              loading="lazy"
-              width="400"
-              height="560"
-            />
-          </picture>
+      <div
+        class="cs-content w-full pt-8"
+        data-once="true"
+        data-reveal
+        data-direction="top"
+      >
+        <Topper class="justify-center" iconName="tabler:photo">
+          Gallery
+        </Topper>
+        <!-- <span
+          class="w-full text-center text-sm font-medium tracking-wide text-accent uppercase italic"
+        >
+        </span> -->
+        <!-- mb-4 text-heading font-extrabold tracking-wide uppercase -->
 
-          <!-- To add more images, copy and paste this row's picture tags here in order from cs-picture-1 to cs-picture-3 and they will maintain the same layout-->
-        </div>
+        <h1
+          class="w-full py-0 text-center text-2xl text-h2 font-bold text-fore-dark"
+        >
+          Epoxy Floor & Concrete Coatings Gallery
+        </h1>
+        <p
+          class="mx-auto mb-8 max-w-prose font-mont text-lg leading-relaxed text-fore-dark/80"
+        >
+          See the quality and variety of our work. From residential garages to
+          commercial spaces, our coatings deliver exceptional durability and
+          aesthetics.
+        </p>
       </div>
-      <!-- <a href="/contact" class="cs-button-solid">Get Free Quote</a> -->
+
+      {
+        allImages.length > 0 && (
+          <div class="gallery-scroll-container mb-16 max-h-[1250px] overflow-y-auto xl:max-h-[2500px]">
+            <div class="columns-1 sm:columns-2 lg:columns-3">
+              {allImages.map((item: ImageGallery, imgIndex: number) => (
+                <div
+                  class="group relative mb-4 break-inside-avoid overflow-hidden"
+                  data-stagger-b
+                  data-distance-y="200"
+                  data-delay-s={imgIndex * 0.11}
+                  data-once="true"
+                >
+                  <Image
+                    src={item.image}
+                    alt={item.imageAlt}
+                    class="h-auto w-full object-cover"
+                    lqip="base64"
+                    lqipSize={10}
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        )
+      }
+
       <CTALink variant="primary">Get Free Quote</CTALink>
     </div>
   </section>

@@ -107,11 +107,11 @@ const { class: className, ...props } = Astro.props;
                 <Image
                   src={service.img}
                   alt={service.title}
-                  class="relative h-full w-full object-contain lg:p-6"
+                  class="relative h-full w-full object-contain p-0"
                 />
               </div>
 
-              <div class="flex flex-col gap-1 bg-fore-dark p-6 pt-0 backdrop-blur-[5px]">
+              <div class="mt-6 flex flex-col gap-1 bg-fore-dark p-6 pt-0 backdrop-blur-[5px]">
                 <h3 class="font-mont text-lg font-bold text-fore-light transition-colors duration-300">
                   {service.title}
                 </h3>

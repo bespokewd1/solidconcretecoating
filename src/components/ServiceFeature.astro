@@ -54,80 +54,54 @@ const { class: className, ...props } = Astro.props;
 ---
 
 <section
-  class="px-1 sm:px-4 pt-0 pb-section-padding"
+  class="px-1 pt-0 pb-section-padding sm:px-4"
   class:list={[className]}
   {...props}
 >
-    <h2 class="text-h2 font-bold text-center mb-8">Our Specializations</h2>
+  <h2 class="mb-8 text-center text-h2 font-bold">Our Specializations</h2>
   <div
     class="mx-auto grid grid-cols-1 gap-5 p-4 sm:max-lg:max-w-150 md:gap-6 md:p-6 lg:grid-cols-3"
   >
     {
-      services.map((service,idx) => {
-      const directions = ["left", "bottom", "right"];
-      let direction = directions[idx % 3];
+      services.map((service, idx) => {
+        const directions = ["left", "bottom", "right"];
+        let direction = directions[idx % 3];
 
-
-      return(
-        <article class="bg-neutral-200"
+        return (
+          <article
+            class="bg-neutral-200"
             data-reveal
             data-direction={direction}
             data-once="true"
-        >
-          <div class="grid grid-rows-[1fr_1fr] h-full -translate-1.5 flex-col items-center bg-neutral-50">
-            <Image
-              src={service.Image}
-              alt={service.title}
-              class={"object-cover size-full"}
-            />
+          >
+            <div class="grid h-full -translate-1.5 grid-rows-[1fr_1fr] flex-col items-center bg-neutral-50">
+              <Image
+                src={service.Image}
+                alt={service.title}
+                class={"size-full object-contain"}
+              />
 
-            <div class="flex flex-1 h-full flex-col gap-5 p-4 lg:px-8 lg:pb-8">
-              <h2 class="font-mont text-heading font-extrabold tracking-wide uppercase text-fore-dark">
-                {service.title}
-              </h2>
+              <div class="flex h-full flex-1 flex-col gap-5 p-4 lg:px-8 lg:pb-8">
+                <h2 class="font-mont text-heading font-extrabold tracking-wide text-fore-dark uppercase">
+                  {service.title}
+                </h2>
 
-              <p class="flex-1 font-mont leading-[1.8rem] tracking-normal text-fore-dark/90">
-                {service.description}
-              </p>
+                <p class="flex-1 font-mont leading-[1.8rem] tracking-normal text-fore-dark/90">
+                  {service.description}
+                </p>
 
-              <!-- <a
-                href={service.href}
-                class:list={[
-                  "p-4 items-center gap-3 font-bold group flex justify-center",
-                  "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-[background-color,color,border-radius] delay-0 duration-400 before:hidden",
-                  "hover:rounded-lg hover:bg-neutral-900 hover:text-neutral-50",
-                  "corner-squircle supports-[corner-shape:squircle]:hover:rounded-[50px]",
-                ]}
-              >
-                  {service.linkLabel}
-                  <Icon
-                    name={"tabler:chevron-right"}
-                    class={
-                      "size-5 transition-transform duration-400 group-hover:translate-x-2"
-                    }
-                  />
-              </a> -->
-              <CTALink href={service.href} variant="primary" label={service.linkLabel} class="justify-center" showIcon={true}/>
-
-
-              <!-- <a
-                href={service.href}
-                class="cs-button-solid group w-fit gap-2 bg-amber-500 px-0 font-mont text-[0.9375rem] font-bold text-neutral-950 transition-colors duration-300 before:hidden"
-              >
-                <span class="inline-flex -translate-x-px -translate-y-0.5 items-center bg-amber-300 px-7.5 duration-300 will-change-transform group-hover:-translate-y-1.5 group-hover:transition-transform group-active:-translate-y-0.5 group-active:duration-100">
-                  {service.linkLabel}
-                  <Icon
-                    name={"tabler:chevron-right"}
-                    class={
-                      "size-5 transition-transform group-hover:translate-x-1"
-                    }
-                  />
-                </span>
-              </a> -->
+                <CTALink
+                  href={service.href}
+                  variant="primary"
+                  label={service.linkLabel}
+                  class="justify-center"
+                  showIcon={true}
+                />
+              </div>
             </div>
-          </div>
-        </article>
-      )})
+          </article>
+        );
+      })
     }
   </div>
 </section>

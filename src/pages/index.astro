@@ -93,11 +93,11 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
       <!-- THE WHITE CARD  -->
       <div
         id="hero-content-box"
-        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm p-8 shadow-[inset_2px_0_0_0_var(--color-accent)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:shadow-2xl md:p-12"
+        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm bg-white/5 p-8 shadow-[inset_2px_0_0_0_var(--color-accent)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:shadow-2xl md:p-12"
       >
         <!--  topper Small Header -->
         <span
-          class="mb-2 block text-lg font-bold tracking-wider text-fore-light uppercase text-shadow-lg/20 "
+          class="mb-2 block text-lg font-bold tracking-wider text-fore-light uppercase text-shadow-lg/20"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.6"
@@ -108,7 +108,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
         <!-- Main Headline -->
         <h1
-          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-accent drop-shadow-sm text-shadow-lg/20 sm:text-5xl "
+          class="mb-6 font-mont text-4xl leading-[1.1] font-extrabold text-accent drop-shadow-sm text-shadow-lg/20 sm:text-5xl"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.55"
@@ -119,7 +119,7 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
 
         <!-- Paragraph -->
         <p
-          class="mb-8 font-mont text-base leading-relaxed text-balance text-fore-light text-shadow-md sm:text-lg "
+          class="mb-8 font-mont text-base leading-relaxed text-balance text-fore-light text-shadow-md sm:text-lg"
           data-stagger-b
           data-distance-y="150"
           data-delay-s="0.5"
@@ -140,13 +140,13 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           data-once="true"
         >
           <span
-            class="text-sm font-bold tracking-widest text-fore-light/80 uppercase text-shadow-lg/20 "
+            class="text-sm font-bold tracking-widest text-fore-light/80 uppercase text-shadow-lg/20"
           >
             Call Now to Get a Free Quote
           </span>
           <a
             href={`tel:${clientData.phoneForTel}`}
-            class="text-4xl font-black text-fore-light transition-colors duration-300 text-shadow-lg/20 hover:text-primary "
+            class="text-4xl font-black text-fore-light transition-colors duration-300 text-shadow-lg/20 hover:text-primary"
           >
             {clientData.phoneFormatted}
           </a>

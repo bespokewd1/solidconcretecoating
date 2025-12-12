@@ -34,19 +34,39 @@ const { title, subtitle, img, class: className, ...props } = Astro.props;
 
   <div
     class="relative z-1 flex flex-col items-center justify-center gap-5 lg:mx-auto lg:max-w-7xl lg:flex-row lg:justify-between lg:py-20 xl:h-177"
+    data-reveal-fr-r
+    data-distance-x="100"
+    data-delay-s="0.25"
+    data-once="true"
   >
-    <div class="flex flex-col gap-5 p-4 md:p-6 lg:max-w-160">
+    <div
+      class="flex flex-col gap-5 bg-white/5 p-4 backdrop-blur-sm md:p-6 lg:max-w-160"
+    >
       <h1
-        class="font-mont text-[1.8125rem] leading-[1.4em] font-extrabold text-neutral-100 text-shadow-lg/30 sm:text-[3.125rem]"
+        class="font-mont text-[1.8125rem] leading-[1.4em] font-bold text-neutral-100 text-shadow-lg/30 sm:text-[3.125rem]"
+        data-stagger-b
+        data-distance-y="150"
+        data-delay-s="0.6"
+        data-once="true"
       >
         {title}
       </h1>
       <p
-        class="font-mont text-[clamp(1.2rem,1.5vw,1.2rem)] leading-[1.8em] font-bold text-pretty text-neutral-100 text-shadow-md/30 md:mb-8"
+        class="rounded-sm font-mont text-[clamp(1rem,1.5vw,1.25rem)] leading-[1.8em] font-semibold text-pretty text-neutral-100 md:mb-8"
+        data-stagger-b
+        data-distance-y="150"
+        data-delay-s="0.55"
+        data-once="true"
       >
         {subtitle}
       </p>
-      <div class="flex flex-wrap items-center gap-5">
+      <div
+        class="flex flex-wrap items-center gap-5"
+        data-stagger-b
+        data-distance-y="150"
+        data-delay-s="0.5"
+        data-once="true"
+      >
         <!-- <ContactCta label="Request a Qoute" /> -->
 
         <CTALink label={"Request a Qoute"} variant="primary" />
