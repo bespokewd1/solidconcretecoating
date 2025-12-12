@@ -7,40 +7,118 @@ import BeforeAfterSlider from "@components/BeforeAfterSlider.astro";
 
 import comFloor from "@assets/images/services/commerce-1.png";
 import comFloor2 from "@assets/images/services/commerce-2.png";
+import comFloor3 from "@assets/images/services/commerce-3.png";
+import comFloor4 from "@assets/images/services/industry-1.png";
+import comFloor5 from "@assets/images/services/industry-2.png";
+import comFloor6 from "@assets/images/services/industry-3.png";
+import cn from "@utils/cn";
+
+type ServiceCategory = {
+  icon: string;
+  text: string;
+  description: string;
+  beforeImage: ImageMetadata;
+  afterImage: ImageMetadata;
+};
+
+const serviceCategories: ServiceCategory[] = [
+  {
+    icon: "tabler:building-warehouse",
+    text: "Warehouses & Factories",
+    description:
+      "High-build, abrasion-resistant flooring designed for forklifts, pallets, and heavy daily traffic.",
+    beforeImage: comFloor,
+    afterImage: comFloor2,
+  },
+  {
+    icon: "tabler:chef-hat",
+    text: "Restaurants & Cafeterias",
+    description:
+      "Easy-to-clean, chemical- and stain-resistant floors that help handle spills, grease, and constant washdowns.",
+    beforeImage: comFloor2,
+    afterImage: comFloor3,
+  },
+  {
+    icon: "tabler:shopping-cart",
+    text: "Retail & Showrooms",
+    description:
+      "Glossy, professional finishes that elevate your space while standing up to foot traffic and scuffs.",
+    beforeImage: comFloor3,
+    afterImage: comFloor4,
+  },
+  {
+    icon: "tabler:barbell",
+    text: "Fitness Centers",
+    description:
+      "Durable, slip-resistant surfaces built for impact, sweat, and frequent cleaning—great for high-traffic zones.",
+    beforeImage: comFloor4,
+    afterImage: comFloor5,
+  },
+];
 ---
 
 <section
   id="commercial-industrial-flooring"
   class="scroll-mt-32 bg-fore-light px-4 py-section-padding sm:px-8"
+  data-content-active="1"
 >
   <div class="mx-auto max-w-7xl">
     <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
       <!-- Image - Order first on desktop -->
       <div
+        id="com-content-grid"
         class="order-2 lg:order-1"
         data-reveal
         data-direction="left"
         data-distance-x="50"
         data-once="true"
       >
+        <div class="col-span-full grid overflow-hidden pr-10 pb-10">
+          {
+            serviceCategories.map((item, idx) => (
+              <div
+                class="group relative rounded-sm [grid-area:1/1]"
+                data-content={idx + 1}
+                style="display: none;"
+              >
+                <BeforeAfterSlider
+                  beforeImage={item.beforeImage}
+                  beforeAlt={`${item.text} before coating`}
+                  afterAlt={`${item.text} after coating`}
+                  afterImage={item.afterImage}
+                />
+
+                <div class="absolute -right-4 -bottom-4 z-20 grid place-content-center items-center overflow-hidden sm:-right-8 sm:-bottom-8">
+                  <div class="rounded-sm bg-primary p-6 transition-all [grid-area:1/1] group-hover:translate-x-[150%] group-hover:opacity-0 group-hover:transition-opacity">
+                    <Icon
+                      name={item.icon}
+                      class="mb-2 size-8 text-fore-light/90"
+                    />
+                    <p class="font-mont text-sm font-bold text-fore-light">
+                      {item.text}
+                    </p>
+                  </div>
+                  <div class="size-0 translate-x-full place-content-center overflow-hidden rounded-sm bg-primary p-0 transition-transform duration-200 ease-in [grid-area:1/1] group-hover:size-full group-hover:translate-x-0 group-hover:p-6">
+                    <p class="font-mont text-sm font-bold text-fore-light">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+        </div>
+
         <!-- h-80 sm:h-[500px] -->
-        <div class="relative">
-          <!-- Main Image -->
+        <!-- <div class="relative">
           <div class="overflow-hidden rounded-sm shadow-2xl">
             <div class="w-full">
-              <!-- <Image
-                src={comFloor}
-                alt="Commercial epoxy flooring installation"
-                class="size-full object-cover"
-                loading="lazy"
-              /> -->
               <BeforeAfterSlider
                 beforeImage={comFloor}
                 afterImage={comFloor2}
               />
             </div>
           </div>
-          <!-- Floating Badge -->
           <div
             class="absolute -right-4 -bottom-4 z-1 rounded-sm bg-primary p-6 shadow-xl sm:-right-8 sm:-bottom-8"
           >
@@ -52,7 +130,7 @@ import comFloor2 from "@assets/images/services/commerce-2.png";
               Industrial<br />Grade
             </p>
           </div>
-        </div>
+        </div> -->
       </div>
 
       <!-- Content -->
@@ -98,21 +176,19 @@ import comFloor2 from "@assets/images/services/commerce-2.png";
           </h3>
           <div class="grid grid-cols-2 gap-3">
             {
-              [
-                {
-                  icon: "tabler:building-warehouse",
-                  text: "Warehouses & Factories",
-                },
-                { icon: "tabler:chef-hat", text: "Restaurants & Cafeterias" },
-                { icon: "tabler:shopping-cart", text: "Retail & Showrooms" },
-                { icon: "tabler:barbell", text: "Fitness Centers" },
-              ].map((item) => (
-                <div class="flex items-center gap-3 rounded-sm bg-white p-3 shadow-sm">
+              serviceCategories.map((item, idx) => (
+                <button
+                  class:list={cn([
+                    "flex items-center gap-3 rounded-sm bg-white p-3 shadow-sm",
+                    idx === 0 ? "bg-accent/30" : "",
+                  ])}
+                  data-tab={idx + 1}
+                >
                   <Icon name={item.icon} class="size-5 text-accent" />
                   <span class="font-mont text-sm font-medium text-fore-dark/60">
                     {item.text}
                   </span>
-                </div>
+                </button>
               ))
             }
           </div>
@@ -165,3 +241,11 @@ import comFloor2 from "@assets/images/services/commerce-2.png";
     </div>
   </div>
 </section>
+
+<script>
+  import { switchTab } from "@js/switchTab";
+
+  document.addEventListener("astro:page-load", () => {
+    switchTab("commercial-industrial-flooring", "#com-content-grid");
+  });
+</script>

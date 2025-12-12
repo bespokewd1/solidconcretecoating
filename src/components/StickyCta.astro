@@ -1,12 +1,13 @@
 ---
 import { Icon } from "astro-icon/components";
 import CTALink from "./CTALink.astro";
-
 import clientData from "@data/client.json";
 ---
 
 <aside
-  class="bg-red fixed bottom-0 left-0 z-50 w-full lg:hidden"
+  id="sticky-cta"
+  class="bg-red fixed bottom-0 left-0 z-50 w-full transition-transform duration-300 data-[hidden='true']:pointer-events-none data-[hidden='true']:translate-y-[110%] lg:hidden"
+  data-sticky-cta
   data-stagger-b
   data-distance-y="350"
   data-once="true"
@@ -28,7 +29,6 @@ import clientData from "@data/client.json";
       </a>
     </div>
 
-    <!-- Button -->
     <CTALink
       class:list={[
         "inline-block flex-1 px-[clamp(calc(var(--spacing)*1),2dvw,calc(var(--spacing)*4))] py-4 text-center text-[clamp(var(--text-sm),3dvw,var(--text-xl))] font-bold",
@@ -39,3 +39,48 @@ import clientData from "@data/client.json";
     />
   </div>
 </aside>
+
+<script>
+  (() => {
+    const cta = document.querySelector("[data-sticky-cta]");
+    if (!cta) return;
+
+    const hero = document.getElementById("hero-section");
+
+    // If there is no hero section on this page, keep CTA behavior unchanged.
+    if (!hero) return;
+
+    const setHidden = (hidden) => {
+      cta.setAttribute("data-hidden", hidden ? "true" : "false");
+    };
+
+    // Start visible; observer will immediately correct it if hero is in view.
+    setHidden(false);
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        // When hero is visible => hide CTA
+        // When hero is not visible (scrolled past) => show CTA
+        setHidden(entry.isIntersecting);
+      },
+      {
+        // You can tune this:
+        // rootMargin pushes the trigger up/down (negative bottom hides CTA longer).
+        root: null,
+        threshold: 0.01,
+        rootMargin: "0px 0px 0px 0px",
+      },
+    );
+
+    observer.observe(hero);
+
+    // Handle Astro view transitions (optional but recommended since you use ClientRouter)
+    document.addEventListener(
+      "astro:before-swap",
+      () => observer.disconnect(),
+      {
+        once: true,
+      },
+    );
+  })();
+</script>

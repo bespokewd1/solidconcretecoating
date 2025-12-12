@@ -5,6 +5,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 export default defineConfig({
   site: "https://www.yourwebsite.com", // update me!
+prefetch: true,
   integrations: [
     icon(),
     sitemap({

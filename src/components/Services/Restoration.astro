@@ -3,11 +3,55 @@ import { Icon } from "astro-icon/components";
 import CTALink from "@components/CTALink.astro";
 import { Image } from "astro-lqip/components";
 import sealed from "@assets/images/coatings/sealed.png";
+import sealed1 from "@assets/images/services/b4-after-coat.webp";
+import sealed2 from "@assets/images/services/b4-after-com.webp";
+import sealed3 from "@assets/images/services/b4-after-res.webp";
+
+type ServiceCategory = {
+  icon: string;
+  title: string;
+  description: string;
+  image: ImageMetadata;
+};
+
+// beforeImage: ImageMetadata;
+// afterImage: ImageMetadata;
+
+const serviceCategories: ServiceCategory[] = [
+  {
+    icon: "tabler:droplet-half-2",
+    title: "Concrete & Aggregate Sealant",
+    description:
+      "Professional-grade sealers that protect against moisture and wear.",
+    image: sealed,
+  },
+  {
+    icon: "tabler:road",
+    title: "Driveways, Stairs & Walkways",
+    description:
+      "Complete sealing solutions for all exterior concrete surfaces.",
+    image: sealed1,
+  },
+  {
+    icon: "tabler:ruler-measure",
+    title: "Leveling & Crack Repair",
+    description: "Fix uneven surfaces and seal cracks before they spread.",
+    image: sealed2,
+  },
+  {
+    icon: "tabler:shield-check",
+    title: "Protective Coatings",
+    description:
+      "Long-lasting protection against weather, salt, and chemicals.",
+    image: sealed3,
+  },
+];
 ---
 
 <section
   id="concrete-sealing-repair"
   class="scroll-mt-32 px-4 py-section-padding sm:px-8"
+  data-content-active="1"
 >
   <div class="mx-auto max-w-7xl">
     <!-- Section Header -->
@@ -65,33 +109,11 @@ import sealed from "@assets/images/coatings/sealed.png";
       data-once="true"
     >
       {
-        [
-          {
-            icon: "tabler:droplet-half-2",
-            title: "Concrete & Aggregate Sealant",
-            description:
-              "Professional-grade sealers that protect against moisture and wear.",
-          },
-          {
-            icon: "tabler:road",
-            title: "Driveways, Stairs & Walkways",
-            description:
-              "Complete sealing solutions for all exterior concrete surfaces.",
-          },
-          {
-            icon: "tabler:ruler-measure",
-            title: "Leveling & Crack Repair",
-            description:
-              "Fix uneven surfaces and seal cracks before they spread.",
-          },
-          {
-            icon: "tabler:shield-check",
-            title: "Protective Coatings",
-            description:
-              "Long-lasting protection against weather, salt, and chemicals.",
-          },
-        ].map((service) => (
-          <div class="group rounded-sm border border-primary/20 bg-white p-6 transition-all duration-300 hover:border-primary hover:shadow-lg">
+        serviceCategories.map((service, idx) => (
+          <button
+            class="group rounded-sm border border-primary/20 bg-white p-6 transition-all duration-300 hover:border-primary hover:shadow-lg"
+            data-tab={idx + 1}
+          >
             <div class="mb-4 flex size-14 items-center justify-center rounded-full bg-fore-light transition-colors duration-300 group-hover:bg-accent/20">
               <Icon
                 name={service.icon}
@@ -104,40 +126,61 @@ import sealed from "@assets/images/coatings/sealed.png";
             <p class="font-mont text-sm leading-relaxed text-fore-dark/80">
               {service.description}
             </p>
-          </div>
+          </button>
         ))
       }
     </div>
 
     <!-- Before/After + Benefits -->
-    <div class="grid items-center gap-12 lg:grid-cols-2">
+    <div
+      id="restore-content-grid"
+      class="grid items-center gap-12 lg:grid-cols-2"
+    >
       <!-- Before/After Image -->
+
       <div
-        class="relative overflow-hidden rounded-sm shadow-xl"
+        class="relative grid place-content-center overflow-hidden pr-10 pb-10"
         data-reveal
         data-direction="left"
         data-distance-x="50"
         data-once="true"
       >
-        <Image
-          src={sealed}
-          alt="Before and after concrete sealing comparison"
-          class="h-80 w-full object-cover sm:h-96"
-          loading="lazy"
-        />
-        <!-- Labels overlay -->
-        <div class="absolute inset-0 flex">
-          <div
-            class="flex flex-1 items-end justify-center bg-gradient-to-t from-black/60 to-transparent p-4"
-          >
-            <span class="font-mont text-lg font-bold text-white">Unsealed</span>
-          </div>
-          <div
-            class="flex flex-1 items-end justify-center bg-gradient-to-t from-black/60 to-transparent p-4"
-          >
-            <span class="font-mont text-lg font-bold text-primary">Sealed</span>
-          </div>
-        </div>
+        {
+          serviceCategories.map((item, idx) => (
+            <div
+              class="group relative [grid-area:1/1]"
+              style="display: none;"
+              data-content={idx + 1}
+            >
+              <div>
+                <Image
+                  src={item.image}
+                  alt="Before and after concrete sealing comparison "
+                  class="h-80 w-full object-contain sm:h-96"
+                  lqip="base64"
+                  lqipSize={10}
+                />
+              </div>
+
+              <div class="absolute -right-4 -bottom-4 z-20 grid place-content-center items-center overflow-hidden sm:-right-8 sm:-bottom-14">
+                <div class="inline-flex flex-col items-center justify-center rounded-sm bg-primary p-6 transition-all [grid-area:1/1] group-hover:translate-x-[150%] group-hover:opacity-0 group-hover:transition-opacity">
+                  <Icon
+                    name={item.icon}
+                    class="mb-2 size-8 text-fore-light/90"
+                  />
+                  <p class="font-mont text-sm font-bold text-fore-light">
+                    {item.title}
+                  </p>
+                </div>
+                <div class="size-0 translate-x-full place-content-center overflow-hidden rounded-sm bg-primary p-0 transition-transform duration-200 ease-in [grid-area:1/1] group-hover:size-full group-hover:translate-x-0 group-hover:p-6">
+                  <p class="font-mont text-sm font-bold text-fore-light">
+                    {item.description}
+                  </p>
+                </div>
+              </div>
+            </div>
+          ))
+        }
       </div>
 
       <!-- Benefits -->
@@ -212,3 +255,11 @@ import sealed from "@assets/images/coatings/sealed.png";
     </div>
   </div>
 </section>
+
+<script>
+  import { switchTab } from "@js/switchTab";
+
+  document.addEventListener("astro:page-load", () => {
+    switchTab("concrete-sealing-repair", "#restore-content-grid");
+  });
+</script>

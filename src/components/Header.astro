@@ -30,6 +30,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
       href="/"
       class="cs-logo size-full translate-x-[30%] scale-180 lg:translate-x-0 lg:scale-100"
       aria-label="back to home"
+      data-astro-prefetch
     >
       <!-- class="drop-shadow-xs/50" -->
       <Image
@@ -99,6 +100,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
                     aria-current={
                       Astro.url.pathname === entry.url ? "page" : undefined
                     }
+                    data-astro-prefetch
                   >
                     {entry.key}
                   </a>
@@ -119,6 +121,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
                               'aria-[current="page"]:bg-primary',
                             ]}
                             data-url={child.url}
+                            data-astro-prefetch
                           >
                             {child.key}
                           </a>
@@ -140,6 +143,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
                               'aria-[current="page"]:bg-primary aria-[current="page"]:text-fore-dark',
                             ]}
                             data-url={child.url}
+                            data-astro-prefetch
                           >
                             {child.key}
                           </a>
