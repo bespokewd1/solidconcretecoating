@@ -11,6 +11,54 @@ type Props = HTMLAttributes<"section">;
 import resFloor from "@assets/images/services/b4-after-res.webp";
 import poly from "@assets/images/services/flake-1.png";
 import resFloor2 from "@assets/images/services/res-floor-1.png";
+import resFloor3 from "@assets/images/services/res-floor-2.png";
+import resFloor4 from "@assets/images/services/res-floor-3.png";
+import resFloor5 from "@assets/images/services/res-floor-4.png";
+import resFloor6 from "@assets/images/services/res-floor-5.png";
+import cn from "@utils/cn";
+
+type ServiceCategory = {
+  icon: string;
+  text: string;
+  description: string;
+  beforeImage: ImageMetadata;
+  afterImage: ImageMetadata;
+};
+
+const serviceCategories: ServiceCategory[] = [
+  {
+    icon: "tabler:car",
+    text: "Garage Floors",
+    description:
+      "Durable, stain-resistant coatings built for hot tires, salt, and daily wear.",
+    beforeImage: resFloor,
+    afterImage: resFloor2,
+  },
+  {
+    icon: "tabler:stairs-down",
+    text: "Basements",
+    description:
+      "Moisture-tough flooring that brightens your basement and stays easy to clean.",
+    beforeImage: resFloor3,
+    afterImage: resFloor4,
+  },
+  {
+    icon: "tabler:plant-2",
+    text: "Outdoor Patios",
+    description:
+      "UV-stable, slip-resistant finishes designed to handle weather and foot traffic.",
+    beforeImage: resFloor4,
+    afterImage: resFloor5,
+  },
+  {
+    icon: "tabler:road",
+    text: "Driveways",
+    description:
+      "Strong, curb-appeal coatings that help protect concrete from stains and erosion.",
+    beforeImage: resFloor2,
+    afterImage: resFloor3,
+  },
+];
 
 const { class: className, ...props } = Astro.props;
 ---
@@ -19,6 +67,7 @@ const { class: className, ...props } = Astro.props;
   id="residential-coatings"
   class:list={["scroll-mt-32 px-4 py-section-padding sm:px-8", className]}
   {...props}
+  data-content-active="1"
 >
   <div class="mx-auto max-w-7xl">
     <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
@@ -64,18 +113,19 @@ const { class: className, ...props } = Astro.props;
           </h3>
           <div class="grid grid-cols-2 gap-3">
             {
-              [
-                { icon: "tabler:car", text: "Garage Floors" },
-                { icon: "tabler:stairs-down", text: "Basements" },
-                { icon: "tabler:plant-2", text: "Outdoor Patios" },
-                { icon: "tabler:road", text: "Driveways" },
-              ].map((item) => (
-                <div class="flex items-center gap-3 rounded-sm bg-fore-light p-3">
+              serviceCategories.map((item, idx) => (
+                <button
+                  class:list={cn([
+                    "group flex items-center gap-3 rounded-sm bg-fore-light p-3 shadow-sm",
+                    idx === 0 ? "bg-accent/30" : "",
+                  ])}
+                  data-tab={idx + 1}
+                >
                   <Icon name={item.icon} class="size-5 text-accent" />
-                  <span class="font-mont text-sm font-medium text-fore-dark/60">
+                  <span class="font-mont text-sm font-medium text-fore-dark/60 group-hover:text-fore-dark">
                     {item.text}
                   </span>
-                </div>
+                </button>
               ))
             }
           </div>
@@ -109,53 +159,62 @@ const { class: className, ...props } = Astro.props;
         </div>
 
         <CTALink variant="primary" showIcon={true} />
-        <!-- <a
-          href="/contact"
-          class:list={[
-            "inline-flex items-center gap-2 px-8 py-4 font-mont font-bold",
-            "border-2 border-amber-300 bg-amber-300 text-neutral-900 transition-all duration-400",
-            "hover:rounded-lg hover:border-neutral-900 hover:bg-neutral-900 hover:text-neutral-50",
-          ]}
-        >
-          Get a Free Quote
-          <Icon name="tabler:arrow-right" class="size-5" />
-        </a> -->
       </div>
 
       <!-- Image Grid -->
       <div
-        class="grid grid-cols-2 grid-rows-[auto_auto_1fr] gap-4"
+        class="grid grid-cols-2 grid-rows-[auto_auto] gap-4"
         data-reveal
         data-direction="right"
         data-distance-x="50"
         data-delay-s="0.15"
         data-once="true"
       >
-        <div class="col-span-full overflow-hidden rounded-sm shadow-lg">
+        <div class="col-span-full grid overflow-hidden pr-10 pb-10">
+          {
+            serviceCategories.map((item, idx) => (
+              <div
+                class="group relative rounded-sm shadow-lg [grid-area:1/1]"
+                data-content={idx + 1}
+                style="display: none;"
+              >
+                <BeforeAfterSlider
+                  beforeImage={item.beforeImage}
+                  beforeAlt={`${item.text} before coating`}
+                  afterAlt={`${item.text} after coating`}
+                  afterImage={item.afterImage}
+                />
+
+                <div class="absolute -right-4 -bottom-4 z-20 grid place-content-center items-center overflow-hidden sm:-right-8 sm:-bottom-8">
+                  <div class="rounded-sm bg-primary p-6 transition-all [grid-area:1/1] group-hover:translate-x-[150%] group-hover:opacity-0 group-hover:transition-opacity">
+                    <Icon
+                      name={item.icon}
+                      class="mb-2 size-8 text-fore-light/90"
+                    />
+                    <p class="font-mont text-sm font-bold text-fore-light">
+                      {item.text}
+                    </p>
+                  </div>
+                  <div class="size-0 translate-x-full place-content-center overflow-hidden rounded-sm bg-primary p-0 transition-transform duration-200 ease-in [grid-area:1/1] group-hover:size-full group-hover:translate-x-0 group-hover:p-6">
+                    <p class="font-mont text-sm font-bold text-fore-light">
+                      {item.description}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
+
+          <!-- <button
+                  class="flex items-center gap-3 rounded-sm bg-fore-light p-3 shadow-sm hover:bg-accent/20"
+                  data-tab={idx + 1}
+                >
+                  <Icon name={item.icon} class="size-5 text-accent" />
+                  <span class="font-mont text-sm font-medium text-fore-dark/60">
+                    {item.text}
+                  </span>
+                </button> -->
           <!-- <div class="h-48 w-full sm:h-64"> -->
-          <div class="">
-            <BeforeAfterSlider beforeImage={resFloor} afterImage={resFloor2} />
-            <!-- <Image
-              src={resFloor}
-              alt="Residential garage floor coating"
-              class="size-full object-cover"
-              loading="lazy"
-              lqip="base64"
-              lqipSize={10}
-            /> -->
-          </div>
-        </div>
-        <div
-          class="col-start-1 col-end-2 overflow-hidden rounded-sm bg-primary p-6 shadow-lg"
-        >
-          <p class="font-mont text-2xl font-bold text-fore-light">Years</p>
-          <p class="font-mont text-sm text-fore-light/80">Of Experience</p>
-        </div>
-        <div
-          class="col-start-2 col-end-3 overflow-hidden rounded-sm bg-fore-light p-6 shadow-lg"
-        >
-          <p class="font-mont text-2xl font-bold text-primary">Hundreds</p>
-          <p class="font-mont text-sm text-primary/80">Of Homes Completed</p>
         </div>
         <div class="col-span-full overflow-hidden">
           <div class="h-48 w-full sm:h-min">
@@ -171,3 +230,85 @@ const { class: className, ...props } = Astro.props;
     </div>
   </div>
 </section>
+
+<script>
+  import { gsap } from "gsap";
+
+  function switchTab() {
+    const parent = document.getElementById(
+      "residential-coatings",
+    ) as HTMLElement;
+    const buttons = parent.querySelectorAll(
+      "[data-tab]",
+    ) as NodeListOf<HTMLButtonElement>;
+    const contents = parent.querySelectorAll(
+      "[data-content]",
+    ) as NodeListOf<HTMLElement>;
+
+    gsap.set(contents[0], { display: "block", x: 0, opacity: 1 });
+
+    buttons.forEach((button) => {
+      button.addEventListener("click", () => {
+        const tab = button.dataset.tab;
+        const activeContent = parent.dataset.contentActive;
+
+        if (tab === activeContent) return;
+        parent.dataset.contentActive = tab || "1";
+
+        const currentContent = parent.querySelector(
+          `[data-content="${activeContent}"]`,
+        ) as HTMLElement;
+
+        const targetContent = parent.querySelector(
+          `[data-content="${tab}"]`,
+        ) as HTMLElement;
+
+        const tl = gsap.timeline({
+          onComplete: () => {
+            if (currentContent) {
+              gsap.set(currentContent, { display: "none" });
+            }
+          },
+        });
+
+        if (currentContent) {
+          tl.to(currentContent, {
+            duration: 0.3,
+            x: "-100%",
+            opacity: 0,
+            ease: "power2.out",
+          });
+        }
+
+        if (targetContent) {
+          gsap.set(targetContent, {
+            display: "block",
+            x: "100%",
+            opacity: 0,
+          });
+
+          tl.to(targetContent, {
+            duration: 0.3,
+            x: "0%",
+            opacity: 1,
+            ease: "power2.in",
+          });
+        }
+
+        buttons.forEach((btn) => {
+          const isActive = btn.dataset.tab === tab;
+          if (isActive) {
+            btn.style.background =
+              "color-mix(in oklab, var(--color-accent) 30%, transparent) !important";
+          } else {
+            btn.style.background = "var(--color-fore-light) !important";
+          }
+        });
+      });
+    });
+  }
+
+  document.addEventListener("astro:page-load", () => {
+    switchTab();
+  });
+</script>
