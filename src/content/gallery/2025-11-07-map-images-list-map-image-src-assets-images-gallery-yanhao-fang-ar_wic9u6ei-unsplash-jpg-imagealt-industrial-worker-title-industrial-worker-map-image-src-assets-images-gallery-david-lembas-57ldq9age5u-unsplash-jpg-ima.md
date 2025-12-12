@@ -1,9 +1,9 @@
 ---
 images:
-  - image: src/assets/images/gallery/yanhao-fang-ar_wic9u6ei-unsplash.jpg
+  - image: src/assets/images/gallery/gemini_generated_image_220xu1220xu1220x.png
     imageAlt: industrial worker
     title: industrial worker
-  - image: src/assets/images/gallery/nomadic-julien-eejd0kk1nhy-unsplash.jpg
+  - image: src/assets/images/gallery/gemini_generated_image_wyu3tdwyu3tdwyu3.png
   - image: src/assets/images/gallery/applying-epoxy.png
     imageAlt: applying epoxy
     title: floor epoxy application

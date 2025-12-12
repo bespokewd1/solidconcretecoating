@@ -28,30 +28,28 @@ import TrustBadges from "@components/TrustBadges.astro";
 import ServiceHighlights from "@components/ServiceHighlights.astro";
 import WhyChoose from "@components/WhyChoose.astro";
 
-type ServiceInfo = {
-  href: string;
-  title: string;
-  description: string;
-  image: ImageMetadata;
-  imageAlt: string;
+type ServiceSection = {
+  id: string;
+  icon: string;
+  label: string;
 };
 
-const serviceInfo: ServiceInfo[] = [
+const serviceSections: ServiceSection[] = [
+  { id: "residential-coatings", icon: "tabler:home-2", label: "Residential" },
   {
-    href: "/services/epoxy-flooring",
-    title: "Residential",
-    description:
-      "Protect, extend, and upgrade your home’s concrete floors with durable epoxy.",
-    image: resFloor,
-    imageAlt: "Epoxy Flooring",
+    id: "commercial-industrial-flooring",
+    icon: "tabler:building-factory-2",
+    label: "Commercial",
   },
   {
-    href: "/services/concrete-coating",
-    title: "Commercial",
-    description:
-      "Durable, professional‑grade epoxy floors built for busy commercial spaces.",
-    image: comFloor,
-    imageAlt: "Concrete Coating",
+    id: "concrete-sealing-repair",
+    icon: "tabler:tools",
+    label: "Sealing ",
+  },
+  {
+    id: "flake-colors-customization",
+    icon: "tabler:palette",
+    label: "Flake Colors",
   },
 ];
 
@@ -93,10 +91,10 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
       <!-- THE WHITE CARD  -->
       <div
         id="hero-content-box"
-        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm bg-white/5 p-8 shadow-[inset_2px_0_0_0_var(--color-accent)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:shadow-2xl md:p-12"
+        class="mt-20 mb-20 w-full max-w-xl origin-center rounded-sm bg-white/5 p-8 shadow-[inset_2px_0_0_0_var(--color-accent)] backdrop-blur-sm will-change-transform sm:mt-0 sm:mb-0 sm:shadow-2xl md:py-12 lg:px-8"
       >
         <!--  topper Small Header -->
-        <span
+        <!-- <span
           class="mb-2 block text-lg font-bold tracking-wider text-fore-light uppercase text-shadow-lg/20"
           data-stagger-b
           data-distance-y="150"
@@ -104,7 +102,32 @@ const optimizedImage = await getImage({ src: landingImage, format: "avif" });
           data-once="true"
         >
           Solid Concrete Coating
-        </span>
+        </span> -->
+
+        <div
+          class="mb-6 flex flex-wrap gap-2"
+          data-reveal
+          data-direction="left"
+          data-distance-x="30"
+          data-delay-s="0.2"
+          data-once="true"
+        >
+          {
+            serviceSections.map((section) => (
+              <a
+                href={`/services/#${section.id}`}
+                class:list={[
+                  "group inline-flex items-center gap-2 rounded-full bg-fore-dark/30 px-4 py-2 font-mont text-xs font-medium text-neutral-300 inset-shadow-border/30 transition-all duration-300",
+                  "hover:bg-primary/30 hover:text-accent hover:inset-shadow-border",
+                ]}
+                data-astro-prefetch
+              >
+                <Icon name={section.icon} class="size-3.5" />
+                {section.label}
+              </a>
+            ))
+          }
+        </div>
 
         <!-- Main Headline -->
         <h1
