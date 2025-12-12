@@ -26,7 +26,11 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
 
   <div class="cs-container lg:pr-10">
     <!--Nav Logo-->
-    <a href="/" class="cs-logo" aria-label="back to home">
+    <a
+      href="/"
+      class="cs-logo size-full translate-x-[30%] scale-180 lg:translate-x-0 lg:scale-100"
+      aria-label="back to home"
+    >
       <!-- class="drop-shadow-xs/50" -->
       <Image
         src={mainLogo}
@@ -35,6 +39,7 @@ import type { ACTION_ERROR_CODES } from "astro:actions";
         decoding="async"
         lqip="base64"
         lqipSize={10}
+        class={"h-full"}
       />
     </a>
     <!--Navigation List-->

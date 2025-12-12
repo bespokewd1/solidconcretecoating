@@ -99,16 +99,19 @@ const { class: className, ...props } = Astro.props;
               data-direction={direction}
               data-once="true"
               href={service.href}
-              class="group relative grid items-end overflow-hidden rounded-sm bg-fore-light p-0 shadow-md"
+              class="group relative grid grid-rows-[auto_1fr] items-end overflow-hidden rounded-sm border border-neutral-200 bg-fore-dark p-0 shadow-md"
             >
-              <div class="-z-1 size-full [grid-area:1/1]">
+              <div class="relative h-100 w-full bg-neutral-100 lg:h-112.5">
+                <div class="absolute inset-0 bg-gradient-to-b from-fore-light to-fore-dark to-90%" />
+
                 <Image
                   src={service.img}
                   alt={service.title}
-                  class="size-full object-cover transition-transform duration-300"
+                  class="relative h-full w-full object-contain lg:p-6"
                 />
               </div>
-              <div class="flex flex-col gap-1 bg-linear-180 from-transparent to-black mask-[linear-gradient(360deg,#000_80%,transparent)] p-6 pt-10 backdrop-blur-[5px] [grid-area:1/1]">
+
+              <div class="flex flex-col gap-1 bg-fore-dark p-6 pt-0 backdrop-blur-[5px]">
                 <h3 class="font-mont text-lg font-bold text-fore-light transition-colors duration-300">
                   {service.title}
                 </h3>
